@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "comments")
 public class Comment {
 	@Id
-	private String id;
+	private Long id;
 	private String author;
 	private String content;
 }
