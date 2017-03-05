@@ -1,4 +1,4 @@
-package com.risingForce.domain;
+package com.beerHangout.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.risingForce.config;
+package com.beerHangout.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

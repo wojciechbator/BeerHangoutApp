@@ -1,4 +1,4 @@
-package com.risingForce.controllers;
+package com.beerHangout.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.risingForce.utils.State.populateModel;
+import static com.beerHangout.utils.State.populateModel;
 
 @Controller
 public class AccountController {

@@ -1,4 +1,4 @@
-package com.risingForce.config.ajax;
+package com.beerHangout.config.ajax;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import com.risingForce.utils.Cookies;
-import com.risingForce.utils.State;
+import com.beerHangout.utils.Cookies;
+import com.beerHangout.utils.State;
 
 @Component
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {

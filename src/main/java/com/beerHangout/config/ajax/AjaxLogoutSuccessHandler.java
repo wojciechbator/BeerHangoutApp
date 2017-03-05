@@ -1,4 +1,4 @@
-package com.risingForce.config.ajax;
+package com.beerHangout.config.ajax;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

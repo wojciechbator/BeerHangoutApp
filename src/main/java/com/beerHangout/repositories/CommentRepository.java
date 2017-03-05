@@ -1,6 +1,6 @@
-package com.risingForce.repositories;
+package com.beerHangout.repositories;
 
-import com.risingForce.domain.Comment;
+import com.beerHangout.domain.Comment;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

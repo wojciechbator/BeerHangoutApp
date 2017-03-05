@@ -1,10 +1,10 @@
-package com.risingForce.rest;
+package com.beerHangout.rest;
 
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.risingForce.utils.State;
+import com.beerHangout.utils.State;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,16 +1,16 @@
-package com.risingForce.controllers;
+package com.beerHangout.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
-import com.risingForce.repositories.CommentRepository;
+import com.beerHangout.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.risingForce.utils.State.populateModel;
+import static com.beerHangout.utils.State.populateModel;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller

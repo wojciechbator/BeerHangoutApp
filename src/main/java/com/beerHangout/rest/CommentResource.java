@@ -1,7 +1,7 @@
-package com.risingForce.rest;
+package com.beerHangout.rest;
 
-import com.risingForce.domain.Comment;
-import com.risingForce.repositories.CommentRepository;
+import com.beerHangout.domain.Comment;
+import com.beerHangout.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

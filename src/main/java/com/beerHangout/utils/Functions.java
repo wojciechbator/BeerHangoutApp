@@ -1,11 +1,11 @@
-package com.risingForce.utils;
+package com.beerHangout.utils;
 
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.risingForce.utils.Streams.asStream;
+import static com.beerHangout.utils.Streams.asStream;
 
 /**
  * @Author: WB

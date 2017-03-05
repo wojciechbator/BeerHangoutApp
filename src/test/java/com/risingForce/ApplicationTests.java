@@ -1,6 +1,0 @@
-package com.risingForce;
-/**
-*
-* NIC
-*
- */

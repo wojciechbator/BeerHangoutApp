@@ -1,6 +1,6 @@
-package com.risingForce.config;
+package com.beerHangout.config;
 
-import com.risingForce.config.ajax.AjaxAuthenticationSuccessHandler;
+import com.beerHangout.config.ajax.AjaxAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,8 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import com.risingForce.config.ajax.AjaxAuthenticationFailureHandler;
-import com.risingForce.config.ajax.AjaxLogoutSuccessHandler;
+import com.beerHangout.config.ajax.AjaxAuthenticationFailureHandler;
+import com.beerHangout.config.ajax.AjaxLogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity

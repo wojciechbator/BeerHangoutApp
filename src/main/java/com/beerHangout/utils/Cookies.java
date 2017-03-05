@@ -1,4 +1,4 @@
-package com.risingForce.utils;
+package com.beerHangout.utils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

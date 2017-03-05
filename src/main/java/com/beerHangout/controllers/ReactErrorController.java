@@ -1,10 +1,10 @@
-package com.risingForce.controllers;
+package com.beerHangout.controllers;
 
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.risingForce.utils.State;
+import com.beerHangout.utils.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.AbstractErrorController;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
