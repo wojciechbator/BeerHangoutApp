@@ -26,4 +26,5 @@ public final class Functions {
     public static <T, V> List<V> map(final Iterable<T> in, final Function<T, V> function) {
         return map(asStream(in), function);
     }
+
 }

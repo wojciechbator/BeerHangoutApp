@@ -27,11 +27,6 @@ public final class State {
 		model.addAttribute("auth", getAuthState(request));
 	}
 
-	private static String getRequestPath(HttpServletRequest request) {
-		String queryString = request.getQueryString();
-		return request.getRequestURI() + (queryString == null ? "" : "?" + queryString);
-	}
-
 	public static Map<String, Object> getAuthState(HttpServletRequest request) {
 		Optional<List<String>> optionalRoles = getRoles(request);
 
@@ -42,13 +37,19 @@ public final class State {
 
 			return authState;
 		})
-		.orElseGet(() -> {
-			Map<String, Object> authState = new HashMap<>();
-			authState.put("signedIn", false);
-			authState.put("roles", Collections.singletonList("ROLE_ANONYMOUS"));
+			.orElseGet(() -> {
+				Map<String, Object> authState = new HashMap<>();
+				authState.put("signedIn", false);
+				authState.put("roles", Collections.singletonList("ROLE_ANONYMOUS"));
 
-			return authState;
-		});
+				return authState;
+			});
+	}
+
+
+	private static String getRequestPath(HttpServletRequest request) {
+		String queryString = request.getQueryString();
+		return request.getRequestURI() + (queryString == null ? "" : "?" + queryString);
 	}
 
 	/**
@@ -79,4 +80,5 @@ public final class State {
 
 		return Optional.ofNullable(authentication);
 	}
+
 }
