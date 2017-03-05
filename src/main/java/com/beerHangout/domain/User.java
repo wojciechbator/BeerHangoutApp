@@ -21,7 +21,7 @@ import java.util.Set;
 @Document(collection = "users")
 public class User implements UserDetails{
 	@Id
-	private Long Id;
+	private String Id;
 	private String username;
 	private String password;
 	private String email;

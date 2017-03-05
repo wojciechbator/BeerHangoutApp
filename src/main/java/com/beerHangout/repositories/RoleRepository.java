@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * @author Konrad Tyma on 05.03.17.
  */
-public interface RoleRepository  extends MongoRepository<Role, Long> {
+public interface RoleRepository  extends MongoRepository<Role, String> {
 
 	List<Role> findAll();
 
-	Role findOne(Long id);
+	Role findOne(String id);
 
 	Role save(Role user);
 

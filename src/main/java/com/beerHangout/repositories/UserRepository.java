@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * @author Konrad Tyma on 05.03.17.
  */
-public interface UserRepository extends MongoRepository<User, Long> {
+public interface UserRepository extends MongoRepository<User, String> {
 
 	List<User> findAll();
 
-	User findOne(Long id);
+	User findOne(String id);
 
 	User findByEmail(String email);
 
