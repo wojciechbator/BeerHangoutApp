@@ -56,4 +56,5 @@ public class ReactErrorController extends AbstractErrorController {
         return include == ErrorProperties.IncludeStacktrace.ALWAYS ||
                 include == ErrorProperties.IncludeStacktrace.ON_TRACE_PARAM && getTraceParameter(request);
     }
+
 }

@@ -38,4 +38,5 @@ public class ViewConfig {
 
         return configurer;
     }
+
 }

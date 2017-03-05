@@ -36,4 +36,5 @@ public class HomeController {
 		state.put("data", repository.findAll());
 		return state;
 	}
+
 }

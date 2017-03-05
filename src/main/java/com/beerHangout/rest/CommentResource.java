@@ -57,5 +57,6 @@ public class CommentResource {
 	public void deleteComment(@Valid @PathVariable("id") String id) {
 		commentRepository.delete(id);
 	}
+
 }
 

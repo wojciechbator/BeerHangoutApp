@@ -15,4 +15,5 @@ class CsrfHeaderFilter extends OncePerRequestFilter {
 		Cookies.setSecurityTokens(request, response);
 		filterChain.doFilter(request, response);
 	}
+
 }
