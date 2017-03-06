@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import static com.beerHangout.utils.State.populateModel;
 
+
+/**
+ * To compare
+ */
 @Controller
 public class AccountController {
 
