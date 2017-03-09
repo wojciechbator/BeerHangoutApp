@@ -1,4 +1,4 @@
-package com.beerHangout.domain.authorise;
+package com.beerHangout.domain;
 
 import com.beerHangout.domain.User;
 import lombok.*;

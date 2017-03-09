@@ -1,5 +1,6 @@
 package com.beerHangout.domain.login.repositories;
 
+import com.beerHangout.domain.PasswordResetToken;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
