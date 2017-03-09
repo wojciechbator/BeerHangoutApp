@@ -1,5 +1,6 @@
 package com.beerHangout.services.impl;
 
+import com.beerHangout.domain.PasswordResetToken;
 import com.beerHangout.domain.User;
 import com.beerHangout.domain.authorise.UserRole;
 import com.beerHangout.repositories.RoleRepository;
@@ -18,6 +19,17 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 	@Autowired
 	RoleRepository roleRepository;
+
+	@Override
+	public PasswordResetToken getPasswordResetToken(String token) {
+		//TODO
+		return null;
+	}
+
+	@Override
+	public void createPasswordResetTokenForUser(String token, User user) {
+		//TODO
+	}
 
 	@Override
 	public User findByUsername(String username) {

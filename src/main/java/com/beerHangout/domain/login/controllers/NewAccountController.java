@@ -1,5 +1,7 @@
-package com.beerHangout.domain.login;
+package com.beerHangout.domain.login.controllers;
 
+import com.beerHangout.domain.login.MailConstructor;
+import com.beerHangout.domain.login.services.UserSecurityService;
 import com.beerHangout.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
