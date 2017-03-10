@@ -3,11 +3,13 @@ package com.beerHangout.services.impl;
 import com.beerHangout.domain.PasswordResetToken;
 import com.beerHangout.domain.User;
 import com.beerHangout.domain.authorise.UserRole;
+import com.beerHangout.domain.login.repositories.PasswordResetTokenRepository;
 import com.beerHangout.repositories.RoleRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -19,16 +21,19 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 	@Autowired
 	RoleRepository roleRepository;
+	@Autowired
+	PasswordResetTokenRepository passwordResetTokenRepository;
 
 	@Override
 	public PasswordResetToken getPasswordResetToken(String token) {
-		//TODO
-		return null;
+		return passwordResetTokenRepository.findOne(token);
 	}
 
 	@Override
 	public void createPasswordResetTokenForUser(String token, User user) {
-		//TODO
+		PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
+		passwordResetToken.updateToken(passwordResetToken.getToken(), passwordResetToken.getExpiration());
+		passwordResetTokenRepository.save(passwordResetToken);
 	}
 
 	@Override

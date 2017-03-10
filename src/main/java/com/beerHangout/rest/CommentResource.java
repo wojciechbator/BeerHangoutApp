@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping("/api/:resource")
 public class CommentResource {
 
 	private final CommentRepository commentRepository;
