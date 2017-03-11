@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.security.SecureRandom;
+import java.util.Random;
 
 /**
  * @author Konrad Tyma on 09.03.17.
@@ -11,6 +12,8 @@ import java.security.SecureRandom;
 public class SecurityUtility {
 
 	private static final String SALT = "salt";
+	private static final String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+	private static final int password_length = 10;
 
 	@Bean
 	public static BCryptPasswordEncoder passwordEncoder() {
@@ -23,8 +26,12 @@ public class SecurityUtility {
 	 */
 	@Bean
 	public static String randomPassword() {
-		//TODO GENERATE 10 length password, use String builder, use defined saltChars
-
-		return null;
+		StringBuilder sb = new StringBuilder();
+		Random random = new SecureRandom();
+		while (sb.length() < password_length) {
+			int index = (int) (random.nextFloat() * SALTCHARS.length());
+			sb.append(SALTCHARS.charAt(index));
+		}
+		return sb.toString();
 	}
 }
