@@ -8,6 +8,7 @@ import com.beerHangout.repositories.RoleRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.Set;
 /**
  * @author Konrad Tyma on 05.03.17.
  */
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired

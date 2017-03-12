@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ import java.util.UUID;
 /**
  * @author Konrad Tyma on 09.03.17.
  */
+@Controller
 public class NewAccountController {
 
 	@Autowired
@@ -47,7 +49,7 @@ public class NewAccountController {
 	public String newUser(Model model, Locale locale, @RequestParam("token") String token) {
 		PasswordResetToken passwordResetToken = userService.getPasswordResetToken(token);
 
-		if(passwordResetToken == null){
+		if (passwordResetToken == null) {
 			String message = "Invalid Token!";
 			model.addAttribute("message", message);
 			return "redirect:/badRequest";
@@ -68,7 +70,9 @@ public class NewAccountController {
 		return "myProfile";
 	}
 
-	/**Post method Controller*/
+	/**
+	 * Post method Controller
+	 */
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
 	public String postNewController(HttpServletRequest request,
 									@ModelAttribute("email") String email,
@@ -79,13 +83,13 @@ public class NewAccountController {
 		model.addAttribute("email", email);
 		model.addAttribute("username", username);
 
-		if(userService.findByUsername(username) != null) {
+		if (userService.findByUsername(username) != null) {
 			model.addAttribute("usernameExists", true);
 
 			return "myAccount";
 		}
 
-		if(userService.findByEmail(email) != null){
+		if (userService.findByEmail(email) != null) {
 			model.addAttribute("usernameEmail", true);
 
 			return "myAccount";
@@ -104,7 +108,7 @@ public class NewAccountController {
 		role.setRoleId(1);
 		role.setName("ROLE_USER");
 
-		Set<UserRole> userRoles= new HashSet<>();
+		Set<UserRole> userRoles = new HashSet<>();
 		userRoles.add(new UserRole(user, role));
 		userService.createUser(user, userRoles);
 
@@ -113,7 +117,7 @@ public class NewAccountController {
 
 		String appUrl = "http://"
 			+ request.getServerName()
-			+":" + request.getServerPort()
+			+ ":" + request.getServerPort()
 			+ request.getContextPath();
 
 		SimpleMailMessage emailMessage = mailConstructor.constuctResetTokenEmail(appUrl, request.getLocale(), token, user, password);
@@ -126,5 +130,4 @@ public class NewAccountController {
 
 	}
 
-
-	}
+}
