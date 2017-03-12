@@ -26,12 +26,12 @@ public class SecurityUtility {
 	 */
 	@Bean
 	public static String randomPassword() {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder passwordBuilder = new StringBuilder();
 		Random random = new SecureRandom();
-		while (sb.length() < password_length) {
+		while (passwordBuilder.length() < password_length) {
 			int index = (int) (random.nextFloat() * SALTCHARS.length());
-			sb.append(SALTCHARS.charAt(index));
+			passwordBuilder.append(SALTCHARS.charAt(index));
 		}
-		return sb.toString();
+		return passwordBuilder.toString();
 	}
 }
