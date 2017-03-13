@@ -22,7 +22,9 @@ import com.beerHangout.config.ajax.AjaxLogoutSuccessHandler;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final AjaxAuthenticationSuccessHandler authSuccessHandler;
+	private static final int password_length = 10;
+
+	private final AjaxAuthenticationSuccessHandler authSuccessHandler;
     private final AjaxAuthenticationFailureHandler authFailureHandler;
     private final AjaxLogoutSuccessHandler logoutSuccessHandler;
 
@@ -57,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 	private BCryptPasswordEncoder passwordEncoder() {
-		return SecurityUtility.passwordEncoder();
+		return SecurityUtility.passwordEncoder(password_length);
 	}
 
 	@Autowired

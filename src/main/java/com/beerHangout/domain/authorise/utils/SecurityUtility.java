@@ -13,11 +13,10 @@ public class SecurityUtility {
 
 	private static final String SALT = "salt";
 	private static final String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-	private static final int password_length = 10;
 
 	@Bean
-	public static BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(10, new SecureRandom(SALT.getBytes()));
+	public static BCryptPasswordEncoder passwordEncoder(int password_length) {
+		return new BCryptPasswordEncoder(password_length, new SecureRandom(SALT.getBytes()));
 	}
 
 	/**
@@ -25,7 +24,7 @@ public class SecurityUtility {
 	 * and get casted value to int, then add next position of password
 	 */
 	@Bean
-	public static String randomPassword() {
+	public static String randomPassword(int password_length) {
 		StringBuilder passwordBuilder = new StringBuilder();
 		Random random = new SecureRandom();
 		while (passwordBuilder.length() < password_length) {

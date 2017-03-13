@@ -79,6 +79,8 @@ public class NewAccountController {
 									@ModelAttribute("username") String username,
 									Model model) throws Exception {
 
+		final int password_length = 10;
+
 		model.addAttribute("classActiveNewAccount", true); // for frontend
 		model.addAttribute("email", email);
 		model.addAttribute("username", username);
@@ -99,8 +101,8 @@ public class NewAccountController {
 		user.setEmail(email);
 		user.setUsername(username);
 
-		String password = SecurityUtility.randomPassword();
-		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
+		String password = SecurityUtility.randomPassword(password_length);
+		String encryptedPassword = SecurityUtility.passwordEncoder(password_length).encode(password);
 
 		user.setPassword(encryptedPassword);
 
