@@ -1,6 +1,5 @@
 package com.beerHangout.domain;
 
-import com.beerHangout.domain.User;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -34,7 +33,15 @@ public class PasswordResetToken {
 		this.user = user;
 	}
 
-	public int getExpiration(){
+	public PasswordResetToken(User user, String token, Date expirationDate) {
+		super();
+
+		this.user = user;
+		this.token = token;
+		this.expirationDate = expirationDate;
+	}
+
+	public int getExpiration() {
 		return EXPIRATION;
 	}
 
@@ -49,14 +56,6 @@ public class PasswordResetToken {
 		this.token = token;
 		//Default should be EXPIRATION, but for test make parametrized function
 		this.expirationDate = calculateExpirationDate(expirationTimeInMinutes);
-	}
-
-	public PasswordResetToken(User user, String token, Date expirationDate) {
-		super();
-
-		this.user = user;
-		this.token = token;
-		this.expirationDate = expirationDate;
 	}
 
 }

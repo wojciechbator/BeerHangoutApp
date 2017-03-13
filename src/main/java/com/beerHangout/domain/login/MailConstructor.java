@@ -1,6 +1,7 @@
 package com.beerHangout.domain.login;
 
 import com.beerHangout.domain.User;
+import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ public class MailConstructor {
 	public static final String RESET_TOKEN_EMAIL_SUBJECT = "Reset password";
 
 	@Autowired
-	private Enviroment enviroment;
+	private Environment environment;
 
 	/**
 	 * Method used to create simple email, which is needed to reset password
@@ -40,7 +41,7 @@ public class MailConstructor {
 		email.setTo(user.getEmail());
 		email.setSubject(RESET_TOKEN_EMAIL_SUBJECT);
 		email.setSentDate(new Date());
-		email.setText(sb.toString());
+		email.setText(emailBuilder.toString());
 
 		return email;
 	}
