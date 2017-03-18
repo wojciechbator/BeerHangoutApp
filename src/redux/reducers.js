@@ -1,16 +1,9 @@
-/* @flow */
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import { ADD_COMMENT, COMMENTS_REFRESHED, AUTHENTICATED, LOGGED_OUT } from './actions';
 
-import type { Action, Comment, Role } from './types';
-
-type CommentsState = {
-  status: 'stale' | 'loaded',
-  data: Comment[]
-}
-
-function commentsReducer(state : CommentsState = { status: 'stale', data: [] }, action : Action) : CommentsState {
-  switch (action.type) {
+function commentsReducer(state = { status: 'stale', data: [] }, action) {
+  switch(action.type) {
     case ADD_COMMENT:
       return {
         status: state.status,
@@ -28,13 +21,8 @@ function commentsReducer(state : CommentsState = { status: 'stale', data: [] }, 
   }
 }
 
-type AuthState = {
-  signedIn: boolean,
-  roles: Role[]
-};
-
-function authReducer(state : AuthState = { signedIn: false, roles: [] }, action : Action) : AuthState {
-  switch (action.type) {
+function authReducer(state = { signedIn: false, roles: [] }, action) {
+  switch(action.type) {
     case AUTHENTICATED:
       return Object.assign({}, state, {
         signedIn: true,
@@ -52,15 +40,16 @@ function authReducer(state : AuthState = { signedIn: false, roles: [] }, action 
   }
 }
 
-function errorsReducer(state = {} /* , action */) {
+function errorsReducer(state = {}) {
   return state;
 }
 
-/* Combine the application's reducers */
-const reducer = combineReducers(Object.assign({}, {
+const reducers = combineReducers(Object.assign({}, {
   auth: authReducer,
   comments: commentsReducer,
-  errors: errorsReducer
+  errors: errorsReducer,
+  routing: routerReducer
 }));
 
-export default reducer;
+
+export default reducers;
