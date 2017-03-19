@@ -1,7 +1,7 @@
 package com.beerHangout.domain;
 
 import com.beerHangout.domain.authorise.Authority;
-import com.beerHangout.domain.authorise.UserRole;
+import com.beerHangout.domain.authorise.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -28,7 +28,8 @@ public class User implements UserDetails {
 	private String firstName;
 	private String lastName;
 	private String phone;
-	private Set<UserRole> userRoles = new HashSet<>();
+
+	private Set<Role> userRoles = new HashSet<>();
 	private boolean active;
 	private boolean enabled = true;
 
@@ -36,7 +37,7 @@ public class User implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<Authority> authorities = new HashSet<>();
-		userRoles.forEach(user -> authorities.add(new Authority(user.getRole().getName())));
+		userRoles.forEach(role -> authorities.add(new Authority(role.getName())));
 
 		return authorities;
 	}

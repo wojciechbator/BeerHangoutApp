@@ -2,7 +2,7 @@ package com.beerHangout.services;
 
 import com.beerHangout.domain.PasswordResetToken;
 import com.beerHangout.domain.User;
-import com.beerHangout.domain.authorise.UserRole;
+import com.beerHangout.domain.authorise.Role;
 
 import java.util.Set;
 
@@ -19,6 +19,6 @@ public interface UserService {
 
 	User findByEmail(String email);
 
-	User createUser(User user, Set<UserRole> userRoles) throws Exception;
+	User createUser(User user, Set<Role> userRoles) throws Exception;
 
 }
