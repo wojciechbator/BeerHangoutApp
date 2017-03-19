@@ -16,9 +16,8 @@ import java.util.Set;
 @Document(collection = "roles")
 public class Role {
 	@Id
-	private int roleId;
+	private String roleId;
+	private String userRoleId;
 	private String name;
-
-	private Set<UserRole> userRoles = new HashSet<>();
 
 }

@@ -3,9 +3,9 @@ package com.beerHangout.domain.login.controllers;
 import com.beerHangout.domain.PasswordResetToken;
 import com.beerHangout.domain.User;
 import com.beerHangout.domain.authorise.Role;
-import com.beerHangout.domain.authorise.UserRole;
 import com.beerHangout.domain.authorise.utils.SecurityUtility;
 import com.beerHangout.domain.login.MailConstructor;
+import com.beerHangout.domain.login.SessionIdentifierGenerator;
 import com.beerHangout.domain.login.services.UserSecurityService;
 import com.beerHangout.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +45,7 @@ public class NewAccountController {
 	@Autowired
 	private UserSecurityService securityService;
 
+
 	@RequestMapping("/createAccount")
 	public String newUser(Model model, Locale locale, @RequestParam("token") String token) {
 		PasswordResetToken passwordResetToken = userService.getPasswordResetToken(token);
@@ -80,6 +81,7 @@ public class NewAccountController {
 									Model model) throws Exception {
 
 		final int password_length = 10;
+		SessionIdentifierGenerator sessionIdentifierGenerator = new SessionIdentifierGenerator();
 
 		model.addAttribute("classActiveNewAccount", true); // for frontend
 		model.addAttribute("email", email);
@@ -107,11 +109,12 @@ public class NewAccountController {
 		user.setPassword(encryptedPassword);
 
 		Role role = new Role();
-		role.setRoleId(1);
+		role.setRoleId(sessionIdentifierGenerator.nextSessionId());
 		role.setName("ROLE_USER");
+		role.setUserRoleId(user.getId());
 
-		Set<UserRole> userRoles = new HashSet<>();
-		userRoles.add(new UserRole(user, role));
+		Set<Role> userRoles = new HashSet<>();
+
 		userService.createUser(user, userRoles);
 
 		String token = UUID.randomUUID().toString();
