@@ -10,13 +10,13 @@ import java.util.List;
  */
 public interface UserRepository extends MongoRepository<User, String> {
 
-	List<User> findAll();
-
 	User findOne(String id);
 
 	User findByEmail(String email);
 
 	User findByUsername(String username);
+
+	List<User> findByActive(Boolean active);
 
 	User save(User user);
 

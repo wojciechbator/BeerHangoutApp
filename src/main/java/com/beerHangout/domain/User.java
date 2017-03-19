@@ -19,7 +19,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Document(collection = "users")
-public class User implements UserDetails{
+public class User implements UserDetails {
 	@Id
 	private String Id;
 	private String username;
@@ -28,8 +28,8 @@ public class User implements UserDetails{
 	private String firstName;
 	private String lastName;
 	private String phone;
-
 	private Set<UserRole> userRoles = new HashSet<>();
+	private boolean active;
 	private boolean enabled = true;
 
 
