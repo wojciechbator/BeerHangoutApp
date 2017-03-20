@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Menu } from 'semantic-ui-react';
 
-require('../../../node_modules/semantic-ui/dist/components/menu.min.css');
-require('../../../node_modules/semantic-ui/dist/components/segment.min.css');
+require('../../../../../node_modules/semantic-ui/dist/components/menu.min.css');
+require('../../../../../node_modules/semantic-ui/dist/components/segment.min.css');
 
 export default class Navbar extends Component {
   state = { activeItem: 'Home' }
