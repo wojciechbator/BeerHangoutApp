@@ -20,12 +20,7 @@ class CommentsContainer extends Component {
         body: '',
         timestamp: ''
       },
-      list: [
-        { body: 'Comment 1', username: 'Wojtek', timestamp: (new Date()).toLocaleString() },
-        { body: 'Comment 2', username: 'Kacper', timestamp: (new Date()).toLocaleString() },
-        { body: 'Comment 3', username: 'Jurek', timestamp: (new Date()).toLocaleString() },
-        { body: 'Comment 4', username: 'Alfons', timestamp: (new Date()).toLocaleString() }
-      ]
+      comments: []
     }
     this.submitComment = this.submitComment.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
@@ -46,7 +41,12 @@ class CommentsContainer extends Component {
     const content = this.state.comment.body;
     const timestamp = (new Date()).toLocaleString();
     this.props.dispatch(saveComment(author, content, timestamp));
-    this.props.dispatch(refreshComments());
+    console.log('submitComment: ' + JSON.stringify(this.state.comment));
+    let updatedList = Object.assign([], this.state.comments);
+    updatedList.push(this.state.comment);
+    this.setState({
+        comments: updatedList
+    });
   }
 
   handleRefreshComments() {
@@ -80,7 +80,7 @@ class CommentsContainer extends Component {
   }
 
   render() {
-    const commentList = this.state.list.map((comment, i) => {
+    const commentList = this.state.comments.map((comment, i) => {
       return (
         <li key={i}><SingleComment currentComment={comment} /></li>
       );
@@ -89,7 +89,9 @@ class CommentsContainer extends Component {
       <div>
         <Comment.Group>
           <Header as="h3" style={{marginTop: 12}}>Komentarze: </Header>
-          <ul style={styles.comment.commentsList}>{commentList}</ul>
+           { this.state.comments.length === 0
+            ? <p>Bądź pierwszym, który skomentuje!</p>
+            : <ul style={styles.comment.commentsList}>{commentList}</ul> }
         </Comment.Group>
         <Form reply onSubmit={this.submitComment}>
           <Header as="h3" style={{marginTop: 12}}>Skomentuj</Header>
