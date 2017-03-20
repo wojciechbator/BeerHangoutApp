@@ -2,7 +2,7 @@ package com.beerHangout.services.impl;
 
 import com.beerHangout.domain.PasswordResetToken;
 import com.beerHangout.domain.User;
-import com.beerHangout.domain.authorise.UserRole;
+import com.beerHangout.domain.authorise.Role;
 import com.beerHangout.domain.login.repositories.PasswordResetTokenRepository;
 import com.beerHangout.repositories.RoleRepository;
 import com.beerHangout.repositories.UserRepository;
@@ -10,7 +10,6 @@ import com.beerHangout.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -48,11 +47,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUser(User user, Set<UserRole> userRoles) throws Exception {
+	public User createUser(User user, Set<Role> userRoles) throws Exception {
 		User localUser = userRepository.findByUsername(user.getUsername());
 
-		for (UserRole role: userRoles) {
-			roleRepository.save(role.getRole());
+		for (Role role: userRoles) {
+			roleRepository.save(role);
 		}
 
 		user.getUserRoles().addAll(userRoles);
