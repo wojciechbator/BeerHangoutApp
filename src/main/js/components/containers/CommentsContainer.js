@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import styles from '../styles/styles';
 import { saveComment, refreshComments } from '../../redux/actions';
 
-require('../../../node_modules/semantic-ui/dist/components/form.min.css');
-require('../../../node_modules/semantic-ui/dist/components/button.min.css');
-require('../../../node_modules/semantic-ui/dist/components/header.min.css');
-require('../../../node_modules/semantic-ui/dist/components/comment.min.css');
+require('../../../../../node_modules/semantic-ui/dist/components/form.min.css');
+require('../../../../../node_modules/semantic-ui/dist/components/button.min.css');
+require('../../../../../node_modules/semantic-ui/dist/components/header.min.css');
+require('../../../../../node_modules/semantic-ui/dist/components/comment.min.css');
 
 class CommentsContainer extends Component {
   constructor(props) {

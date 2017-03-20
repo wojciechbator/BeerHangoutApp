@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Header } from 'semantic-ui-react';
 
-require('../../../node_modules/semantic-ui/dist/components/container.min.css');
-require('../../../node_modules/semantic-ui/dist/components/header.min.css');
+require('../../../../../node_modules/semantic-ui/dist/components/container.min.css');
+require('../../../../../node_modules/semantic-ui/dist/components/header.min.css');
 
 const ServerError = () => (
   <Container>
