@@ -102,7 +102,7 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
+<!-- 			<plugin>
 				<artifactId>exec-maven-plugin</artifactId>
 				<groupId>org.codehaus.mojo</groupId>
 				<executions>
@@ -118,7 +118,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
@@ -145,23 +145,23 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>Run webpack</id>
-						<phase>generate-resources</phase>
+						<id>Run webpack-dev</id>
+						<phase>Development</phase>
 						<goals>
 							<goal>yarn</goal>
 						</goals>
 						<configuration>
-							<arguments>run build</arguments>
+							<arguments>start</arguments>
 						</configuration>
 					</execution>
 					<execution>
-						<id>Compile renderer</id>
-						<phase>generate-resources</phase>
+						<id>Compile bundle</id>
+						<phase>Production-ready</phase>
 						<goals>
 							<goal>yarn</goal>
 						</goals>
 						<configuration>
-							<arguments>run compile-renderer</arguments>
+							<arguments>build</arguments>
 						</configuration>
 					</execution>
 				</executions>
@@ -173,10 +173,10 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>src/main/resources/static/js</directory>
-							<includes>
-								<include>bundle.js*</include>
-							</includes>
+							<directory>build/static/js</directory>
+<!-- 							<includes>
+								<include>*</include>
+							</includes> -->
 						</fileset>
 					</filesets>
 				</configuration>
