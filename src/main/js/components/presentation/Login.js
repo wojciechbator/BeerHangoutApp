@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Container, Grid, Segment } from 'semantic-ui-react';
+import { Link } from 'react-router';
 
 class Login extends Component {
   render() {
@@ -8,7 +9,7 @@ class Login extends Component {
         <Grid>
           <Grid.Row centered>
             <Segment inverted>
-              <Form large>
+              <Form>
                 <Form.Field>
                   <label>Login</label>
                   <input placeholder='login' />
@@ -18,6 +19,7 @@ class Login extends Component {
                   <input placeholder='haslo' />
                 </Form.Field>
                 <Button type='submit'>Zaloguj</Button>
+                <Button as={Link} to='/' color='blue'>Powrót</Button>
               </Form>
             </Segment>
           </Grid.Row>

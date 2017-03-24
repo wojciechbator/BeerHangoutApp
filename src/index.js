@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import App from './main/js/App';
 import createStore from './main/js/redux/store';
-import Login from './main/js/components/presentation/Login'
+import Login from './main/js/components/presentation/Login';
+import Home from './main/js/components/layout/Home';
 
 if (typeof window !== 'undefined') {
   const store = createStore(window.__INITIAL_STATE__);
@@ -15,9 +16,9 @@ if (typeof window !== 'undefined') {
   ReactDOM.render(
     <Provider store={store}>
       <Router history={history}>
-        <Route path="/" component={App}>
-        </Route>
-        <Route path="/signin" component={Login}>
+        <Route path='/' component={App}>
+          <IndexRoute component={Home}/>
+          <Route path='/signin' component={Login }/>
         </Route>
       </Router>
     </Provider>,

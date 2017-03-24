@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import Home from './components/layout/Home';
 import Navbar from './components/presentation/Navbar';
 
 class App extends Component {
@@ -9,7 +8,7 @@ class App extends Component {
     return (
       <div className="container">
         <Navbar />
-        <Home />
+        {this.props.children}
       </div>
     );
   }
