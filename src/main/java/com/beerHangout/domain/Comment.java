@@ -13,4 +13,5 @@ public class Comment {
 	private String id;
 	private String author;
 	private String content;
+	private long timestamp;
 }
