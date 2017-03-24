@@ -3,7 +3,7 @@ import SingleComment from '../presentation/SingleComment';
 import { Header, Form, Button, Comment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import styles from '../styles/styles';
-import { saveComment, refreshComments } from '../../redux/actions';
+import { saveComment, refreshComments } from '../../redux/comments/commentsActions';
 
 require('../../../../../node_modules/semantic-ui/dist/components/form.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/button.min.css');
@@ -13,25 +13,19 @@ require('../../../../../node_modules/semantic-ui/dist/components/comment.min.css
 class CommentsContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      status: '',
-      comment: {
-        username: '',
-        body: '',
-        timestamp: ''
-      },
-      comments: []
-    }
+
     this.submitComment = this.submitComment.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updateBody = this.updateBody.bind(this);
-    this.updateTimestamp = this.updateTimestamp.bind(this);
     this.handleRefreshComments = this.handleRefreshComments.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.status === 'stale') {
+    if (this.props.status !== 'loaded') {
       this.props.dispatch(refreshComments());
+      this.setState({
+        comments: this.props.comments
+      })
     }
   }
 
@@ -41,20 +35,16 @@ class CommentsContainer extends Component {
     const content = this.state.comment.body;
     const timestamp = (new Date()).toLocaleString();
     this.props.dispatch(saveComment(author, content, timestamp));
-    console.log('submitComment: ' + JSON.stringify(this.state.comment));
-    let updatedList = Object.assign([], this.state.comments);
-    updatedList.push(this.state.comment);
     this.setState({
-        comments: updatedList
+        comments: this.props.comments
     });
   }
 
   handleRefreshComments() {
     this.props.dispatch(refreshComments());
   }
-
+  
   updateUsername(event) {
-    console.log('updateUsername: ' + event.target.value);
     let updatedComment = Object.assign({}, this.state.comment);
     updatedComment['username'] = event.target.value;
     this.setState({
@@ -63,7 +53,6 @@ class CommentsContainer extends Component {
   }
 
   updateBody(event) {
-    console.log('updateBody: ' + event.target.value);
     let updatedComment = Object.assign({}, this.state.comment);
     updatedComment['body'] = event.target.value;
     this.setState({
@@ -71,16 +60,8 @@ class CommentsContainer extends Component {
     });
   }
 
-  updateTimestamp(comment) {
-    let updatedComment = Object.assign({}, this.state.comment);
-    updatedComment['timestamp'] = (new Date()).toLocaleString();
-    this.setState({
-      comment: updatedComment
-    });
-  }
-
   render() {
-    const commentList = this.state.comments.map((comment, i) => {
+    const commentsList = this.props.comments.map((comment, i) => {
       return (
         <li key={i}><SingleComment currentComment={comment} /></li>
       );
@@ -89,9 +70,9 @@ class CommentsContainer extends Component {
       <div>
         <Comment.Group>
           <Header as="h3" style={{marginTop: 12}}>Komentarze: </Header>
-           { this.state.comments.length === 0
+           { this.props.comments.length === 0
             ? <p>Bądź pierwszym, który skomentuje!</p>
-            : <ul style={styles.comment.commentsList}>{commentList}</ul> }
+            : <ul style={styles.comment.commentsList}>{commentsList}</ul> }
         </Comment.Group>
         <Form reply onSubmit={this.submitComment}>
           <Header as="h3" style={{marginTop: 12}}>Skomentuj</Header>
@@ -104,4 +85,11 @@ class CommentsContainer extends Component {
   };
 }
 
-export default connect()(CommentsContainer);
+const mapStateToProps = (state) => {
+  return {
+    status: state.comments.status,
+    comments: state.comments.data
+  };
+}
+
+export default connect(mapStateToProps)(CommentsContainer);
