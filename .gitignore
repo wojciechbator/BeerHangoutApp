@@ -35,3 +35,4 @@ nbdist/
 .eslintcache
 
 .DS_Store
+yarn.lock

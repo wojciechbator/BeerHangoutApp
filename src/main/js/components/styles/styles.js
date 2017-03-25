@@ -4,7 +4,6 @@ export default {
     },
     comment: {
         commentsList: {
-            padding: 0,
             listStyleType: 'none'
         },
         pipeStyle: {

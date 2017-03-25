@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import SingleComment from '../presentation/SingleComment';
+import CommentsList from './CommentsList';
 import { Header, Form, Button, Comment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import styles from '../styles/styles';
-import { saveComment, refreshComments } from '../../redux/actions';
+import { saveComment, refreshComments } from '../../redux/comments/commentsActions';
 
 require('../../../../../node_modules/semantic-ui/dist/components/form.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/button.min.css');
@@ -11,92 +10,70 @@ require('../../../../../node_modules/semantic-ui/dist/components/header.min.css'
 require('../../../../../node_modules/semantic-ui/dist/components/comment.min.css');
 
 class CommentsContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      status: '',
-      comment: {
-        username: '',
-        body: '',
-        timestamp: ''
-      },
-      comments: []
-    }
+  constructor() {
+    super();
+    // this.state = {
+    //   comments: []
+    // }
     this.submitComment = this.submitComment.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updateBody = this.updateBody.bind(this);
-    this.updateTimestamp = this.updateTimestamp.bind(this);
     this.handleRefreshComments = this.handleRefreshComments.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.status === 'stale') {
+    if (this.props.status !== 'loaded') {
       this.props.dispatch(refreshComments());
+      this.setState({
+        comments: this.props.comments
+      })
     }
   }
 
   submitComment(e) {
     e.preventDefault();
-    const author = this.state.comment.username;
-    const content = this.state.comment.body;
-    const timestamp = (new Date()).toLocaleString();
+    const author = this.state.comment.author;
+    const content = this.state.comment.content;
+    const timestamp = (new Date()).getTime();
     this.props.dispatch(saveComment(author, content, timestamp));
-    console.log('submitComment: ' + JSON.stringify(this.state.comment));
-    let updatedList = Object.assign([], this.state.comments);
-    updatedList.push(this.state.comment);
     this.setState({
-        comments: updatedList
+        comments: this.props.comments
     });
   }
 
   handleRefreshComments() {
     this.props.dispatch(refreshComments());
   }
-
+  
   updateUsername(event) {
-    console.log('updateUsername: ' + event.target.value);
     let updatedComment = Object.assign({}, this.state.comment);
-    updatedComment['username'] = event.target.value;
+    updatedComment['author'] = event.target.value;
     this.setState({
       comment: updatedComment
     });
   }
 
   updateBody(event) {
-    console.log('updateBody: ' + event.target.value);
     let updatedComment = Object.assign({}, this.state.comment);
-    updatedComment['body'] = event.target.value;
-    this.setState({
-      comment: updatedComment
-    });
-  }
-
-  updateTimestamp(comment) {
-    let updatedComment = Object.assign({}, this.state.comment);
-    updatedComment['timestamp'] = (new Date()).toLocaleString();
+    updatedComment['content'] = event.target.value;
     this.setState({
       comment: updatedComment
     });
   }
 
   render() {
-    const commentList = this.state.comments.map((comment, i) => {
-      return (
-        <li key={i}><SingleComment currentComment={comment} /></li>
-      );
-    })
     return (
       <div>
         <Comment.Group>
           <Header as="h3" style={{marginTop: 12}}>Komentarze: </Header>
-           { this.state.comments.length === 0
+           { this.props.comments.length === 0
             ? <p>Bądź pierwszym, który skomentuje!</p>
-            : <ul style={styles.comment.commentsList}>{commentList}</ul> }
+            : <CommentsList comments={this.props.comments} />}
         </Comment.Group>
         <Form reply onSubmit={this.submitComment}>
           <Header as="h3" style={{marginTop: 12}}>Skomentuj</Header>
-          <Form.Input value={this.state.comment.username} onChange={this.updateUsername} type="text"/>
-          <Form.TextArea value={this.state.comment.body} onChange={this.updateBody} type="text" />
+          <Form.Input onChange={this.updateUsername} type="text"/>
+          <Form.TextArea onChange={this.updateBody} type="text" />
           <Button type="submit" content='Odpowiedz' color="green" />
         </Form>
       </div>
@@ -104,4 +81,17 @@ class CommentsContainer extends Component {
   };
 }
 
-export default connect()(CommentsContainer);
+CommentsContainer.propTypes = {
+  status: React.PropTypes.string,
+  comment: React.PropTypes.object,
+  comments: React.PropTypes.array
+}
+
+const mapStateToProps = (store) => {
+  return {
+    status: store.comments.status,
+    comments: store.comments.data
+  };
+}
+
+export default connect(mapStateToProps)(CommentsContainer);
