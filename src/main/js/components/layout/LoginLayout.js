@@ -15,15 +15,12 @@ class LoginLayout extends Component {
   }
 
 // TODO: gather usernameInput and passwordInput in sensible way, now it's undefined, either using HTMLInputElement or focus or refs
-  onChange(event) {
-    
-  }
 
   handleOnSignIn(event) {
     event.preventDefault();
 
-    const username = this.usernameInput.value.trim();
-    const password = this.passwordInput.value.trim();
+    const username = this.props.children.usernameInput.value.trim();
+    const password = this.props.children.passwordInput.value.trim();
 
     if (username.length === 0) {
       return;
@@ -67,7 +64,7 @@ class LoginLayout extends Component {
           <Grid>
             <Grid.Row centered>
               {this.authFailedMessage()}
-              <Login onChange={this.onChange} onSubmit={this.handleOnSignIn} />
+              <Login onSubmit={this.handleOnSignIn} />
             </Grid.Row>
             <Grid.Row centered>
               <Register />
@@ -77,11 +74,6 @@ class LoginLayout extends Component {
       </div>
     );
   }
-}
-
-LoginLayout.propTypes = {
-  usernameInput: HTMLInputElement,
-  passwordInput: HTMLInputElement
 }
 
 export default connect(state => ({ auth: state.auth }))(LoginLayout);

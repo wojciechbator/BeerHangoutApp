@@ -3,6 +3,22 @@ import { Segment, Header, Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.gatherUsername = this.gatherUsername.bind(this);
+    this.gatherPassword = this.gatherPassword.bind(this);
+    let usernameInput = null;
+    let passwordInput = null;
+  }
+
+  gatherUsername() {
+    this.usernameInput.focus();
+  }
+
+  gatherPassword() {
+    this.passwordInput.focus();
+  }
+
   render() {
     return (
       <Segment inverted compact>
@@ -12,13 +28,13 @@ export default class Login extends Component {
             <Form.Input
               type="text"
               name="username"
-              onChange={this.props.onChange}
+              ref={(input) => { this.usernameInput = input; }}
               label='Nazwa użytkownika'
               placeholder='Nazwa użytkownika' />
             <Form.Input
               type="password"
               name="password"
-              onChange={this.props.onChange}
+              ref={(input) => { this.passwordInput = input; }}
               label='Hasło'
               placeholder='Hasło' />
           </Form.Group>
