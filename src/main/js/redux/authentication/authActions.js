@@ -1,6 +1,7 @@
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const LOGGED_OUT = 'LOGGED_OUT';
 
+
 export const authenticated = (authData) => {
   return {
     type: AUTHENTICATED,
