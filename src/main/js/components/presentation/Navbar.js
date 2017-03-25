@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import axios from 'axios';
-import { authenticated, loggedOut } from '../../redux/authentication/authActions';
-import { RouterContext as RouterType } from 'react-router'
+import { authenticated } from '../../redux/authentication/authActions';
 
 require('../../../../../node_modules/semantic-ui/dist/components/menu.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/segment.min.css');
@@ -11,13 +10,13 @@ require('../../../../../node_modules/semantic-ui/dist/components/segment.min.css
 export default class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       activeItem: 'Home',
       authFailed: false
     };
   }
 
-// TODO
+  // TODO
   handleUsernameInput = (event) => {
   }
 
@@ -35,12 +34,12 @@ export default class Navbar extends Component {
     const data = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
     axios.post('api/authenticate', data)
       .then(
-        success => {
-          this.props.dispatch(authenticated(success.data));
-          const { location } = this.props;
-          const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
-
-        }
+      success => {
+        this.props.dispatch(authenticated(success.data));
+        const { location } = this.props;
+        const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
+        
+      }
       )
   }
 
@@ -50,12 +49,12 @@ export default class Navbar extends Component {
     const { activeItem } = this.state
 
     return (
-        <Menu inverted fixed="top">
-          <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
-          <Menu.Item as={Link} to='/friends' name='Friends' active={activeItem === 'Friends'} onClick={this.handleItemClick} />
-          {/*{this.props.roles === 'ROLE_ANONYMOUS' ? <Menu.Item as={Link} to='/register' name='register' active={activeItem === 'register'} onClick={this.handleItemClick} />}*/}
-          <Menu.Item as={Link} to='/signin' name='Login' active={activeItem === 'Login'} onClick={this.handleItemClick} />
-        </Menu>
+      <Menu inverted fixed="top">
+        <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
+        <Menu.Item as={Link} to='/friends' name='Friends' active={activeItem === 'Friends'} onClick={this.handleItemClick} />
+        {/*{this.props.roles === 'ROLE_ANONYMOUS' ? <Menu.Item as={Link} to='/register' name='register' active={activeItem === 'register'} onClick={this.handleItemClick} />}*/}
+        <Menu.Item as={Link} to='/signin' name='Login' active={activeItem === 'Login'} onClick={this.handleItemClick} />
+      </Menu>
     );
   }
 }

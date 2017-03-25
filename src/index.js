@@ -5,7 +5,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import App from './main/js/App';
 import createStore from './main/js/redux/store';
-import Login from './main/js/components/presentation/Login';
+import LoginLayout from './main/js/components/layout/LoginLayout';
 import Home from './main/js/components/layout/Home';
 
 if (typeof window !== 'undefined') {
@@ -18,7 +18,7 @@ if (typeof window !== 'undefined') {
       <Router history={history}>
         <Route path='/' component={App}>
           <IndexRoute component={Home}/>
-          <Route path='/signin' component={Login }/>
+          <Route path='/signin' component={LoginLayout}/>
         </Route>
       </Router>
     </Provider>,
