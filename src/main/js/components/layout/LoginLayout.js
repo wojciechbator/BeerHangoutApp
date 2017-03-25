@@ -3,8 +3,8 @@ import { Message, Container, Grid } from 'semantic-ui-react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-import Login from '../presentation/Login';
-import Register from '../presentation/Register';
+import LoginForm from '../presentation/LoginForm';
+import RegisterForm from '../presentation/RegisterForm';
 import { authenticated } from '../../redux/authentication/authActions';
 
 
@@ -14,19 +14,10 @@ class LoginLayout extends Component {
     this.state = { authFailed: false };
   }
 
-// TODO: gather usernameInput and passwordInput in sensible way, now it's undefined, either using HTMLInputElement or focus or refs
-
   handleOnSignIn(event) {
     event.preventDefault();
 
-    const username = this.props.children.usernameInput.value.trim();
-    const password = this.props.children.passwordInput.value.trim();
-
-    if (username.length === 0) {
-      return;
-    }
-
-    const data = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+    const data = event.toString();
 
     axios.post('/api/authenticate', data)
       .then(
@@ -64,10 +55,10 @@ class LoginLayout extends Component {
           <Grid>
             <Grid.Row centered>
               {this.authFailedMessage()}
-              <Login onSubmit={this.handleOnSignIn} />
+              <LoginForm onSubmit={this.handleOnSignIn} />
             </Grid.Row>
             <Grid.Row centered>
-              <Register />
+              <RegisterForm />
             </Grid.Row>
           </Grid>
         </Container>

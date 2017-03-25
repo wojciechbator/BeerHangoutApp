@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { AUTHENTICATED, LOGGED_OUT } from './authentication/authActions';
 import { ADD_COMMENT, COMMENTS_REFRESHED } from './comments/commentsActions';
+import { reducer as formReducer } from 'redux-form';
 
 const commentsReducer = (state = { status: 'stale', data: [] }, action) => {
   switch(action.type) {
@@ -49,7 +50,8 @@ const reducers = combineReducers(Object.assign({}, {
   auth: authReducer,
   comments: commentsReducer,
   errors: errorsReducer,
-  routing: routerReducer
+  routing: routerReducer,
+  form: formReducer
 }));
 
 
