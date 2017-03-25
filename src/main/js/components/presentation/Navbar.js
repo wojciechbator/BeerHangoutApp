@@ -16,13 +16,6 @@ export default class Navbar extends Component {
     };
   }
 
-  // TODO
-  handleUsernameInput = (event) => {
-  }
-
-  handlePasswordInput = (event) => {
-  }
-
   handleOnSignIn(event) {
     event.preventDefault();
     const username = this.props.username.value.trim();
@@ -38,7 +31,7 @@ export default class Navbar extends Component {
         this.props.dispatch(authenticated(success.data));
         const { location } = this.props;
         const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
-        
+
       }
       )
   }
