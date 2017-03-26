@@ -49,6 +49,7 @@ public class CommentResource {
 		}
 		commentData.setAuthor(comment.getAuthor());
 		commentData.setContent(comment.getContent());
+		commentData.setTimestamp(comment.getTimestamp());
 		Comment updatedComment = commentRepository.save(commentData);
 		return new ResponseEntity<>(updatedComment, HttpStatus.OK);
 	}
