@@ -8,6 +8,7 @@ import com.beerHangout.domain.login.MailConstructor;
 import com.beerHangout.domain.login.SessionIdentifierGenerator;
 import com.beerHangout.domain.login.services.UserSecurityService;
 import com.beerHangout.services.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -32,6 +33,7 @@ import java.util.UUID;
  */
 @Controller
 public class NewAccountController {
+    private final static Logger log = Logger.getLogger(NewAccountController.class);
 
     @Autowired
     private MailConstructor mailConstructor;
@@ -129,6 +131,7 @@ public class NewAccountController {
 
         mailSender.send(emailMessage);
 
+        log.info("Email sent to the requester.");
         model.addAttribute("emailSent", true);
 
         return "myAccount";
