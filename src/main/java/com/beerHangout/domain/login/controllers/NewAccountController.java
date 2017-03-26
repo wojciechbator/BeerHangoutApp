@@ -33,106 +33,106 @@ import java.util.UUID;
 @Controller
 public class NewAccountController {
 
-	@Autowired
-	private MailConstructor mailConstructor;
+    @Autowired
+    private MailConstructor mailConstructor;
 
-	@Autowired
-	private JavaMailSender mailSender;
+    @Autowired
+    private JavaMailSender mailSender;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private UserSecurityService securityService;
+    @Autowired
+    private UserSecurityService securityService;
 
 
-	@RequestMapping("/createAccount")
-	public String newUser(Model model, Locale locale, @RequestParam("token") String token) {
-		PasswordResetToken passwordResetToken = userService.getPasswordResetToken(token);
+    @RequestMapping("/createAccount")
+    public String newUser(Model model, Locale locale, @RequestParam("token") String token) {
+        PasswordResetToken passwordResetToken = userService.getPasswordResetToken(token);
 
-		if (passwordResetToken == null) {
-			String message = "Invalid Token!";
-			model.addAttribute("message", message);
-			return "redirect:/badRequest";
-		}
+        if (passwordResetToken == null) {
+            String message = "Invalid Token!";
+            model.addAttribute("message", message);
+            return "redirect:/badRequest";
+        }
 
-		User currentUser = passwordResetToken.getUser();
-		String username = currentUser.getUsername();
+        User currentUser = passwordResetToken.getUser();
+        String username = currentUser.getUsername();
 
-		UserDetails userDetails = securityService.loadUserByUsername(username);
+        UserDetails userDetails = securityService.loadUserByUsername(username);
 
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
-			userDetails.getPassword(), userDetails.getAuthorities());
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
+                userDetails.getPassword(), userDetails.getAuthorities());
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		model.addAttribute("user", currentUser);
-		model.addAttribute("classActiveEdit", true);
-		return "myProfile";
-	}
+        model.addAttribute("user", currentUser);
+        model.addAttribute("classActiveEdit", true);
+        return "myProfile";
+    }
 
-	/**
-	 * Post method Controller
-	 */
-	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-	public String postNewController(HttpServletRequest request,
-									@ModelAttribute("email") String email,
-									@ModelAttribute("username") String username,
-									Model model) throws Exception {
+    /**
+     * Post method Controller
+     */
+    @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
+    public String postNewController(HttpServletRequest request,
+                                    @ModelAttribute("email") String email,
+                                    @ModelAttribute("username") String username,
+                                    Model model) throws Exception {
 
-		final int password_length = 10;
-		SessionIdentifierGenerator sessionIdentifierGenerator = new SessionIdentifierGenerator();
+        final int password_length = 10;
+        SessionIdentifierGenerator sessionIdentifierGenerator = new SessionIdentifierGenerator();
 
-		model.addAttribute("classActiveNewAccount", true); // for frontend
-		model.addAttribute("email", email);
-		model.addAttribute("username", username);
+        model.addAttribute("classActiveNewAccount", true); // for frontend
+        model.addAttribute("email", email);
+        model.addAttribute("username", username);
 
-		if (userService.findByUsername(username) != null) {
-			model.addAttribute("usernameExists", true);
+        if (userService.findByUsername(username) != null) {
+            model.addAttribute("usernameExists", true);
 
-			return "myAccount";
-		}
+            return "myAccount";
+        }
 
-		if (userService.findByEmail(email) != null) {
-			model.addAttribute("usernameEmail", true);
+        if (userService.findByEmail(email) != null) {
+            model.addAttribute("usernameEmail", true);
 
-			return "myAccount";
-		}
+            return "myAccount";
+        }
 
-		User user = new User();
-		user.setEmail(email);
-		user.setUsername(username);
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(username);
 
-		String password = SecurityUtility.randomPassword(password_length);
-		String encryptedPassword = SecurityUtility.passwordEncoder(password_length).encode(password);
+        String password = SecurityUtility.randomPassword(password_length);
+        String encryptedPassword = SecurityUtility.passwordEncoder(password_length).encode(password);
 
-		user.setPassword(encryptedPassword);
+        user.setPassword(encryptedPassword);
 
-		Role role = new Role();
-		role.setRoleId(sessionIdentifierGenerator.nextSessionId());
-		role.setName("ROLE_USER");
-		role.setUserRoleId(user.getId());
+        Role role = new Role();
+        role.setRoleId(sessionIdentifierGenerator.nextSessionId());
+        role.setName("ROLE_USER");
+        role.setUserRoleId(user.getId());
 
-		Set<Role> userRoles = new HashSet<>();
+        Set<Role> userRoles = new HashSet<>();
 
-		userService.createUser(user, userRoles);
+        userService.createUser(user, userRoles);
 
-		String token = UUID.randomUUID().toString();
-		userService.createPasswordResetTokenForUser(token, user);
+        String token = UUID.randomUUID().toString();
+        userService.createPasswordResetTokenForUser(token, user);
 
-		String appUrl = "http://"
-			+ request.getServerName()
-			+ ":" + request.getServerPort()
-			+ request.getContextPath();
+        String appUrl = "http://"
+                + request.getServerName()
+                + ":" + request.getServerPort()
+                + request.getContextPath();
 
-		SimpleMailMessage emailMessage = mailConstructor.constuctResetTokenEmail(appUrl, request.getLocale(), token, user, password);
+        SimpleMailMessage emailMessage = mailConstructor.constuctResetTokenEmail(appUrl, request.getLocale(), token, user, password);
 
-		mailSender.send(emailMessage);
+        mailSender.send(emailMessage);
 
-		model.addAttribute("emailSent", true);
+        model.addAttribute("emailSent", true);
 
-		return "myAccount";
+        return "myAccount";
 
-	}
+    }
 
 }

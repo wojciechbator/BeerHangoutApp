@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * @author Konrad Tyma on 05.03.17.
  */
-public interface RoleRepository  extends MongoRepository<Role, String> {
+public interface RoleRepository extends MongoRepository<Role, String> {
 
-	List<Role> findAll();
+    List<Role> findAll();
 
-	Role findOne(String id);
+    Role findOne(String id);
 
-	Role save(Role user);
+    Role save(Role user);
 
-	void delete(Role user);
+    void delete(Role user);
 }

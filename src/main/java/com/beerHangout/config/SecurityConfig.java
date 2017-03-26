@@ -1,6 +1,8 @@
 package com.beerHangout.config;
 
+import com.beerHangout.config.ajax.AjaxAuthenticationFailureHandler;
 import com.beerHangout.config.ajax.AjaxAuthenticationSuccessHandler;
+import com.beerHangout.config.ajax.AjaxLogoutSuccessHandler;
 import com.beerHangout.domain.authorise.utils.SecurityUtility;
 import com.beerHangout.domain.login.services.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +17,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import com.beerHangout.config.ajax.AjaxAuthenticationFailureHandler;
-import com.beerHangout.config.ajax.AjaxLogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final int password_length = 10;
+    private static final int password_length = 10;
 
-	private final AjaxAuthenticationSuccessHandler authSuccessHandler;
+    private final AjaxAuthenticationSuccessHandler authSuccessHandler;
     private final AjaxAuthenticationFailureHandler authFailureHandler;
     private final AjaxLogoutSuccessHandler logoutSuccessHandler;
 
-	@Autowired
-	private UserSecurityService userSecurityService;
+    @Autowired
+    private UserSecurityService userSecurityService;
 
-	@Autowired
-	public Environment environment;
+    @Autowired
+    public Environment environment;
 
     @Autowired
     public SecurityConfig(AjaxAuthenticationSuccessHandler authSuccessHandler, AjaxAuthenticationFailureHandler authFailureHandler, AjaxLogoutSuccessHandler logoutSuccessHandler) {
@@ -58,14 +58,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         );
     }
 
-	private BCryptPasswordEncoder passwordEncoder() {
-		return SecurityUtility.passwordEncoder(password_length);
-	}
+    private BCryptPasswordEncoder passwordEncoder() {
+        return SecurityUtility.passwordEncoder(password_length);
+    }
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
-	}
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

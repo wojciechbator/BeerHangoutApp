@@ -1,12 +1,11 @@
 package com.beerHangout.rest;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.beerHangout.utils.State;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -14,9 +13,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api", produces = APPLICATION_JSON_VALUE)
 public class AccountResource {
 
-	@RequestMapping("/account")
-	public Map<String,Object> getAccountStatus(HttpServletRequest request) {
-		return State.getAuthState(request);
-	}
+    @RequestMapping("/account")
+    public Map<String, Object> getAccountStatus(HttpServletRequest request) {
+        return State.getAuthState(request);
+    }
 
 }

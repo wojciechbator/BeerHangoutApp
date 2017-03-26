@@ -38,17 +38,17 @@ public class UserResource {
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUserById(@PathVariable("id") String id) {
         User user = userRepository.findOne(id);
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
     }
 
-    @RequestMapping(value="{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     public ResponseEntity<User> updateUser(@Valid @RequestBody User user, @PathVariable("id") String id) {
         User userData = userRepository.findOne(id);
-        if(userData == null) {
+        if (userData == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         userData.setUsername(user.getUsername());
@@ -61,7 +61,7 @@ public class UserResource {
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
-    @RequestMapping(value="{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void deleteUser(@Valid @PathVariable("id") String id) {
         userRepository.delete(id);
     }

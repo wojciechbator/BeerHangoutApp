@@ -11,14 +11,14 @@ import java.util.Set;
  */
 public interface UserService {
 
-	PasswordResetToken getPasswordResetToken(final String token);
+    PasswordResetToken getPasswordResetToken(final String token);
 
-	void createPasswordResetTokenForUser(final String token, final User user);
+    void createPasswordResetTokenForUser(final String token, final User user);
 
-	User findByUsername(String username);
+    User findByUsername(String username);
 
-	User findByEmail(String email);
+    User findByEmail(String email);
 
-	User createUser(User user, Set<Role> userRoles) throws Exception;
+    User createUser(User user, Set<Role> userRoles) throws Exception;
 
 }
