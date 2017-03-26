@@ -8,18 +8,18 @@ export default class HangoutsMap extends Component {
       lat: 51.10,
       lng: 17.03,
     },
-  }
+  };
 
   handleClick = () => {
     this.refs.map.leafletElement.locate()
-  }
+  };
 
   handleLocationFound = (e) => {
     this.setState({
       hasLocation: true,
       latlng: e.latlng,
-    })
-  }
+    });
+  };
 
   render() {
     const marker = this.state.hasLocation ? (

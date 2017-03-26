@@ -36,7 +36,7 @@ const LoginForm = (props) => {
       </Form>
     </Segment>
   );
-}
+};
 
 export default reduxForm({
   form: 'submitValidation'

@@ -14,10 +14,10 @@ export default class Navbar extends Component {
     };
   }
 
-  handleItemClick = (event, {name}) => this.setState({activeItem: name})
+  handleItemClick = (event, {name}) => this.setState({activeItem: name});
 
   render() {
-    const {activeItem} = this.state
+    const {activeItem} = this.state;
 
     return (
       <Menu inverted fixed="top">
