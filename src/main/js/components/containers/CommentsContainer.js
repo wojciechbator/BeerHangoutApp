@@ -85,13 +85,13 @@ CommentsContainer.propTypes = {
   status: React.PropTypes.string,
   comment: React.PropTypes.object,
   comments: React.PropTypes.array
-}
+};
 
 const mapStateToProps = (store) => {
   return {
     status: store.comments.status,
     comments: store.comments.data
   };
-}
+};
 
 export default connect(mapStateToProps)(CommentsContainer);
