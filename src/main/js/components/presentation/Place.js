@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from "react";
 
 class Place extends Component {
   render() {
-    return(
+    return (
       <div>
         Place stub
       </div>

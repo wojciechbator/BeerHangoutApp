@@ -1,7 +1,5 @@
-import {
-  SubmitionError
-} from 'redux-form';
-import axios from 'axios';
+import {SubmitionError} from "redux-form";
+import axios from "axios";
 
 submit = (values) => {
   axios.get('/api/users')

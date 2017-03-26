@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { Message, Container, Grid } from 'semantic-ui-react';
-import axios from 'axios';
-import { connect } from 'react-redux';
+import React, {Component} from "react";
+import {Container, Grid, Message} from "semantic-ui-react";
+import axios from "axios";
+import {connect} from "react-redux";
 
-import LoginForm from '../presentation/LoginForm';
-import RegisterForm from '../presentation/RegisterForm';
-import { authenticated } from '../../redux/authentication/authActions';
+import LoginForm from "../presentation/LoginForm";
+import RegisterForm from "../presentation/RegisterForm";
+import {authenticated} from "../../redux/authentication/authActions";
 
 
 class LoginLayout extends Component {
   constructor(props) {
     super(props);
-    this.state = { authFailed: false };
+    this.state = {authFailed: false};
   }
 
   handleOnSignIn(event) {
@@ -21,18 +21,18 @@ class LoginLayout extends Component {
 
     axios.post('/api/authenticate', data)
       .then(
-      success => {
-        this.props.dispatch(authenticated(success.data));
+        success => {
+          this.props.dispatch(authenticated(success.data));
 
-        const { location } = this.props;
-        const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
+          const {location} = this.props;
+          const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
 
-        this.context.router.transitionTo(nextPathname);
-      },
-      failure => {
-        console.error(failure);
-        this.setState({ authFailed: true });
-      }
+          this.context.router.transitionTo(nextPathname);
+        },
+        failure => {
+          console.error(failure);
+          this.setState({authFailed: true});
+        }
       );
   }
 
@@ -47,6 +47,7 @@ class LoginLayout extends Component {
       </Message>
     );
   }
+
   render() {
 
     return (
@@ -55,7 +56,7 @@ class LoginLayout extends Component {
           <Grid>
             <Grid.Row centered>
               {this.authFailedMessage()}
-              <LoginForm onSubmit={this.handleOnSignIn} />
+              <LoginForm onSubmit={this.handleOnSignIn}/>
             </Grid.Row>
             <Grid.Row centered>
               <RegisterForm />
@@ -67,4 +68,4 @@ class LoginLayout extends Component {
   }
 }
 
-export default connect(state => ({ auth: state.auth }))(LoginLayout);
+export default connect(state => ({auth: state.auth}))(LoginLayout);

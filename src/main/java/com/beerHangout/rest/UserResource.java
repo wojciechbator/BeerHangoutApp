@@ -54,8 +54,8 @@ public class UserResource {
         userData.setUsername(user.getUsername());
         userData.setPassword(user.getPassword());
         userData.setEmail(user.getEmail());
-        userData.setFirstname(user.getFirstname());
-        userData.setLastname(user.getLastname());
+        userData.setFirstName(user.getFirstName());
+        userData.setLastName(user.getLastName());
         userData.setPhone(user.getPhone());
         User updatedUser = userRepository.save(userData);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);

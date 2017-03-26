@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import styles from '../styles/styles';
-import SingleComment from '../presentation/SingleComment';
+import React, {Component} from "react";
+import styles from "../styles/styles";
+import SingleComment from "../presentation/SingleComment";
 
 export default class CommentsList extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class CommentsList extends Component {
         {this.props.comments.map((comment, i) => {
           return (
             <li key={i}>
-              <SingleComment currentComment={comment} />
+              <SingleComment currentComment={comment}/>
             </li>
           );
         })}

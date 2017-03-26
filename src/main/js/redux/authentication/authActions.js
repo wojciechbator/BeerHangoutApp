@@ -7,10 +7,10 @@ export const authenticated = (authData) => {
     type: AUTHENTICATED,
     roles: authData.roles
   };
-}
+};
 
 export const loggedOut = () => {
   return {
     type: LOGGED_OUT
   };
-}
+};

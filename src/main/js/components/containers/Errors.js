@@ -1,6 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Container, Header } from 'semantic-ui-react';
+import React from "react";
+import {connect} from "react-redux";
+import {Container, Header} from "semantic-ui-react";
 
 require('../../../../../node_modules/semantic-ui/dist/components/container.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/header.min.css');
@@ -31,4 +31,4 @@ const Errors = (props) => {
 };
 
 /* Inject errors state and dispatch() into props */
-export default connect(state => ({ errors: state.errors }))(Errors);
+export default connect(state => ({errors: state.errors}))(Errors);
