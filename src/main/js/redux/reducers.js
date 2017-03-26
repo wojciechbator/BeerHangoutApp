@@ -1,8 +1,9 @@
 import {combineReducers} from "redux";
 import {routerReducer} from "react-router-redux";
+import {reducer as formReducer} from "redux-form";
 import {AUTHENTICATED, LOGGED_OUT} from "./authentication/authActions";
 import {ADD_COMMENT, COMMENTS_REFRESHED} from "./comments/commentsActions";
-import {reducer as formReducer} from "redux-form";
+import {ADD_USER, GET_USERS} from "./users/usersActions";
 
 const commentsReducer = (state = {status: 'stale', data: []}, action) => {
   switch (action.type) {
@@ -16,6 +17,25 @@ const commentsReducer = (state = {status: 'stale', data: []}, action) => {
       return {
         status: 'loaded',
         data: action.comments
+      };
+
+    default:
+      return state;
+  }
+};
+
+const usersReducer = (state = {status: 'stale', data: []}, action) => {
+  switch (action.type) {
+    case ADD_USER:
+      return {
+        status: state.status,
+        data: state.data.concat(action.user)
+      };
+
+    case GET_USERS:
+      return {
+        status: 'loaded',
+        data: action.users
       };
 
     default:
@@ -49,6 +69,7 @@ const errorsReducer = (state = {}) => {
 const reducers = combineReducers(Object.assign({}, {
   auth: authReducer,
   comments: commentsReducer,
+  users: usersReducer,
   errors: errorsReducer,
   routing: routerReducer,
   form: formReducer

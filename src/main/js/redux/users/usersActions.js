@@ -10,11 +10,11 @@ export const addUser = (user) => {
   };
 };
 
-export const saveUser = (username, content, timestamp) => {
+export const saveUser = (username, password, email, firstName, lastName, phone) => {
   return dispatch => {
-    axios.post('/api/users', {author, content, timestamp}).then(
-      success => dispatch(addComment(success.data)),
-      failure => console.error('Failure when trying to save comment, reason: ' + failure)
+    axios.post('/api/users', {username, password, email, firstName, lastName, phone}).then(
+      success => dispatch(addUser(success.data)),
+      failure => console.error('Failure when trying to save user, reason: ' + failure)
     );
   };
 };
