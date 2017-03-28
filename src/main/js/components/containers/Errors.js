@@ -8,7 +8,7 @@ require('../../../../../node_modules/semantic-ui/dist/components/header.min.css'
 const ServerError = () => (
   <Container>
     <Header as="h1">Błąd serwera</Header>
-    <p>Coś nie dało rady po stronie serwera, przepraszamy!</p>
+    <p>Coś nie dało rady po stronie serwera, przepraszamy!</p>\
   </Container>
 );
 
