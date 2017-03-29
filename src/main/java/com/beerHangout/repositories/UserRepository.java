@@ -21,4 +21,5 @@ public interface UserRepository extends MongoRepository<User, String> {
     User save(User user);
 
     void delete(User user);
+
 }

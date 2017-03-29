@@ -4,12 +4,12 @@ import com.beerHangout.domain.PasswordResetToken;
 import com.beerHangout.domain.User;
 import com.beerHangout.domain.authorise.Role;
 import com.beerHangout.domain.login.repositories.PasswordResetTokenRepository;
-import com.beerHangout.repositories.RoleRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,8 +20,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    RoleRepository roleRepository;
     @Autowired
     PasswordResetTokenRepository passwordResetTokenRepository;
 
@@ -48,16 +46,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user, Set<Role> userRoles) throws Exception {
-        User localUser = userRepository.findByUsername(user.getUsername());
 
-        for (Role role : userRoles) {
-            roleRepository.save(role);
-        }
+        user.setUserRoles(userRoles);
+        return userRepository.save(user);
+    }
 
-        user.getUserRoles().addAll(userRoles);
-        localUser = userRepository.save(user);
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
-        return localUser;
+    @Override
+    public void removeUser(String id) {
+        userRepository.delete(id);
+    }
+
+    @Override
+    public void updateUser(String username, User user) {
+        User userToUpdate = userRepository.findByUsername(username);
+        userToUpdate.setUsername(user.getUsername());
+        userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setPhone(user.getPhone());
+        userRepository.save(userToUpdate);
     }
 
 }
