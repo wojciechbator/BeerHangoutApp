@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Container, Grid, Message} from "semantic-ui-react";
+import {Container, Grid, Header, Message, Segment} from "semantic-ui-react";
 import axios from "axios";
 import {connect} from "react-redux";
 
@@ -55,8 +55,11 @@ class LoginLayout extends Component {
         <Container>
           <Grid>
             <Grid.Row centered>
-              {this.authFailedMessage()}
-              <LoginForm onSubmit={this.handleOnSignIn}/>
+              <Segment inverted compact>
+                <Header size='medium' style={{marginTop: 12}}>Zaloguj się</Header>
+                {this.authFailedMessage()}
+                <LoginForm onSubmit={this.handleOnSignIn}/>
+              </Segment>
             </Grid.Row>
             <Grid.Row centered>
               <RegisterForm />

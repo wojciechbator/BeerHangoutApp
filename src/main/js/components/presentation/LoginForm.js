@@ -1,13 +1,11 @@
 import React from "react";
-import {Button, Form, Header, Segment} from "semantic-ui-react";
+import {Button, Form} from "semantic-ui-react";
 import {Link} from "react-router";
 import {Field, reduxForm} from "redux-form";
 
 const LoginForm = (props) => {
   const {error, handleSubmit, pristine, reset, submitting} = props;
   return (
-    <Segment inverted compact>
-      <Header size='medium'>Zaloguj się</Header>
       <Form inverted onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
           <Field style={{margin: 8}}
@@ -34,7 +32,6 @@ const LoginForm = (props) => {
         <Button type='button' disabled={pristine || submitting} onClick={reset}>Wyczyść wartości</Button>
         <Button as={Link} to='/' color='blue'>Powrót</Button>
       </Form>
-    </Segment>
   );
 };
 

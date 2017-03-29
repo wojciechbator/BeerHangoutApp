@@ -11,7 +11,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar/>
         <Grid columns='equal'>
           <Grid.Row>
             <Grid.Column>
