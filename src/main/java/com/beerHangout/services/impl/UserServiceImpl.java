@@ -6,6 +6,7 @@ import com.beerHangout.domain.authorise.Role;
 import com.beerHangout.domain.login.repositories.PasswordResetTokenRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,8 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     @Autowired
     PasswordResetTokenRepository passwordResetTokenRepository;
+
+    private static final Logger log = Logger.getLogger(UserServiceImpl.class);
 
     @Override
     public PasswordResetToken getPasswordResetToken(String token) {
@@ -46,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user, Set<Role> userRoles) throws Exception {
-
+        log.info("Creating user " + user.getUsername());
         user.setUserRoles(userRoles);
         return userRepository.save(user);
     }
@@ -58,11 +61,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeUser(String id) {
+        log.info("Removing user by id: " + id);
         userRepository.delete(id);
     }
 
     @Override
     public void updateUser(String username, User user) {
+        log.info("Updating user " + username);
         User userToUpdate = userRepository.findByUsername(username);
         userToUpdate.setUsername(user.getUsername());
         userToUpdate.setPassword(user.getPassword());

@@ -1,6 +1,7 @@
 package com.beerHangout.controllers;
 
 import com.beerHangout.repositories.CommentRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,10 @@ public class HomeController {
 
     private final CommentRepository repository;
 
+    private static final Logger log = Logger.getLogger(HomeController.class);
+
+
+
     @Autowired
     public HomeController(CommentRepository repository) {
         this.repository = repository;
@@ -31,6 +36,7 @@ public class HomeController {
     }
 
     private Map<String, Object> getCommentsState() {
+        log.info("Getting comment states.");
         Map<String, Object> state = new HashMap<>();
         state.put("status", "loaded");
         state.put("data", repository.findAll());
