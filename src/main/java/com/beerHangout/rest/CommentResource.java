@@ -39,6 +39,7 @@ public class CommentResource {
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ResponseEntity<Comment> getCommentById(@PathVariable("id") String id) {
         Comment comment = commentRepository.findOne(id);
+        log.info("Getting comment: " + comment.toString());
         if (comment == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -49,6 +50,7 @@ public class CommentResource {
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     public ResponseEntity<Comment> updateComment(@Valid @RequestBody Comment comment, @PathVariable("id") String id) {
         Comment commentData = commentRepository.findOne(id);
+        log.info("Updating comment. Comment data:  " + commentData.toString());
         if (commentData == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -61,6 +63,7 @@ public class CommentResource {
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void deleteComment(@Valid @PathVariable("id") String id) {
+        log.info("Deleting comment by id: " + id);
         commentRepository.delete(id);
     }
 
