@@ -4,6 +4,14 @@ import {Button, Form, Header, Segment} from "semantic-ui-react";
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      username: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      passwordConfirmation: ''
+    };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -48,6 +56,18 @@ class RegisterForm extends Component {
                         onChange={this.onChange}
                         name="lastName"
                         placeholder='Nazwisko'/>
+          </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.Input label='Hasło'
+                        value={this.state.password}
+                        onChange={this.onChange}
+                        name="password"
+                        type='password'/>
+            <Form.Input label='Potwierdź hasło'
+                        value={this.state.passwordConfirmation}
+                        onChange={this.onChange}
+                        name="passwordConfirmation"
+                        type='password'/>
           </Form.Group>
           <Button type='submit'>Zarejestruj</Button>
         </Form>
