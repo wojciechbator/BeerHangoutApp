@@ -6,7 +6,7 @@ class SingleComment extends Component {
     const time = new Date(this.props.currentComment.timestamp);
     return (
       <div>
-        <p style={{fontSize: 20, fontWeight: 400}}>
+        <p style={styles.comment.header}>
           {this.props.currentComment.content}
         </p>
         <span style={styles.comment.nameAndDate}>{this.props.currentComment.author}</span>

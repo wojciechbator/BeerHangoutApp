@@ -11,6 +11,10 @@ export default {
     },
     nameAndDate: {
       fontWeight: 200
+    },
+    header: {
+      fontSize: 20,
+      fontWeight: 400
     }
   },
   place: {

@@ -1,38 +1,45 @@
-import React from "react";
-import {Button, Form} from "semantic-ui-react";
-import {Link} from "react-router";
-import {Field, reduxForm} from "redux-form";
+import React, {Component} from "react";
+import { Form, Button } from 'semantic-ui-react';
 
-const LoginForm = (props) => {
-  const {error, handleSubmit, pristine, reset, submitting} = props;
-  return (
+class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+    this.clearInput = this.clearInput.bind(this);
+  }
+
+  onChange(event) {
+    this.setState();
+  }
+
+  clearInput() {
+    this.setState({
+      username: '',
+      password: ''
+    })
+  }
+
+  render() {
+    return (
       <Form inverted onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
-          <Field style={{margin: 8}}
-                 name='username'
-                 label='Nazwa użytkownika'
-                 component={username =>
-                   <div>
-                     <Form.Input type='text' {...username} placeholder='Nazwa użytkownika'/>
-                     {username.touched && username.error && <span>{username.error}</span>}
-                   </div>
-                 }/>
-          <Field style={{margin: 8}}
-                 name='password'
-                 label='Hasło'
-                 component={password =>
-                   <div>
-                     <Form.Input type='text' {...password} placeholder='Hasło'/>
-                     {password.touched && password.error && <span>{password.error}</span>}
-                   </div>
-                 }/>
-          {error && <strong>{error}</strong>}
+          <Form.input style={{margin: 8}}
+                      name='username'
+                      value="{this.state.username}"
+                      label='Nazwa użytkownika'
+                      placeholder='Nazwa użytkownika'
+                      onChange={this.onChange}/>
+          <Form.input style={{margin: 8}}
+                      name='password'
+                      label='Hasło'
+                      placeholder='Hasło'/>
         </Form.Group>
         <Button type='submit' disabled={submitting}>Zaloguj</Button>
-        <Button type='button' disabled={pristine || submitting} onClick={reset}>Wyczyść wartości</Button>
+        <Button type='button' onClick={this.clearInput}>Wyczyść wartości</Button>
         <Button as={Link} to='/' color='blue'>Powrót</Button>
       </Form>
-  );
+    );
+  };
 };
 
 export default reduxForm({
