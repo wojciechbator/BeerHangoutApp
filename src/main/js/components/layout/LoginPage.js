@@ -1,14 +1,10 @@
 import React, {Component} from "react";
-import {Container, Grid, Header, Message, Segment} from "semantic-ui-react";
+import {Grid, Header, Message, Segment} from "semantic-ui-react";
 import axios from "axios";
-import {connect} from "react-redux";
-
 import LoginForm from "../presentation/LoginForm";
-import RegisterForm from "../presentation/RegisterForm";
 import {authenticated} from "../../redux/authentication/authActions";
 
-
-class LoginLayout extends Component {
+class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {authFailed: false};
@@ -49,26 +45,20 @@ class LoginLayout extends Component {
   }
 
   render() {
-
     return (
       <div>
-        <Container>
-          <Grid>
-            <Grid.Row centered>
-              <Segment inverted compact>
-                <Header size='medium' style={{marginTop: 12}}>Zaloguj się</Header>
-                {this.authFailedMessage()}
-                <LoginForm onSubmit={this.handleOnSignIn}/>
-              </Segment>
-            </Grid.Row>
-            <Grid.Row centered>
-              <RegisterForm />
-            </Grid.Row>
-          </Grid>
-        </Container>
+        <Grid>
+          <Grid.Row centered>
+            <Segment inverted compact>
+              <Header size='medium' style={{marginTop: 12}}>Zaloguj się</Header>
+              {this.authFailedMessage()}
+              <LoginForm onSubmit={this.handleOnSignIn}/>
+            </Segment>
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }
 }
 
-export default connect(state => ({auth: state.auth}))(LoginLayout);
+export default LoginPage;

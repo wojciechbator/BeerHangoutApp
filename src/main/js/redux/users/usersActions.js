@@ -3,19 +3,16 @@ import axios from "axios";
 export const ADD_USER = 'ADD_USER';
 export const GET_USERS = 'GET_USERS';
 
-export const addUser = (user) => {
+export const addUser = (userData) => {
   return {
     type: ADD_USER,
-    user
+    userData
   };
 };
 
-export const saveUser = (username, password, email, firstName, lastName, phone) => {
+export const registerUser = (userData) => {
   return dispatch => {
-    axios.post('/api/users', {username, password, email, firstName, lastName, phone}).then(
-      success => dispatch(addUser(success.data)),
-      failure => console.error('Failure when trying to save user, reason: ' + failure)
-    );
+    return axios.post('/api/users', userData);
   };
 };
 

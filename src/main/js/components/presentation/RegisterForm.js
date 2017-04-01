@@ -1,7 +1,8 @@
-import React, {Component} from "react";
-import {Button, Form, Header, Segment} from "semantic-ui-react";
+import React, {Component} from 'react';
+import {Button, Form, Header, Segment} from 'semantic-ui-react';
+import {Link} from 'react-router';
 
-export default class RegisterForm extends Component {
+class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +14,7 @@ export default class RegisterForm extends Component {
       passwordConfirmation: ''
     };
     this.onChange = this.onChange.bind(this);
+    this.clearInput = this.clearInput.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -24,8 +26,18 @@ export default class RegisterForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    //TODO:
-    console.log(this.state);
+    this.props.registerUser(this.state);
+  }
+
+  clearInput() {
+    this.setState({
+      username: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      passwordConfirmation: ''
+    })
   }
 
   render() {
@@ -69,9 +81,17 @@ export default class RegisterForm extends Component {
                         name="passwordConfirmation"
                         type='password'/>
           </Form.Group>
-          <Button type='submit'>Zarejestruj</Button>
+          <Button color='green' type='submit'>Zarejestruj</Button>
+          <Button type='button' onClick={this.clearInput}>Wyczyść wartości</Button>
+          <Button as={Link} to='/' color='blue'>Powrót</Button>
         </Form>
       </Segment>
     );
   }
 }
+
+RegisterForm.propTypes = {
+  registerUser: React.PropTypes.func.isRequired
+}
+
+export default RegisterForm
