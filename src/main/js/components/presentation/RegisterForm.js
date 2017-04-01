@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form, Header, Segment} from 'semantic-ui-react';
+import {Button, Form, Header, Segment, Message} from 'semantic-ui-react';
 import {Link} from 'react-router';
 
 class RegisterForm extends Component {
@@ -11,11 +11,14 @@ class RegisterForm extends Component {
       firstName: '',
       lastName: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      errors: {},
+      isLoading: false
     };
     this.onChange = this.onChange.bind(this);
     this.clearInput = this.clearInput.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.isValid = this.isValid.bind(this);
   }
 
   onChange(event) {
@@ -26,7 +29,7 @@ class RegisterForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    if (this.isValid) {
+    if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true});
       this.props.registerUser(this.state)
         .then(
@@ -35,6 +38,9 @@ class RegisterForm extends Component {
         );
     }
 
+  }
+
+  isValid() {
   }
 
   clearInput() {
@@ -49,6 +55,7 @@ class RegisterForm extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     return (
       <Segment inverted>
         <Header size='medium'>Nie masz konta? Zarejestruj się</Header>
@@ -65,6 +72,7 @@ class RegisterForm extends Component {
                         name="email"
                         placeholder='e-mail'/>
           </Form.Group>
+          {/*{errors.username || errors.email && <Message error header='Ups...' content='Nazwa użytkownika lub e-mail są niepoprawne.'/>}*/}
           <Form.Group widths='equal'>
             <Form.Input label='Imię'
                         value={this.state.firstName}
@@ -89,7 +97,7 @@ class RegisterForm extends Component {
                         name="passwordConfirmation"
                         type='password'/>
           </Form.Group>
-          <Button color='green' type='submit'>Zarejestruj</Button>
+          <Button disabled={this.state.isLoading} color='green' type='submit'>Zarejestruj</Button>
           <Button type='button' onClick={this.clearInput}>Wyczyść wartości</Button>
           <Button as={Link} to='/' color='blue'>Powrót</Button>
         </Form>
