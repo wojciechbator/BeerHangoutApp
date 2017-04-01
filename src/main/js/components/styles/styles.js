@@ -1,20 +1,29 @@
 export default {
   universal: {},
   comment: {
+      commentsContainer: {
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+       padding: 15
+
+      },
+    singleComment:{
+        fontSize: 15,
+        fontWeight: 400,
+    },
     commentsList: {
-      listStyleType: 'none'
+        padding: 0,
+        color: '#ffffff',
+      listStyleType: 'none',
     },
     pipeStyle: {
       fontWeight: 200,
       marginLeft: 12,
-      marginRight: 12
+      marginRight: 12,
+        color: '#bbbbbb'
     },
     nameAndDate: {
-      fontWeight: 200
-    },
-    header: {
-      fontSize: 20,
-      fontWeight: 400
+      fontWeight: 200,
+        color: '#bbbbbb'
     }
   },
   place: {
@@ -32,6 +41,13 @@ export default {
     title: {
       textDecoration: 'none',
       color: 'red'
+    }
+  },
+  inputs: {
+    textArea: {
+    },
+    textField: {
+
     }
   }
 }

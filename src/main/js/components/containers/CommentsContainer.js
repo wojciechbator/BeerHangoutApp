@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import CommentsList from "./CommentsList";
+import styles from "../styles/styles";
 import {Button, Comment, Form, Header} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {refreshComments, saveComment} from "../../redux/comments/commentsActions";
@@ -63,17 +64,17 @@ class CommentsContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div style={styles.comment.commentsContainer}>
         <Comment.Group>
-          <Header as="h3" style={{marginTop: 12}}>Komentarze: </Header>
+          <Header as="h3" style={{marginTop: 12, color: '#FFFFFF'}}>Komentarze: </Header>
           { this.props.comments.length === 0
             ? <p>Bądź pierwszym, który skomentuje!</p>
             : <CommentsList comments={this.props.comments}/>}
         </Comment.Group>
         <Form reply onSubmit={this.submitComment}>
-          <Header as="h3" style={{marginTop: 12}}>Skomentuj</Header>
-          <Form.Input onChange={this.updateUsername} type="text"/>
-          <Form.TextArea onChange={this.updateBody} type="text"/>
+          <Header as="h3" style={{marginTop: 12, color: '#FFFFFF'}}>Skomentuj</Header>
+          <Form.Input style={styles.inputs.textField} onChange={this.updateUsername} type="text"/>
+          <Form.TextArea  style={styles.inputs.textArea}  onChange={this.updateBody} type="text"/>
           <Button type="submit" content='Odpowiedz' color="green"/>
         </Form>
       </div>
