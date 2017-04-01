@@ -45,6 +45,7 @@ export default {
   },
   inputs: {
     textArea: {
+      width: "93%"
     },
     textField: {
 
