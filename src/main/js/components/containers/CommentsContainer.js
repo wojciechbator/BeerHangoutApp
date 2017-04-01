@@ -73,8 +73,8 @@ class CommentsContainer extends Component {
         </Comment.Group>
         <Form reply onSubmit={this.submitComment}>
           <Header as="h3" style={{marginTop: 12, color: '#FFFFFF'}}>Skomentuj</Header>
-          <Form.Input style={styles.inputs.textField} onChange={this.updateUsername} type="text"/>
-          <Form.TextArea  style={styles.inputs.textArea}  onChange={this.updateBody} type="text"/>
+          <Form.Input fluid onChange={this.updateUsername} type="text"/>
+          <Form.TextArea autoHeight style={styles.inputs.textArea}  onChange={this.updateBody} type="text"/>
           <Button type="submit" content='Odpowiedz' color="green"/>
         </Form>
       </div>

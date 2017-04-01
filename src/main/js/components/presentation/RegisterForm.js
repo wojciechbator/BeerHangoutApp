@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Button, Form, Header, Segment} from "semantic-ui-react";
 
-class RegisterForm extends Component {
+export default class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,5 +75,3 @@ class RegisterForm extends Component {
     );
   }
 }
-
-export default RegisterForm

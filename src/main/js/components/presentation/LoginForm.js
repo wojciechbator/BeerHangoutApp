@@ -2,9 +2,13 @@ import React, {Component} from "react";
 import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
-class LoginForm extends Component {
+export default class LoginForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      username: '',
+      password: ''
+    }
     this.onChange = this.onChange.bind(this);
     this.clearInput = this.clearInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,13 +31,13 @@ class LoginForm extends Component {
     return (
       <Form inverted onSubmit={this.handleSubmit}>
         <Form.Group widths='equal'>
-          <Form.input style={{margin: 8}}
+          <Form.Input
                       name='username'
-                      value="{this.state.username}"
+                      value={this.state.username}
                       label='Nazwa użytkownika'
                       placeholder='Nazwa użytkownika'
                       onChange={this.onChange}/>
-          <Form.input style={{margin: 8}}
+          <Form.Input
                       name='password'
                       label='Hasło'
                       placeholder='Hasło'
@@ -47,5 +51,3 @@ class LoginForm extends Component {
     );
   };
 }
-
-export default LoginForm;
