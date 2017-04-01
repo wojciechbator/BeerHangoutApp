@@ -15,7 +15,9 @@ export default class LoginForm extends Component {
   }
 
   onChange(event) {
-    this.setState();
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
 
   clearInput() {
