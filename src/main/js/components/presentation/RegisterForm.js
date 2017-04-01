@@ -26,7 +26,15 @@ class RegisterForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    this.props.registerUser(this.state);
+    if (this.isValid) {
+      this.setState({ errors: {}, isLoading: true});
+      this.props.registerUser(this.state)
+        .then(
+          () => {},
+          ({ data }) => this.setState({ errors: data, isLoading: false })
+        );
+    }
+
   }
 
   clearInput() {
