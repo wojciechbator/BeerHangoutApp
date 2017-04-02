@@ -19,8 +19,7 @@ public class HomeController {
 
     private final CommentRepository repository;
 
-    private static final Logger log = Logger.getLogger(HomeController.class);
-
+    private static final Logger LOGGER = Logger.getLogger(HomeController.class);
 
 
     @Autowired
@@ -36,7 +35,7 @@ public class HomeController {
     }
 
     private Map<String, Object> getCommentsState() {
-        log.info("Getting comment states.");
+        LOGGER.info("Getting comment states.");
         Map<String, Object> state = new HashMap<>();
         state.put("status", "loaded");
         state.put("data", repository.findAll());

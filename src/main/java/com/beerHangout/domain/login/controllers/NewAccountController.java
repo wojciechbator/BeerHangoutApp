@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 @Controller
 public class NewAccountController {
-    private final static Logger log = Logger.getLogger(NewAccountController.class);
+    private final static Logger LOGGER = Logger.getLogger(NewAccountController.class);
 
     @Autowired
     private MailConstructor mailConstructor;
@@ -53,6 +53,7 @@ public class NewAccountController {
         PasswordResetToken passwordResetToken = userService.getPasswordResetToken(token);
 
         if (passwordResetToken == null) {
+            LOGGER.warn("Invalid token!");
             String message = "Invalid Token!";
             model.addAttribute("message", message);
             return "redirect:/badRequest";
@@ -90,14 +91,14 @@ public class NewAccountController {
         model.addAttribute("username", username);
 
         if (userService.findByUsername(username) != null) {
+            LOGGER.warn("Username already exists!");
             model.addAttribute("usernameExists", true);
-
             return "myAccount";
         }
 
         if (userService.findByEmail(email) != null) {
+            LOGGER.warn("User email already exists! ");
             model.addAttribute("usernameEmail", true);
-
             return "myAccount";
         }
 
@@ -131,7 +132,7 @@ public class NewAccountController {
 
         mailSender.send(emailMessage);
 
-        log.info("Email sent to the requester.");
+        LOGGER.info("Email sent to the requester.");
         model.addAttribute("emailSent", true);
 
         return "myAccount";
