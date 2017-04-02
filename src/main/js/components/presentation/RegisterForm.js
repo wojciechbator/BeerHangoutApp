@@ -6,28 +6,6 @@ import {Field, reduxForm} from 'redux-form';
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      passwordConfirmation: '',
-      errors: {},
-      isLoading: false
-    };
-    this.clearInput = this.clearInput.bind(this);
-  }
-
-  clearInput() {
-    this.setState({
-      username: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      passwordConfirmation: ''
-    })
   }
 
   render() {
@@ -45,7 +23,6 @@ class RegisterForm extends Component {
                        <Form.Input
                          type='text'
                          {...username}
-                         value={this.state.username}
                          placeholder='Nazwa użytkownika'/>
                        {username.touched && username.error && <span>{username.error}</span>}
                      </div>
@@ -58,7 +35,6 @@ class RegisterForm extends Component {
                        <Form.Input
                          type='text'
                          {...email}
-                         value={this.state.email}
                          placeholder='Email'/>
                        {email.touched && email.error && <span>{email.error}</span>}
                      </div>
@@ -73,7 +49,6 @@ class RegisterForm extends Component {
                        <Form.Input
                          type='text'
                          {...firstName}
-                         value={this.state.firstName}
                          placeholder='Podaj swoje imię'/>
                        {firstName.touched && firstName.error && <span>{firstName.error}</span>}
                      </div>
@@ -86,7 +61,6 @@ class RegisterForm extends Component {
                        <Form.Input
                          type='text'
                          {...lastName}
-                         value={this.state.lastName}
                          placeholder='Tutaj nazwisko'/>
                        {lastName.touched && lastName.error && <span>{lastName.error}</span>}
                      </div>
@@ -101,7 +75,7 @@ class RegisterForm extends Component {
                        <Form.Input
                          type='password'
                          {...password}
-                         value={this.state.password} />
+                       />
                        {password.touched && password.error && <span>{password.error}</span>}
                      </div>
                    }/>
@@ -113,14 +87,12 @@ class RegisterForm extends Component {
                        <Form.Input
                          type='password'
                          {...passwordConfirmation}
-                         value={this.state.passwordConfirmation}
                        />
                        {passwordConfirmation.touched && passwordConfirmation.error && <span>{passwordConfirmation.error}</span>}
                      </div>
                    }/>
           </Form.Group>
-          <Button disabled={this.state.isLoading} color='green' type='submit'>Zarejestruj</Button>
-          <Button type='button' onClick={this.clearInput}>Wyczyść wartości</Button>
+          <Button color='green' type='submit'>Zarejestruj</Button>
           <Button as={Link} to='/' color='blue'>Powrót</Button>
         </Form>
       </Segment>
