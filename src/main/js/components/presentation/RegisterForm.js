@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Form, Header, Segment, Message} from 'semantic-ui-react';
 import {Link} from 'react-router';
-import axios from 'axios';
+import {Field, reduxForm} from 'redux-form';
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -16,30 +16,7 @@ class RegisterForm extends Component {
       errors: {},
       isLoading: false
     };
-    this.onChange = this.onChange.bind(this);
     this.clearInput = this.clearInput.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.isValid = this.isValid.bind(this);
-  }
-
-  onChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
-
-  onSubmit(event) {
-    event.preventDefault();
-    this.setState({errors: {}, isLoading: true});
-    axios.post('/api/users', this.state)
-      .then(
-        () => {
-        },
-        ({data}) => this.setState({errors: data, isLoading: false})
-      );
-  }
-
-  isValid() {
   }
 
   clearInput() {
@@ -54,47 +31,93 @@ class RegisterForm extends Component {
   }
 
   render() {
-    const {errors} = this.state;
+    const {handleSumbit} = this.props;
     return (
       <Segment inverted>
         <Header size='medium'>Nie masz konta? Zarejestruj się</Header>
-        <Form inverted onSubmit={this.onSubmit}>
+        <Form inverted onSubmit={handleSumbit}>
           <Form.Group widths='equal'>
-            <Form.Input label='Nazwa użytkownika'
-                        value={this.state.username}
-                        onChange={this.onChange}
-                        name="username"
-                        placeholder='Nazwa użytkownika'/>
-            <Form.Input label='e-mail'
-                        value={this.state.email}
-                        onChange={this.onChange}
-                        name="email"
-                        placeholder='e-mail'/>
+            <Field style={{margin: 6}}
+                   name='username'
+                   label='Nazwa użytkownika'
+                   component={username =>
+                     <div>
+                       <Form.Input
+                         type='text'
+                         {...username}
+                         value={this.state.username}
+                         placeholder='Nazwa użytkownika'/>
+                       {username.touched && username.error && <span>{username.error}</span>}
+                     </div>
+                   }/>
+            <Field style={{margin: 6}}
+                   name='email'
+                   label='Adres e-mail'
+                   component={email =>
+                     <div>
+                       <Form.Input
+                         type='text'
+                         {...email}
+                         value={this.state.email}
+                         placeholder='Email'/>
+                       {email.touched && email.error && <span>{email.error}</span>}
+                     </div>
+                   }/>
           </Form.Group>
-          {/*{errors.username || errors.email && <Message error header='Ups...' content='Nazwa użytkownika lub e-mail są niepoprawne.'/>}*/}
           <Form.Group widths='equal'>
-            <Form.Input label='Imię'
-                        value={this.state.firstName}
-                        onChange={this.onChange}
-                        name="firstName"
-                        placeholder='Imię'/>
-            <Form.Input label='Nazwisko'
-                        value={this.state.lastName}
-                        onChange={this.onChange}
-                        name="lastName"
-                        placeholder='Nazwisko'/>
+            <Field style={{margin: 6}}
+                   name='firstName'
+                   label='Imię'
+                   component={firstName =>
+                     <div>
+                       <Form.Input
+                         type='text'
+                         {...firstName}
+                         value={this.state.firstName}
+                         placeholder='Podaj swoje imię'/>
+                       {firstName.touched && firstName.error && <span>{firstName.error}</span>}
+                     </div>
+                   }/>
+            <Field style={{margin: 6}}
+                   name='lastName'
+                   label='Nazwisko'
+                   component={lastName =>
+                     <div>
+                       <Form.Input
+                         type='text'
+                         {...lastName}
+                         value={this.state.lastName}
+                         placeholder='Tutaj nazwisko'/>
+                       {lastName.touched && lastName.error && <span>{lastName.error}</span>}
+                     </div>
+                   }/>
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Input label='Hasło'
-                        value={this.state.password}
-                        onChange={this.onChange}
-                        name="password"
-                        type='password'/>
-            <Form.Input label='Potwierdź hasło'
-                        value={this.state.passwordConfirmation}
-                        onChange={this.onChange}
-                        name="passwordConfirmation"
-                        type='password'/>
+            <Field style={{margin: 6}}
+                   name='password'
+                   label='Hasło'
+                   component={password =>
+                     <div>
+                       <Form.Input
+                         type='password'
+                         {...password}
+                         value={this.state.password} />
+                       {password.touched && password.error && <span>{password.error}</span>}
+                     </div>
+                   }/>
+            <Field style={{margin: 6}}
+                   name='passwordConfirmation'
+                   label='Potwierdź hasło'
+                   component={passwordConfirmation =>
+                     <div>
+                       <Form.Input
+                         type='password'
+                         {...passwordConfirmation}
+                         value={this.state.passwordConfirmation}
+                       />
+                       {passwordConfirmation.touched && passwordConfirmation.error && <span>{passwordConfirmation.error}</span>}
+                     </div>
+                   }/>
           </Form.Group>
           <Button disabled={this.state.isLoading} color='green' type='submit'>Zarejestruj</Button>
           <Button type='button' onClick={this.clearInput}>Wyczyść wartości</Button>
@@ -107,6 +130,10 @@ class RegisterForm extends Component {
 
 RegisterForm.propTypes = {
   registerUser: React.PropTypes.func.isRequired
-}
+};
 
-export default RegisterForm
+RegisterForm = reduxForm({
+  form: 'register'
+})(RegisterForm);
+
+export default RegisterForm;
