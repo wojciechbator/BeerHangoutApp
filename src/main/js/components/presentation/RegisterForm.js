@@ -107,7 +107,7 @@ class RegisterForm extends Component {
                      </div>
                    }/>
           </Form.Group>
-          <Button color='green' type='submit'>Zarejestruj</Button>
+          <Button color='green' type='submit' disabled={submitting}>Zarejestruj</Button>
           <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
           <Button as={Link} to='/' color='blue'>Powrót</Button>
         </Form>

@@ -50,7 +50,7 @@ class LoginForm extends Component {
                    </div>
                  }/>
         </Form.Group>
-        <Button type='submit'>Zaloguj</Button>
+        <Button type='submit' disabled={submitting}>Zaloguj</Button>
         <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
         <Button as={Link} to='/' color='blue'>Powrót</Button>
       </Form>
