@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form, Header, Segment, Message} from 'semantic-ui-react';
+import { Button, Form, Header, Segment } from 'semantic-ui-react';
 import {Link} from 'react-router';
 import {Field, reduxForm} from 'redux-form';
 import axios from 'axios';

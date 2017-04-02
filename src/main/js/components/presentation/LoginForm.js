@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
-import validateLogin from '../utils/loginValidation';
+import submitValidation from '../utils/submitValidation';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -60,5 +60,6 @@ class LoginForm extends Component {
 
 export default reduxForm({
   form: 'login',
-  validateLogin
+  submitValidation,
+  asyncBlurFields: [ 'login', 'password' ]
 })(LoginForm);

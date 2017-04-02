@@ -4,8 +4,6 @@ import {reducer as formReducer} from "redux-form";
 import {AUTHENTICATED, LOGGED_OUT} from "./authentication/authActions";
 import {ADD_COMMENT, COMMENTS_REFRESHED} from "./comments/commentsActions";
 import {ADD_USER, GET_USERS} from "./users/usersActions";
-import registerValidation from "../components/utils/registerValidation";
-import loginValidation from "../components/utils/loginValidation";
 
 const commentsReducer = (state = {status: 'stale', data: []}, action) => {
   switch (action.type) {
@@ -72,10 +70,7 @@ const reducers = combineReducers({
   users: usersReducer,
   errors: errorsReducer,
   routing: routerReducer,
-  form: formReducer.validation({
-    register: registerValidation,
-    login: loginValidation
-  })
+  form: formReducer
 });
 
 
