@@ -11,6 +11,10 @@ export default {
         fontWeight: 400,
         overflowWrap: 'break-word'
     },
+    header: {
+        marginTop: 12,
+        color: '#FFFFFF'
+    },
     commentsList: {
         padding: 0,
         color: '#ffffff',
