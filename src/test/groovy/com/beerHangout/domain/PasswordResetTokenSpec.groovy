@@ -1,3 +1,5 @@
+import com.beerHangout.domain.PasswordResetToken
+import com.beerHangout.domain.User
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll

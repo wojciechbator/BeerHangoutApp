@@ -15,7 +15,7 @@ public class SecurityUtility {
     private static final String SALT = "salt";
     private static final String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-    private static final Logger log = Logger.getLogger(SecurityUtility.class);
+    private static final Logger LOGGER = Logger.getLogger(SecurityUtility.class);
 
     @Bean
     public static BCryptPasswordEncoder passwordEncoder(int password_length) {
@@ -28,7 +28,7 @@ public class SecurityUtility {
      */
     @Bean
     public static String randomPassword(int password_length) {
-        log.info("Generating random password!");
+        LOGGER.info("Generating random password!");
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();
         while (passwordBuilder.length() < password_length) {

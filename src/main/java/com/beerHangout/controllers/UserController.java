@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class UserController {
     private final UserService userService;
-    private static final Logger log = Logger.getLogger(UserController.class);
+    private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
     @Autowired
     public UserController(UserService userService) {
