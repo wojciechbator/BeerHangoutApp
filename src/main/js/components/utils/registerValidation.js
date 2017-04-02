@@ -1,7 +1,7 @@
 /**
  * Created by wojciech on 02.04.17.
  */
-const validate = (values) => {
+const validateRegister = (values) => {
   const errors = {};
   if (!values.username) {
     errors.username = 'Podaj jakiś login :)';
@@ -42,4 +42,4 @@ const validate = (values) => {
   return errors;
 };
 
-export default validate;
+export default validateRegister;

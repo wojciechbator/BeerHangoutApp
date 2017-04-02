@@ -1,8 +1,10 @@
 import React, {Component} from "react";
 import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
+import { Field, reduxForm } from 'redux-form';
+import validateLogin from '../utils/loginValidation';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,8 +12,6 @@ export default class LoginForm extends Component {
       password: ''
     };
     this.onChange = this.onChange.bind(this);
-    this.clearInput = this.clearInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onChange(event) {
@@ -20,36 +20,45 @@ export default class LoginForm extends Component {
     });
   }
 
-  clearInput() {
-    this.setState({
-      username: '',
-      password: ''
-    })
-  }
-
-  handleSubmit(event) {}
-
   render() {
+    const {handleSumbit, pristine, reset, submitting} = this.props;
     return (
-      <Form inverted onSubmit={this.handleSubmit}>
+      <Form inverted onSubmit={handleSumbit}>
         <Form.Group widths='equal'>
-          <Form.Input
-                      name='username'
-                      value={this.state.username}
-                      label='Nazwa użytkownika'
-                      placeholder='Nazwa użytkownika'
-                      onChange={this.onChange}/>
-          <Form.Input
-                      name='password'
-                      label='Hasło'
-                      placeholder='Hasło'
-                      onChange={this.onChange}
-                      type="password"/>
+          <Field style={{margin: 6}}
+                 name='login'
+                 label='Nazwa użytkownika'
+                 component={login =>
+                   <div>
+                     <Form.Input
+                       type='text'
+                       {...login}
+                     />
+                     {login.touched && login.error && <span>{login.error}</span>}
+                   </div>
+                 }/>
+          <Field style={{margin: 6}}
+                 name='password'
+                 label='Hasło'
+                 component={password =>
+                   <div>
+                     <Form.Input
+                       type='password'
+                       {...password}
+                     />
+                     {password.touched && password.error && <span>{password.error}</span>}
+                   </div>
+                 }/>
         </Form.Group>
         <Button type='submit'>Zaloguj</Button>
-        <Button type='button' onClick={this.clearInput}>Wyczyść wartości</Button>
+        <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
         <Button as={Link} to='/' color='blue'>Powrót</Button>
       </Form>
     );
   };
 }
+
+export default reduxForm({
+  form: 'login',
+  validateLogin
+})(LoginForm);
