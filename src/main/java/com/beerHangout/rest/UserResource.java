@@ -23,7 +23,7 @@ public class UserResource {
 
     private final UserService userService;
 
-    private static final Logger log = Logger.getLogger(AccountResource.class);
+    private static final Logger log = Logger.getLogger(UserResource.class);
 
     @Autowired
     public UserResource(UserService userService) {

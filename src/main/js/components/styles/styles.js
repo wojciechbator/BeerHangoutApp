@@ -9,6 +9,7 @@ export default {
     singleComment:{
         fontSize: 15,
         fontWeight: 400,
+        overflowWrap: 'break-word'
     },
     commentsList: {
         padding: 0,

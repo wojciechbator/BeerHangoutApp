@@ -8,7 +8,7 @@ export default class LoginForm extends Component {
     this.state = {
       username: '',
       password: ''
-    }
+    };
     this.onChange = this.onChange.bind(this);
     this.clearInput = this.clearInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

@@ -14,7 +14,7 @@ export const registerUser = (userData) => {
   return dispatch => {
     axios.post('/api/users', userData).then(
       success => dispatch(addUser(success.data)),
-      failure => console.error('Failure when trying to save user, reason: ' + failure)
+      failure => console.error('Failure when trying to register user, reason: ' + failure)
     );
   };
 };

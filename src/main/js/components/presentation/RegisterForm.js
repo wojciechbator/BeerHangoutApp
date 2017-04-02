@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Form, Header, Segment, Message} from 'semantic-ui-react';
 import {Link} from 'react-router';
+import axios from 'axios';
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -29,15 +30,13 @@ class RegisterForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    if (this.isValid()) {
-      this.setState({ errors: {}, isLoading: true});
-      this.props.registerUser(this.state)
-        .then(
-          () => {},
-          ({ data }) => this.setState({ errors: data, isLoading: false })
-        );
-    }
-
+    this.setState({errors: {}, isLoading: true});
+    axios.post('/api/users', this.state)
+      .then(
+        () => {
+        },
+        ({data}) => this.setState({errors: data, isLoading: false})
+      );
   }
 
   isValid() {
@@ -55,7 +54,7 @@ class RegisterForm extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const {errors} = this.state;
     return (
       <Segment inverted>
         <Header size='medium'>Nie masz konta? Zarejestruj się</Header>

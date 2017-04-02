@@ -24,17 +24,15 @@ const commentsReducer = (state = {status: 'stale', data: []}, action) => {
   }
 };
 
-const usersReducer = (state = {status: 'stale', data: []}, action) => {
+const usersReducer = (state = {data: []}, action) => {
   switch (action.type) {
     case ADD_USER:
       return {
-        status: state.status,
         data: state.data.concat(action.user)
       };
 
     case GET_USERS:
       return {
-        status: 'loaded',
         data: action.users
       };
 
