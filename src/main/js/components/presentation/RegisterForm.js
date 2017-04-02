@@ -13,12 +13,11 @@ class RegisterForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    this.setState({errors: {}, isLoading: true});
     axios.post('/api/users', this.state)
       .then(
         () => {
         },
-        ({data}) => this.setState({errors: data, isLoading: false})
+        () => {}
       );
     //Dispatch redux action in the future
   }
