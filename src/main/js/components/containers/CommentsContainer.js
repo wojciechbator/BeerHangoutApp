@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import CommentsList from './CommentsList';
-import { Header, Form, Button, Comment } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { saveComment, refreshComments } from '../../redux/comments/commentsActions';
+import React, {Component} from "react";
+import CommentsList from "./CommentsList";
+import styles from "../styles/styles";
+import {Button, Comment, Form, Header} from "semantic-ui-react";
+import {connect} from "react-redux";
+import {refreshComments, saveComment} from "../../redux/comments/commentsActions";
 
 require('../../../../../node_modules/semantic-ui/dist/components/form.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/button.min.css');
@@ -37,14 +38,14 @@ class CommentsContainer extends Component {
     const timestamp = (new Date()).getTime();
     this.props.dispatch(saveComment(author, content, timestamp));
     this.setState({
-        comments: this.props.comments
+      comments: this.props.comments
     });
   }
 
   handleRefreshComments() {
     this.props.dispatch(refreshComments());
   }
-  
+
   updateUsername(event) {
     let updatedComment = Object.assign({}, this.state.comment);
     updatedComment['author'] = event.target.value;
@@ -63,18 +64,18 @@ class CommentsContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div style={styles.comment.commentsContainer}>
         <Comment.Group>
-          <Header as="h3" style={{marginTop: 12}}>Komentarze: </Header>
-           { this.props.comments.length === 0
+          <Header as="h3" style={styles.comment.header}>Komentarze: </Header>
+          { this.props.comments.length === 0
             ? <p>Bądź pierwszym, który skomentuje!</p>
-            : <CommentsList comments={this.props.comments} />}
+            : <CommentsList comments={this.props.comments}/>}
         </Comment.Group>
         <Form reply onSubmit={this.submitComment}>
-          <Header as="h3" style={{marginTop: 12}}>Skomentuj</Header>
-          <Form.Input onChange={this.updateUsername} type="text"/>
-          <Form.TextArea onChange={this.updateBody} type="text" />
-          <Button type="submit" content='Odpowiedz' color="green" />
+          <Header as="h3" style={styles.comment.header}>Skomentuj</Header>
+          <Form.Input fluid onChange={this.updateUsername} type="text"/>
+          <Form.TextArea autoHeight style={styles.inputs.textArea}  onChange={this.updateBody} type="text"/>
+          <Button type="submit" content='Odpowiedz' color="green"/>
         </Form>
       </div>
     );
@@ -85,13 +86,13 @@ CommentsContainer.propTypes = {
   status: React.PropTypes.string,
   comment: React.PropTypes.object,
   comments: React.PropTypes.array
-}
+};
 
 const mapStateToProps = (store) => {
   return {
     status: store.comments.status,
     comments: store.comments.data
   };
-}
+};
 
 export default connect(mapStateToProps)(CommentsContainer);

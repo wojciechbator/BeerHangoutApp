@@ -4,12 +4,13 @@ import com.beerHangout.domain.PasswordResetToken;
 import com.beerHangout.domain.User;
 import com.beerHangout.domain.authorise.Role;
 import com.beerHangout.domain.login.repositories.PasswordResetTokenRepository;
-import com.beerHangout.repositories.RoleRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,46 +19,63 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	UserRepository userRepository;
-	@Autowired
-	RoleRepository roleRepository;
-	@Autowired
-	PasswordResetTokenRepository passwordResetTokenRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    PasswordResetTokenRepository passwordResetTokenRepository;
 
-	@Override
-	public PasswordResetToken getPasswordResetToken(String token) {
-		return passwordResetTokenRepository.findOne(token);
-	}
+    private static final Logger log = Logger.getLogger(UserServiceImpl.class);
 
-	@Override
-	public void createPasswordResetTokenForUser(String token, User user) {
-		PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
-		passwordResetTokenRepository.save(passwordResetToken);
-	}
+    @Override
+    public PasswordResetToken getPasswordResetToken(String token) {
+        return passwordResetTokenRepository.findOne(token);
+    }
 
-	@Override
-	public User findByUsername(String username) {
-		return userRepository.findByUsername(username);
-	}
+    @Override
+    public void createPasswordResetTokenForUser(String token, User user) {
+        PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
+        passwordResetTokenRepository.save(passwordResetToken);
+    }
 
-	@Override
-	public User findByEmail(String email) {
-		return userRepository.findByEmail(email);
-	}
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 
-	@Override
-	public User createUser(User user, Set<Role> userRoles) throws Exception {
-		User localUser = userRepository.findByUsername(user.getUsername());
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
-		for (Role role: userRoles) {
-			roleRepository.save(role);
-		}
+    @Override
+    public User createUser(User user, Set<Role> userRoles) throws Exception {
+        log.info("Creating user " + user.getUsername());
+        user.setUserRoles(userRoles);
+        return userRepository.save(user);
+    }
 
-		user.getUserRoles().addAll(userRoles);
-		localUser = userRepository.save(user);
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
-		return localUser;
-	}
+    @Override
+    public void removeUser(String id) {
+        log.info("Removing user by id: " + id);
+        userRepository.delete(id);
+    }
+
+    @Override
+    public void updateUser(String username, User user) {
+        log.info("Updating user " + username);
+        User userToUpdate = userRepository.findByUsername(username);
+        userToUpdate.setUsername(user.getUsername());
+        userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setPhone(user.getPhone());
+        userRepository.save(userToUpdate);
+    }
 
 }

@@ -8,6 +8,7 @@ import com.beerHangout.domain.login.MailConstructor;
 import com.beerHangout.domain.login.SessionIdentifierGenerator;
 import com.beerHangout.domain.login.services.UserSecurityService;
 import com.beerHangout.services.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -32,107 +33,110 @@ import java.util.UUID;
  */
 @Controller
 public class NewAccountController {
+    private final static Logger LOGGER = Logger.getLogger(NewAccountController.class);
 
-	@Autowired
-	private MailConstructor mailConstructor;
+    @Autowired
+    private MailConstructor mailConstructor;
 
-	@Autowired
-	private JavaMailSender mailSender;
+    @Autowired
+    private JavaMailSender mailSender;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private UserSecurityService securityService;
+    @Autowired
+    private UserSecurityService securityService;
 
 
-	@RequestMapping("/createAccount")
-	public String newUser(Model model, Locale locale, @RequestParam("token") String token) {
-		PasswordResetToken passwordResetToken = userService.getPasswordResetToken(token);
+    @RequestMapping("/createAccount")
+    public String newUser(Model model, Locale locale, @RequestParam("token") String token) {
+        PasswordResetToken passwordResetToken = userService.getPasswordResetToken(token);
 
-		if (passwordResetToken == null) {
-			String message = "Invalid Token!";
-			model.addAttribute("message", message);
-			return "redirect:/badRequest";
-		}
+        if (passwordResetToken == null) {
+            LOGGER.warn("Invalid token!");
+            String message = "Invalid Token!";
+            model.addAttribute("message", message);
+            return "redirect:/badRequest";
+        }
 
-		User currentUser = passwordResetToken.getUser();
-		String username = currentUser.getUsername();
+        User currentUser = passwordResetToken.getUser();
+        String username = currentUser.getUsername();
 
-		UserDetails userDetails = securityService.loadUserByUsername(username);
+        UserDetails userDetails = securityService.loadUserByUsername(username);
 
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
-			userDetails.getPassword(), userDetails.getAuthorities());
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
+                userDetails.getPassword(), userDetails.getAuthorities());
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		model.addAttribute("user", currentUser);
-		model.addAttribute("classActiveEdit", true);
-		return "myProfile";
-	}
+        model.addAttribute("user", currentUser);
+        model.addAttribute("classActiveEdit", true);
+        return "myProfile";
+    }
 
-	/**
-	 * Post method Controller
-	 */
-	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-	public String postNewController(HttpServletRequest request,
-									@ModelAttribute("email") String email,
-									@ModelAttribute("username") String username,
-									Model model) throws Exception {
+    /**
+     * Post method Controller
+     */
+    @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
+    public String postNewController(HttpServletRequest request,
+                                    @ModelAttribute("email") String email,
+                                    @ModelAttribute("username") String username,
+                                    Model model) throws Exception {
 
-		final int password_length = 10;
-		SessionIdentifierGenerator sessionIdentifierGenerator = new SessionIdentifierGenerator();
+        final int password_length = 10;
+        SessionIdentifierGenerator sessionIdentifierGenerator = new SessionIdentifierGenerator();
 
-		model.addAttribute("classActiveNewAccount", true); // for frontend
-		model.addAttribute("email", email);
-		model.addAttribute("username", username);
+        model.addAttribute("classActiveNewAccount", true); // for frontend
+        model.addAttribute("email", email);
+        model.addAttribute("username", username);
 
-		if (userService.findByUsername(username) != null) {
-			model.addAttribute("usernameExists", true);
+        if (userService.findByUsername(username) != null) {
+            LOGGER.warn("Username already exists!");
+            model.addAttribute("usernameExists", true);
+            return "myAccount";
+        }
 
-			return "myAccount";
-		}
+        if (userService.findByEmail(email) != null) {
+            LOGGER.warn("User email already exists! ");
+            model.addAttribute("usernameEmail", true);
+            return "myAccount";
+        }
 
-		if (userService.findByEmail(email) != null) {
-			model.addAttribute("usernameEmail", true);
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(username);
 
-			return "myAccount";
-		}
+        String password = SecurityUtility.randomPassword(password_length);
+        String encryptedPassword = SecurityUtility.passwordEncoder(password_length).encode(password);
 
-		User user = new User();
-		user.setEmail(email);
-		user.setUsername(username);
+        user.setPassword(encryptedPassword);
 
-		String password = SecurityUtility.randomPassword(password_length);
-		String encryptedPassword = SecurityUtility.passwordEncoder(password_length).encode(password);
+        Role role = new Role();
+        role.setRoleId(sessionIdentifierGenerator.nextSessionId());
+        role.setName("ROLE_USER");
+        role.setUserRoleId(user.getId());
 
-		user.setPassword(encryptedPassword);
+        Set<Role> userRoles = new HashSet<>();
 
-		Role role = new Role();
-		role.setRoleId(sessionIdentifierGenerator.nextSessionId());
-		role.setName("ROLE_USER");
-		role.setUserRoleId(user.getId());
+        userService.createUser(user, userRoles);
 
-		Set<Role> userRoles = new HashSet<>();
+        String token = UUID.randomUUID().toString();
+        userService.createPasswordResetTokenForUser(token, user);
 
-		userService.createUser(user, userRoles);
+        String appUrl = "http://"
+                + request.getServerName()
+                + ":" + request.getServerPort()
+                + request.getContextPath();
 
-		String token = UUID.randomUUID().toString();
-		userService.createPasswordResetTokenForUser(token, user);
+        SimpleMailMessage emailMessage = mailConstructor.constuctResetTokenEmail(appUrl, request.getLocale(), token, user, password);
 
-		String appUrl = "http://"
-			+ request.getServerName()
-			+ ":" + request.getServerPort()
-			+ request.getContextPath();
+        mailSender.send(emailMessage);
 
-		SimpleMailMessage emailMessage = mailConstructor.constuctResetTokenEmail(appUrl, request.getLocale(), token, user, password);
+        LOGGER.info("Email sent to the requester.");
+        model.addAttribute("emailSent", true);
 
-		mailSender.send(emailMessage);
+        return "myAccount";
 
-		model.addAttribute("emailSent", true);
-
-		return "myAccount";
-
-	}
+    }
 
 }

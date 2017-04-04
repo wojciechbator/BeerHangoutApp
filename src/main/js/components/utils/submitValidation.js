@@ -1,9 +1,7 @@
-import {
-  SubmitionError
-} from 'redux-form';
-import axios from 'axios';
+import {SubmitionError} from "redux-form";
+import axios from "axios";
 
-submit = (values) => {
+const submitValidation = (values) => {
   axios.get('/api/users')
     .then((data) => {
       if (!data.includes(values.username)) {
@@ -20,6 +18,6 @@ submit = (values) => {
         return values;
       }
     })
-}
+};
 
-export default submit
+export default submitValidation

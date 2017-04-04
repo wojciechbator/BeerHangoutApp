@@ -1,6 +1,4 @@
 package com.beerHangout;
 /**
-*
-* NIC
-*
+ * NIC
  */

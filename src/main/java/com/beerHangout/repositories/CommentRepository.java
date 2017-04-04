@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface CommentRepository extends MongoRepository<Comment, String> {
 
-	List<Comment> findAll();
+    List<Comment> findAll();
 
-	Comment findOne(String id);
+    Comment findOne(String id);
 
-	Comment save(Comment comment);
+    Comment save(Comment comment);
 
-	void delete(Comment comment);
+    void delete(Comment comment);
 }

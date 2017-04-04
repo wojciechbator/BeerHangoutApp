@@ -19,46 +19,46 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Document(collection = "users")
-public class User implements UserDetails{
-	@Id
-	private String Id;
-	private String username;
-	private String password;
-	private String email;
-	private String firstName;
-	private String lastName;
-	private String phone;
+public class User implements UserDetails {
+    @Id
+    private String Id;
+    private String username;
+    private String password;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String phone;
 
-	private Set<Role> userRoles = new HashSet<>();
-	private boolean enabled = true;
+    private Set<Role> userRoles = new HashSet<>();
+    private boolean enabled = true;
 
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<Authority> authorities = new HashSet<>();
-		userRoles.forEach(role -> authorities.add(new Authority(role.getName())));
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Authority> authorities = new HashSet<>();
+        userRoles.forEach(role -> authorities.add(new Authority(role.getName())));
 
-		return authorities;
-	}
+        return authorities;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-	@Override
-	public boolean isEnabled() {
-		return this.enabled;
-	}
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
 
 }

@@ -1,6 +1,9 @@
 package com.beerHangout.domain;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,45 +20,45 @@ import java.util.Date;
 @Document(collection = "password_reset_token")
 public class PasswordResetToken {
 
-	private static final int EXPIRATION = 24 * 60;
+    private static final int EXPIRATION = 24 * 60;
 
-	@Id
-	private String tokenId;
+    @Id
+    private String tokenId;
 
-	private User user;
+    private User user;
 
-	private String token;
+    private String token;
 
-	private Date expirationDate;
+    private Date expirationDate;
 
-	public PasswordResetToken(String token, User user) {
-		this.token = token;
-		this.user = user;
-	}
+    public PasswordResetToken(String token, User user) {
+        this.token = token;
+        this.user = user;
+    }
 
-	public PasswordResetToken(User user, String token, Date expirationDate) {
-		super();
+    public PasswordResetToken(User user, String token, Date expirationDate) {
+        super();
 
-		this.user = user;
-		this.token = token;
-		this.expirationDate = expirationDate;
-	}
+        this.user = user;
+        this.token = token;
+        this.expirationDate = expirationDate;
+    }
 
-	public int getExpiration() {
-		return EXPIRATION;
-	}
+    public int getExpiration() {
+        return EXPIRATION;
+    }
 
-	private Date calculateExpirationDate(int expirationTimeInMinutes) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(new Date().getTime());
-		calendar.add(Calendar.MINUTE, expirationTimeInMinutes);
-		return new Date(calendar.getTime().getTime());
-	}
+    private Date calculateExpirationDate(int expirationTimeInMinutes) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(new Date().getTime());
+        calendar.add(Calendar.MINUTE, expirationTimeInMinutes);
+        return new Date(calendar.getTime().getTime());
+    }
 
-	public void updateToken(final String token, int expirationTimeInMinutes) {
-		this.token = token;
-		//Default should be EXPIRATION, but for test make parametrized function
-		this.expirationDate = calculateExpirationDate(expirationTimeInMinutes);
-	}
+    public void updateToken(final String token, int expirationTimeInMinutes) {
+        this.token = token;
+        //Default should be EXPIRATION, but for test make parametrized function
+        this.expirationDate = calculateExpirationDate(expirationTimeInMinutes);
+    }
 
 }

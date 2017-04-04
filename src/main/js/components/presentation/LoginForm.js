@@ -1,43 +1,65 @@
-import React from 'react';
-import { Segment, Header, Form, Button } from 'semantic-ui-react';
+import React, {Component} from "react";
+import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
+import submitValidation from '../utils/submitValidation';
 
-const LoginForm = (props) => {
-  const { error, handleSubmit, pristine, reset, submitting } = props;
-  return (
-    <Segment inverted compact>
-      <Header size='medium'>Zaloguj się</Header>
-      <Form inverted onSubmit={handleSubmit}>
+class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: ''
+    };
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  render() {
+    const {handleSumbit, pristine, reset, submitting} = this.props;
+    return (
+      <Form inverted onSubmit={handleSumbit}>
         <Form.Group widths='equal'>
-          <Field style={{ margin: 8 }}
-            name='username'
-            label='Nazwa użytkownika'
-            component={username =>
-              <div>
-                <Form.Input type='text' {...username} placeholder='Nazwa użytkownika'/>
-                {username.touched && username.error && <span>{username.error}</span>}
-              </div>
-            }/>
-          <Field style={{ margin: 8 }}
-            name='password'
-            label='Hasło'
-            component={password =>
-              <div>
-                <Form.Input type='text' {...password} placeholder='Hasło'/>
-                {password.touched && password.error && <span>{password.error}</span>}
-              </div>
-            }/>
-          {error && <strong>{error}</strong>}
+          <Field style={{margin: 6}}
+                 name='login'
+                 label='Nazwa użytkownika'
+                 component={login =>
+                   <div>
+                     <Form.Input
+                       type='text'
+                       {...login}
+                     />
+                     {login.touched && login.error && <span>{login.error}</span>}
+                   </div>
+                 }/>
+          <Field style={{margin: 6}}
+                 name='password'
+                 label='Hasło'
+                 component={password =>
+                   <div>
+                     <Form.Input
+                       type='password'
+                       {...password}
+                     />
+                     {password.touched && password.error && <span>{password.error}</span>}
+                   </div>
+                 }/>
         </Form.Group>
         <Button type='submit' disabled={submitting}>Zaloguj</Button>
-        <Button type='button' disabled={pristine || submitting} onClick={reset}>Wyczyść wartości</Button>
+        <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
         <Button as={Link} to='/' color='blue'>Powrót</Button>
       </Form>
-    </Segment>
-  );
+    );
+  };
 }
 
 export default reduxForm({
-  form: 'submitValidation'
-})(LoginForm)
+  form: 'login',
+  submitValidation,
+  asyncBlurFields: [ 'login', 'password' ]
+})(LoginForm);
