@@ -1,9 +1,9 @@
 /**
  * Created by wojciech on 02.04.17.
  */
-const validateRegister = (values) => {
+const validateRegister = values => {
   const errors = {};
-  if (!values.username) {
+  if (!values.username || values.username.trim() === '') {
     errors.username = 'Podaj jakiś login :)';
   } else if (values.username.length > 20) {
     errors.username = 'Podaj krótszy niż 20 znaków';

@@ -10,9 +10,13 @@ export default class HangoutsMap extends Component {
     },
   };
 
-  handleClick = () => {
-    this.refs.map.leafletElement.locate()
-  };
+  componentDidMount() {
+    this.refs.map.leafletElement.locate();
+  }
+
+  // handleClick = () => {
+  //   this.refs.map.leafletElement.locate()
+  // };
 
   handleLocationFound = (e) => {
     this.setState({
@@ -35,7 +39,7 @@ export default class HangoutsMap extends Component {
         center={this.state.latlng}
         zoom={13}
         style={{position: "fixed"}}
-        onClick={this.handleClick}
+        // onClick={this.handleClick}
         onLocationfound={this.handleLocationFound}
         ref='map'
       >

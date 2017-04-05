@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Form, Header, Segment } from 'semantic-ui-react';
+import { Button, Form, Header, Segment, Message } from 'semantic-ui-react';
 import {Link} from 'react-router';
 import {Field, reduxForm} from 'redux-form';
 import { registerUser } from '../../redux/users/usersActions'
@@ -15,6 +15,16 @@ class RegisterForm extends Component {
     this.props.dispatch(registerUser(data));
   }
 
+  drawInput = inputData => {
+    return (
+      <div>
+        <Form.Input {...inputData.input} style={{margin: 6}} placeholder={inputData.input.placeholder}
+                    label={inputData.input.label} type={inputData.input.type}/>
+        {inputData.touched && inputData.error && <Message error={inputData.error}>Ups</Message>}
+      </div>
+    );
+  };
+
   render() {
     const {handleSubmit, pristine, reset, submitting} = this.props;
     return (
@@ -27,13 +37,13 @@ class RegisterForm extends Component {
                    label='Nazwa użytkownika'
                    type='text'
                    placeholder='Nazwa użytkownika'
-                   component={drawInput}/>
+                   component={this.drawInput}/>
             <Field
                    name='email'
                    label='Adres e-mail'
                    type='text'
                    placeholder='Email'
-                   component={drawInput}/>
+                   component={this.drawInput}/>
           </Form.Group>
           <Form.Group widths='equal'>
             <Field
@@ -41,25 +51,25 @@ class RegisterForm extends Component {
                    label='Imię'
                    type='text'
                    placeholder='Podaj swoje imię'
-                   component={drawInput}/>
+                   component={this.drawInput}/>
             <Field
                    name='lastName'
                    label='Nazwisko'
                    placeholder='Tutaj nazwisko'
                    type='text'
-                   component={drawInput}/>
+                   component={this.drawInput}/>
           </Form.Group>
           <Form.Group widths='equal'>
             <Field
                    name='password'
                    label='Hasło'
                    type='password'
-                   component={drawInput}/>
+                   component={this.drawInput}/>
             <Field
                    name='passwordConfirmation'
                    label='Potwierdź hasło'
                    type='password'
-                   component={drawInput}/>
+                   component={this.drawInput}/>
           </Form.Group>
           <Button color='green' type='submit' disabled={submitting}>Zarejestruj</Button>
           <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
@@ -68,15 +78,6 @@ class RegisterForm extends Component {
       </Segment>
     );
   }
-}
-
-const drawInput = inputData => {
-  return (
-    <div>
-      <Form.Input {...inputData.input} style={{margin: 6}} placeholder={inputData.input.placeholder} label={inputData.input.label} type={inputData.input.type}/>
-      {inputData.touched && inputData.error && <Message error={inputData.error}>Ups</Message>}
-    </div>
-  );
 };
 
 RegisterForm.propTypes = {

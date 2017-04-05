@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Message } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import submitValidation from '../utils/submitValidation';
+import { loginRequest } from '../../redux/authentication/authActions';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class LoginForm extends Component {
       password: ''
     };
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(event) {
@@ -20,22 +22,36 @@ class LoginForm extends Component {
     });
   }
 
-  render() {
-    const {handleSumbit, pristine, reset, submitting} = this.props;
+  onSubmit(data) {
+    this.props.dispatch(loginRequest(data));
+  }
+
+  drawInput = ({input, meta: { touched, error }, ...custom}) => {
+    const hasError = touched && error !== undefined;
     return (
-      <Form inverted onSubmit={handleSumbit}>
+      <div>
+        {hasError && <Message error header="Błąd" content={error} />}
+        <Form.Input error={hasError} {...input} {...custom} style={{margin: 6}} />
+      </div>
+    );
+  };
+
+  render() {
+    const {handleSubmit, pristine, reset, submitting} = this.props;
+    return (
+      <Form inverted onSubmit={handleSubmit(this.onSubmit)}>
         <Form.Group widths='equal'>
           <Field
                  name='login'
                  label='Nazwa użytkownika'
                  type='text'
                  placeholder='Podaj swój login'
-                 component={drawInput}/>
+                 component={this.drawInput}/>
           <Field
                  name='password'
                  label='Hasło'
                  type='password'
-                 component={drawInput}/>
+                 component={this.drawInput}/>
         </Form.Group>
         <Button type='submit' disabled={submitting}>Zaloguj</Button>
         <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
@@ -44,15 +60,6 @@ class LoginForm extends Component {
     );
   };
 }
-
-const drawInput = inputData => {
-  return (
-    <div>
-      <Form.Input {...inputData.input} style={{margin: 6}} placeholder={inputData.input.placeholder} label={inputData.input.label} type={inputData.input.type}/>
-      {inputData.touched && inputData.error && <Message error={inputData.error}>Ups</Message>}
-    </div>
-  );
-};
 
 export default reduxForm({
   form: 'login',
