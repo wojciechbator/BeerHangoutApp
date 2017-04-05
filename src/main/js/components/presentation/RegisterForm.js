@@ -78,7 +78,7 @@ class RegisterForm extends Component {
       </Segment>
     );
   }
-};
+}
 
 RegisterForm.propTypes = {
   registerUser: React.PropTypes.func.isRequired

@@ -63,6 +63,5 @@ class LoginForm extends Component {
 
 export default reduxForm({
   form: 'login',
-  submitValidation,
-  asyncBlurFields: [ 'login', 'password' ]
+  submitValidation
 })(LoginForm);
