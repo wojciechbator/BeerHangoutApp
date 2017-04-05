@@ -25,30 +25,17 @@ class LoginForm extends Component {
     return (
       <Form inverted onSubmit={handleSumbit}>
         <Form.Group widths='equal'>
-          <Field style={{margin: 6}}
+          <Field
                  name='login'
                  label='Nazwa użytkownika'
-                 component={login =>
-                   <div>
-                     <Form.Input
-                       type='text'
-                       {...login}
-                     />
-                     {login.touched && login.error && <span>{login.error}</span>}
-                   </div>
-                 }/>
-          <Field style={{margin: 6}}
+                 type='text'
+                 placeholder='Podaj swój login'
+                 component={drawInput}/>
+          <Field
                  name='password'
                  label='Hasło'
-                 component={password =>
-                   <div>
-                     <Form.Input
-                       type='password'
-                       {...password}
-                     />
-                     {password.touched && password.error && <span>{password.error}</span>}
-                   </div>
-                 }/>
+                 type='password'
+                 component={drawInput}/>
         </Form.Group>
         <Button type='submit' disabled={submitting}>Zaloguj</Button>
         <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
@@ -57,6 +44,15 @@ class LoginForm extends Component {
     );
   };
 }
+
+const drawInput = inputData => {
+  return (
+    <div>
+      <Form.Input {...inputData.input} style={{margin: 6}} placeholder={inputData.input.placeholder} label={inputData.input.label} type={inputData.input.type}/>
+      {inputData.touched && inputData.error && <Message error={inputData.error}>Ups</Message>}
+    </div>
+  );
+};
 
 export default reduxForm({
   form: 'login',
