@@ -1,7 +1,7 @@
 /**
  * Created by wojciech on 02.04.17.
  */
-const validateRegister = values => {
+const validate = values => {
   const errors = {};
   if (!values.username || values.username.trim() === '') {
     errors.username = 'Podaj jakiś login :)';
@@ -42,4 +42,4 @@ const validateRegister = values => {
   return errors;
 };
 
-export default validateRegister;
+export default validate;

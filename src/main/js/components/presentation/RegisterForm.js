@@ -3,7 +3,7 @@ import { Button, Form, Header, Segment, Message } from 'semantic-ui-react';
 import {Link} from 'react-router';
 import {Field, reduxForm} from 'redux-form';
 import { registerUser } from '../../redux/users/usersActions'
-import validateRegister from '../utils/registerValidation';
+import validate from '../utils/validateRegister';
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -86,5 +86,5 @@ RegisterForm.propTypes = {
 
 export default reduxForm({
   form: 'register',
-  validateRegister
+  validate
 })(RegisterForm);

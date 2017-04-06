@@ -1,8 +1,4 @@
-/**
- * Created by Wojtek on 2017-04-02.
- */
-
-const validateLogin = values => {
+const validate = values => {
   const errors = {};
   if(!values.login || values.login.trim() === '') {
     errors.login = 'Podaj jakiś login :)';
@@ -17,4 +13,4 @@ const validateLogin = values => {
   return errors;
 };
 
-export default validateLogin;
+export default validate

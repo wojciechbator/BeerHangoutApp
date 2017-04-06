@@ -11,12 +11,21 @@ export const authenticated = (authData) => {
   };
 };
 
-export const loginRequest = (loginData) => {
+export const loginRequest = (data) => {
   return dispatch => {
-    axios.post('/signin', loginData).then(
-      onResolve => dispatch.authenticated(loginData),
-      onReject => console.error("Couldn't authenticate! Reason: " + onReject)
-    );
+    axios.post('/api/authenticate', data)
+      .then(
+        success => {
+          dispatch(authenticated(success.data));
+          const { location } = this.props;
+          const nextPathname = location.state && location.state.nextPathname ? location.state.nextPathname : '/';
+          this.context.router.transitionTo(nextPathname);
+        },
+        failure => {
+          console.error(failure);
+          this.setState({ authFailed: true });
+        }
+      );
   };
 };
 

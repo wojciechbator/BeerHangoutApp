@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import { Form, Button, Message } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
-import submitValidation from '../utils/submitValidation';
+import validate from '../utils/validateLogin';
+import asyncValidate from '../utils/asyncValidate';
 import { loginRequest } from '../../redux/authentication/authActions';
 
 class LoginForm extends Component {
@@ -22,16 +23,24 @@ class LoginForm extends Component {
     });
   }
 
-  onSubmit(data) {
+  onSubmit(event) {
+    event.preventDefault();
+    const username = event.currentTarget.username.value;
+    const password = event.currentTarget.password.value;
+    if (username.length === 0) {
+      return;
+    }
+    const data = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+
     this.props.dispatch(loginRequest(data));
   }
 
-  drawInput = ({input, meta: { touched, error }, ...custom}) => {
+  drawInput = ({ input, label, placeholder, custom, meta: { asyncValidating, touched, error } }) => {
     const hasError = touched && error !== undefined;
     return (
-      <div>
+      <div className={asyncValidating ? 'async-validating' : ''}>
         {hasError && <Message error header="Błąd" content={error} />}
-        <Form.Input error={hasError} {...input} {...custom} style={{margin: 6}} />
+        <Form.Input label={label} placeholder={placeholder} error={hasError} {...input} {...custom} style={{margin: 6}} />
       </div>
     );
   };
@@ -39,10 +48,10 @@ class LoginForm extends Component {
   render() {
     const {handleSubmit, pristine, reset, submitting} = this.props;
     return (
-      <Form inverted onSubmit={handleSubmit(this.onSubmit)}>
+      <Form inverted onSubmit={handleSubmit(event => this.onSubmit(event))}>
         <Form.Group widths='equal'>
           <Field
-                 name='login'
+                 name='username'
                  label='Nazwa użytkownika'
                  type='text'
                  placeholder='Podaj swój login'
@@ -63,5 +72,7 @@ class LoginForm extends Component {
 
 export default reduxForm({
   form: 'login',
-  submitValidation
+  validate,
+  asyncValidate,
+  asyncBlurFields: [ 'username', 'password' ]
 })(LoginForm);
