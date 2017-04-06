@@ -9,15 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import static com.beerHangout.utils.State.populateModel;
 
-
-/**
- * To compare
- */
 @Controller
 public class AccountController {
 
     private static final Logger log = Logger.getLogger(AccountController.class);
-
 
     @RequestMapping("/signin")
     public String showSignIn(Model model, HttpServletRequest request) {
