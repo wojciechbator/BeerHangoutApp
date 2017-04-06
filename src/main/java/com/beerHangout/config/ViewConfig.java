@@ -13,9 +13,9 @@ import org.springframework.web.servlet.view.script.ScriptTemplateViewResolver;
 public class ViewConfig {
 
     private static final String[] scripts = {
-        "static/js/polyfill.js",
-        "static/js/render.js",
-        "static/app/bundle.js"
+            "static/js/polyfill.js",
+            "static/js/render.js",
+            "static/app/bundle.js"
     };
 
     @Bean

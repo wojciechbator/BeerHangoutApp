@@ -1,6 +1,6 @@
 #!/usr/bin/env jjs
 
-var ROOT = './src/main/resources/static';
+const ROOT = './src/main/resources/static';
 
 print('Loading polyfill...');
 

@@ -9,8 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "comments")
 public class Comment {
-	@Id
-	private String id;
-	private String author;
-	private String content;
+    @Id
+    private String id;
+    private String author;
+    private String content;
+    private long timestamp;
 }

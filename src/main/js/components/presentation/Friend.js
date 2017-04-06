@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from "react";
 
 class Friend extends Component {
   render() {
-    return(
+    return (
       <div>
         Friend stub
       </div>
