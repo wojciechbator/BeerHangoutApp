@@ -1,5 +1,13 @@
 export default {
-    universal: {},
+    universal: {
+        margin_left_minus_15: {
+            "margin-left": -15
+        },
+        header: {
+            marginTop: 12,
+            color: '#FFFFFF',
+        }
+    },
     comment: {
         commentsContainer: {
             backgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -10,10 +18,6 @@ export default {
             fontSize: 15,
             fontWeight: 400,
             overflowWrap: 'break-word'
-        },
-        header: {
-            marginTop: 12,
-            color: '#FFFFFF'
         },
         commentsList: {
             padding: 0,
@@ -32,15 +36,20 @@ export default {
         }
     },
     users: {
-        usersSidebar: {
-            width: "100%",
+        usersSidebarDiv: {
+            width: "20%",
             height: "100%",
+            position: "absolute",
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            padding: 12
         },
         refreshButton: {
-            position:"absolute",
-            bottom:0,
-            width:"94%",
-            "margin-left":"3%"
+            position: "absolute",
+            bottom: "2%",
+            width:"92%"
+        },
+        hr_style: {
+            "margin-bottom": "10%"
         }
     },
     place: {

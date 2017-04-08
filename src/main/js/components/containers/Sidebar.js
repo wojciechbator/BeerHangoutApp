@@ -31,12 +31,14 @@ class Sidebar extends React.Component {
 
     render() {
         return (
-            <div style={styles.users.usersSidebar}>
-                <Header as="h3" style={styles.comment.header}>Uzytkownicy: </Header>
+            <div style={styles.users.usersSidebarDiv}>
+                <Header as="h3" style={styles.universal.header}>Uzytkownicy: </Header>
+                <hr style={styles.users.hr_style}/>
                 <Grid columns='equal'>
                     {this.props.users.map((person, i) => <SidebarRow key={i} data={person}/>)}
                 </Grid>
-                <Button onClick={this.handleGetUsers} color="green" content="Odswierz" style={styles.users.refreshButton}/>
+                <Button onClick={this.handleGetUsers} color="green" content="Odświerz"
+                        style={styles.users.refreshButton}/>
             </div>
         );
     }
@@ -55,7 +57,7 @@ export default connect(mapStateToProps)(Sidebar);
 class SidebarRow extends React.Component {
     render() {
         return (
-            <Grid.Row verticalAlign="middle">
+            <Grid.Row verticalAlign="middle" style={styles.comment.commentsList}>
                 <Grid.Column width={3}>
                     {this.props.data.username}
                 </Grid.Column>
