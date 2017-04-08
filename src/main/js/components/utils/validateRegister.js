@@ -10,9 +10,9 @@ const validate = values => {
   }
 
   if(!values.email) {
-    errors.email = 'e-mail jest wymagany, podaj go proszę.';
+    errors.email = 'e-mail jest wymagany';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'To nie jest poprawny adres e-mail.';
+    errors.email = 'To nie jest poprawny e-mail';
   }
 
   if(!values.firstName) {
@@ -30,13 +30,13 @@ const validate = values => {
   if(!values.password) {
     errors.password = 'Hasło nie może być puste';
   } else if (values.password.length < 5) {
-    errors.password = 'Hasło musi zawierać 5 i więcej znaków'
+    errors.password = 'Musi zawierać >= 5 znaków'
   }
 
   if(!values.passwordConfirmation) {
     errors.passwordConfirmation = 'Nie moze tu być pusto!';
   } else if (values.passwordConfirmation !== values.password) {
-    errors.passwordConfirmation = 'To pole różni się od podanego hasła!';
+    errors.passwordConfirmation = 'Pole różni się od podanego hasła!';
   }
 
   return errors;

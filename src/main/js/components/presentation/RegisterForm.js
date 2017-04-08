@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
-import { Button, Form, Header, Segment, Message } from 'semantic-ui-react';
+import { Button, Form, Header, Segment } from 'semantic-ui-react';
 import {Link} from 'react-router';
 import {Field, reduxForm} from 'redux-form';
+import {Icon} from 'semantic-ui-react';
 import { registerUser } from '../../redux/users/usersActions'
 import validate from '../utils/validateRegister';
+import styles from '../styles/styles';
+
+require('../../../../../node_modules/semantic-ui/dist/components/icon.min.css');
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -15,17 +19,17 @@ class RegisterForm extends Component {
     this.props.dispatch(registerUser(data));
   }
 
-  drawInput = ({ input, label, placeholder, meta: { asyncValidating, touched, error } }) => {
+  drawInput = ({ input, label, placeholder, type, meta: { asyncValidating, touched, error } }) => {
     return (
       <div className={asyncValidating ? 'async-validating' : ''}>
-        <Form.Input label={label} placeholder={placeholder} {...input} style={{margin: 6}} />
-        {touched && error && <Message negative>{error}</Message>}
+        <Form.Input label={label} placeholder={placeholder} {...input} type={type} style={{margin: 6}} />
+        {touched && error && <p style={styles.warningPrompt}><Icon name='warning'/>{error}</p>}
       </div>
     );
   };
 
   render() {
-    const {handleSubmit, pristine, reset, submitting} = this.props;
+    const {handleSubmit, pristine, reset, submitting, valid} = this.props;
     return (
       <Segment inverted>
         <Header size='medium'>Nie masz konta? Zarejestruj się</Header>
@@ -70,7 +74,7 @@ class RegisterForm extends Component {
                    type='password'
                    component={this.drawInput}/>
           </Form.Group>
-          <Button color='green' type='submit' disabled={submitting}>Zarejestruj</Button>
+          <Button color='green' type='submit' disabled={submitting || !valid}>Zarejestruj</Button>
           <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
           <Button as={Link} to='/' color='blue'>Powrót</Button>
         </Form>

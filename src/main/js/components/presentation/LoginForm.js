@@ -1,10 +1,14 @@
 import React, {Component} from "react";
-import { Form, Button, Message } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
+import { Icon } from 'semantic-ui-react';
 import validate from '../utils/validateLogin';
 import asyncValidate from '../utils/asyncValidate';
 import { loginRequest } from '../../redux/authentication/authActions';
+import styles from '../styles/styles';
+
+require('../../../../../node_modules/semantic-ui/dist/components/icon.min.css');
 
 class LoginForm extends Component {
   constructor(props) {
@@ -24,6 +28,7 @@ class LoginForm extends Component {
   }
 
   onSubmit(event) {
+    //TODO: add csrf token in header!
     event.preventDefault();
     const username = event.currentTarget.username.value;
     const password = event.currentTarget.password.value;
@@ -35,17 +40,16 @@ class LoginForm extends Component {
     this.props.dispatch(loginRequest(data));
   }
 
-  drawInput = ({ input, label, placeholder, meta: { asyncValidating, touched, error } }) => {
+  drawInput = ({ input, label, placeholder, type, meta: { asyncValidating, touched, error } }) => {
     return (
       <div className={asyncValidating ? 'async-validating' : ''}>
-        <Form.Input label={label} placeholder={placeholder} {...input} style={{margin: 6}} />
-        {touched && error && <Message negative>{error}</Message>}
+        <Form.Input label={label} placeholder={placeholder} {...input} type={type} style={{margin: 6}} />
+        {touched && error && <p style={styles.warningPrompt}><Icon name='warning'/>{error}</p>}
       </div>
     );
   };
-
   render() {
-    const {handleSubmit, pristine, reset, submitting} = this.props;
+    const {handleSubmit, pristine, reset, submitting, valid} = this.props;
     return (
       <Form inverted onSubmit={handleSubmit(event => this.onSubmit(event))}>
         <Form.Group widths='equal'>
@@ -61,7 +65,7 @@ class LoginForm extends Component {
                  type='password'
                  component={this.drawInput}/>
         </Form.Group>
-        <Button type='submit' disabled={submitting}>Zaloguj</Button>
+        <Button type='submit' disabled={submitting || !valid}>Zaloguj</Button>
         <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
         <Button as={Link} to='/' color='blue'>Powrót</Button>
       </Form>

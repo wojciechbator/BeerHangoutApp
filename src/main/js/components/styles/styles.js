@@ -53,5 +53,15 @@ export default {
     textArea: {
       width: "93%"
     }
+  },
+  image: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    minWidth: '100%',
+    minHeight: '100%'
+  },
+  warningPrompt: {
+    color: 'red'
   }
 }
