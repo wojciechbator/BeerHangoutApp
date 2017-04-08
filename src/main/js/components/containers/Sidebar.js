@@ -3,7 +3,8 @@
 
 import React from "react";
 import {Grid} from "semantic-ui-react";
-import {getUsers} from "../../redux/actions";
+import {refreshUsers} from "../../redux/users/usersActions";
+import {connect} from "react-redux";
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -11,60 +12,51 @@ class Sidebar extends React.Component {
         this.state = {
             date: new Date(),
             users: [],
-            mock_data: [
-                {
-                    "name": "Jan1",
-                    "surname": "Kowalski1",
-                    "is_active": true
-                },
-                {
-                    "name": "Jan2",
-                    "surname": "Kowalski2",
-                    "is_active": true
-                },
-                {
-                    "name": "Jan3",
-                    "surname": "Kowalski3",
-                    "is_active": false
-                },
-                {
-                    "name": "Jan4",
-                    "surname": "Kowalski4",
-                    "is_active": false
-                },
-            ],
         };
         this.handleGetUsers = this.handleGetUsers.bind(this);
     }
 
-    handleGetUsers() {
-        this.props.dispatch(getUsers());
+    componentDidMount(){
+        this.props.dispatch(refreshUsers());
+        this.setState({
+            users: this.props.users
+        })
     }
 
-    componentDidMount(){
-        this.props.dispatch(getUsers());
+    handleGetUsers() {
+        this.props.dispatch(refreshUsers());
     }
 
     render() {
         return (
             <Grid columns='equal'>
-                {this.state.mock_data.map((person, i) => <SidebarRow key={i} data={person}/>)}
-                {this.state.users.map((person, i) => <SidebarRow key={i} data={person}/>)}
-                <button onClick={this.handleGetUsers.bind(this)}>odswierz</button>
+                {this.props.users.map((person, i) => <SidebarRow key={i} data={person}/>)}
+                <button onClick={this.handleGetUsers}>odswierz</button>
             </Grid>
         );
     }
+
 }
+
+
+const mapStateToProps = (store) => {
+    return {
+        users: store.users.data,
+    };
+};
+
+export default connect(mapStateToProps)(Sidebar);
+
 
 class SidebarRow extends React.Component {
     render() {
         return (
             <Grid.Row verticalAlign="middle">
                 <Grid.Column width={3}>
-                    {this.props.data.name}
+                    {this.props.data.username}
                 </Grid.Column>
                 <Grid.Column width={3}>
-                    {this.props.data.surname}
+                    {this.props.data.lastName}
                 </Grid.Column>
                 <Grid.Column width={1}>
                     {this.props.data.is_active ? "aktywny" : "nie aktywny"}
@@ -73,9 +65,6 @@ class SidebarRow extends React.Component {
         )
     }
 }
-
 SidebarRow.propTypes = {
     data: React.PropTypes.object.isRequired
 };
-
-export default Sidebar;
