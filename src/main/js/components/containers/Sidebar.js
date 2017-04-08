@@ -2,9 +2,11 @@
 /* eslint jsx-a11y/href-no-hash:"off" */
 
 import React from "react";
-import {Grid} from "semantic-ui-react";
+import {Grid, Button, Header} from "semantic-ui-react";
+import styles from "../styles/styles";
 import {refreshUsers} from "../../redux/users/usersActions";
 import {connect} from "react-redux";
+
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -16,7 +18,7 @@ class Sidebar extends React.Component {
         this.handleGetUsers = this.handleGetUsers.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.dispatch(refreshUsers());
         this.setState({
             users: this.props.users
@@ -29,15 +31,17 @@ class Sidebar extends React.Component {
 
     render() {
         return (
-            <Grid columns='equal'>
-                {this.props.users.map((person, i) => <SidebarRow key={i} data={person}/>)}
-                <button onClick={this.handleGetUsers}>odswierz</button>
-            </Grid>
+            <div style={styles.users.usersSidebar}>
+                <Header as="h3" style={styles.comment.header}>Uzytkownicy: </Header>
+                <Grid columns='equal'>
+                    {this.props.users.map((person, i) => <SidebarRow key={i} data={person}/>)}
+                </Grid>
+                <Button onClick={this.handleGetUsers} color="green" content="Odswierz" style={styles.users.refreshButton}/>
+            </div>
         );
     }
 
 }
-
 
 const mapStateToProps = (store) => {
     return {
