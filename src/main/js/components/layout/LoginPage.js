@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Grid, Header, Message, Segment} from "semantic-ui-react";
+import {Grid, Header, Segment} from "semantic-ui-react";
 import LoginForm from "../presentation/LoginForm";
 
 class LoginPage extends Component {

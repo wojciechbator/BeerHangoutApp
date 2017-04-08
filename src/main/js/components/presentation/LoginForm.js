@@ -35,12 +35,11 @@ class LoginForm extends Component {
     this.props.dispatch(loginRequest(data));
   }
 
-  drawInput = ({ input, label, placeholder, custom, meta: { asyncValidating, touched, error } }) => {
-    const hasError = touched && error !== undefined;
+  drawInput = ({ input, label, placeholder, meta: { asyncValidating, touched, error } }) => {
     return (
       <div className={asyncValidating ? 'async-validating' : ''}>
-        {hasError && <Message error header="Błąd" content={error} />}
-        <Form.Input label={label} placeholder={placeholder} error={hasError} {...input} {...custom} style={{margin: 6}} />
+        <Form.Input label={label} placeholder={placeholder} {...input} style={{margin: 6}} />
+        {touched && error && <Message negative><p>{error}</p></Message>}
       </div>
     );
   };
