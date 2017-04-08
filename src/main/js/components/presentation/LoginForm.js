@@ -39,7 +39,7 @@ class LoginForm extends Component {
     return (
       <div className={asyncValidating ? 'async-validating' : ''}>
         <Form.Input label={label} placeholder={placeholder} {...input} style={{margin: 6}} />
-        {touched && error && <Message negative><p>{error}</p></Message>}
+        {touched && error && <Message negative>{error}</Message>}
       </div>
     );
   };

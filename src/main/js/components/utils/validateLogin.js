@@ -1,7 +1,7 @@
 const validate = values => {
   const errors = {};
-  if(!values.login || values.login.trim() === '') {
-    errors.login = 'Podaj jakiś login :)';
+  if(!values.username || values.username.trim() === '') {
+    errors.username = 'Podaj jakiś login :)';
   }
 
   if(!values.password || values.password.trim() === '') {

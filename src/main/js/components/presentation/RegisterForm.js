@@ -15,12 +15,11 @@ class RegisterForm extends Component {
     this.props.dispatch(registerUser(data));
   }
 
-  drawInput = inputData => {
+  drawInput = ({ input, label, placeholder, meta: { asyncValidating, touched, error } }) => {
     return (
-      <div>
-        <Form.Input {...inputData.input} style={{margin: 6}} placeholder={inputData.input.placeholder}
-                    label={inputData.input.label} type={inputData.input.type}/>
-        {inputData.touched && inputData.error && <Message error={inputData.error}>Ups</Message>}
+      <div className={asyncValidating ? 'async-validating' : ''}>
+        <Form.Input label={label} placeholder={placeholder} {...input} style={{margin: 6}} />
+        {touched && error && <Message negative>{error}</Message>}
       </div>
     );
   };
