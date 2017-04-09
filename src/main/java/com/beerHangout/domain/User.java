@@ -31,6 +31,7 @@ public class User implements UserDetails {
 
     private Set<Role> userRoles = new HashSet<>();
     private boolean enabled = true;
+	private boolean active;
 
 
     @Override
