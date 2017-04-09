@@ -37,7 +37,7 @@ class Sidebar extends React.Component {
                 <Grid columns='equal'>
                     {this.props.users.map((person, i) => <SidebarRow key={i} data={person}/>)}
                 </Grid>
-                <Button onClick={this.handleGetUsers} color="green" content="Odświerz"
+                <Button onClick={this.handleGetUsers} color="green" content="Odśwież"
                         style={styles.users.refreshButton}/>
             </div>
         );
