@@ -16,7 +16,7 @@ export const saveComment = (author, content, timestamp) => {
       success => dispatch(addComment(success.data)),
       failure => console.error('Failure when trying to save comment, reason: ' + failure)
     );
-  };
+  }
 };
 
 export const commentsRefreshed = (comments) => {

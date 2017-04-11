@@ -3,9 +3,11 @@
 
 import React from "react";
 import {Grid, Button, Header} from "semantic-ui-react";
+import {connect} from "react-redux";
+
+import SidebarRow from '../presentation/SidebarRow';
 import styles from "../styles/styles";
 import {refreshUsers} from "../../redux/users/usersActions";
-import {connect} from "react-redux";
 
 
 class Sidebar extends React.Component {
@@ -32,7 +34,7 @@ class Sidebar extends React.Component {
     render() {
         return (
             <div style={styles.users.usersSidebarDiv}>
-                <Header as="h3" style={styles.universal.header}>Uzytkownicy: </Header>
+                <Header as="h3" style={styles.universal.header}>Użytkownicy: </Header>
                 <hr style={styles.users.hr_style}/>
                 <Grid columns='equal'>
                     {this.props.users.map((person, i) => <SidebarRow key={i} data={person}/>)}
@@ -52,25 +54,3 @@ const mapStateToProps = (store) => {
 };
 
 export default connect(mapStateToProps)(Sidebar);
-
-
-class SidebarRow extends React.Component {
-    render() {
-        return (
-            <Grid.Row verticalAlign="middle" style={styles.comment.commentsList}>
-                <Grid.Column width={3}>
-                    {this.props.data.username}
-                </Grid.Column>
-                <Grid.Column width={3}>
-                    {this.props.data.lastName}
-                </Grid.Column>
-                <Grid.Column width={1}>
-                    {this.props.data.is_active ? "aktywny" : "nie aktywny"}
-                </Grid.Column>
-            </Grid.Row>
-        )
-    }
-}
-SidebarRow.propTypes = {
-    data: React.PropTypes.object.isRequired
-};

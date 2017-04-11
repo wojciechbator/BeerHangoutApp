@@ -11,11 +11,11 @@ require('../../../../../node_modules/semantic-ui/dist/components/header.min.css'
 require('../../../../../node_modules/semantic-ui/dist/components/comment.min.css');
 
 class CommentsContainer extends Component {
-  constructor() {
-    super();
-    // this.state = {
-    //   comments: []
-    // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      comments: this.props.comments
+    };
     this.submitComment = this.submitComment.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updateBody = this.updateBody.bind(this);

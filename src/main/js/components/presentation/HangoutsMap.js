@@ -4,15 +4,12 @@ import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 export default class HangoutsMap extends Component {
   state = {
     hasLocation: false,
-    latlng: {
-      lat: 51.10,
-      lng: 17.03,
-    },
+    latlng: Map.latLng
   };
 
-  handleClick = () => {
-    this.refs.map.leafletElement.locate()
-  };
+  componentDidMount() {
+    this.refs.map.leafletElement.locate();
+  }
 
   handleLocationFound = (e) => {
     this.setState({
@@ -35,7 +32,7 @@ export default class HangoutsMap extends Component {
         center={this.state.latlng}
         zoom={13}
         style={{position: "fixed"}}
-        onClick={this.handleClick}
+        // onClick={this.handleClick}
         onLocationfound={this.handleLocationFound}
         ref='map'
       >

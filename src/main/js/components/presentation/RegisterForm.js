@@ -2,8 +2,12 @@ import React, {Component} from 'react';
 import { Button, Form, Header, Segment } from 'semantic-ui-react';
 import {Link} from 'react-router';
 import {Field, reduxForm} from 'redux-form';
-import axios from 'axios';
-import validateRegister from '../utils/registerValidation';
+import {Icon} from 'semantic-ui-react';
+import { registerUser } from '../../redux/users/usersActions'
+import validate from '../utils/validateRegister';
+import styles from '../styles/styles';
+
+require('../../../../../node_modules/semantic-ui/dist/components/icon.min.css');
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -11,103 +15,66 @@ class RegisterForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(event) {
-    event.preventDefault();
-    axios.post('/api/users', this.state)
-      .then(
-        () => {
-        },
-        () => {}
-      );
-    //Dispatch redux action in the future
+  onSubmit(data) {
+    this.props.dispatch(registerUser(data));
   }
 
+  drawInput = ({ input, label, placeholder, type, meta: { asyncValidating, touched, error } }) => {
+    return (
+      <div className={asyncValidating ? 'async-validating' : ''}>
+        <Form.Input label={label} placeholder={placeholder} {...input} type={type} style={{margin: 6}} />
+        {touched && error && <p style={styles.warningPrompt}><Icon name='warning'/>{error}</p>}
+      </div>
+    );
+  };
+
   render() {
-    const {handleSumbit, pristine, reset, submitting} = this.props;
+    const {handleSubmit, pristine, reset, submitting, valid} = this.props;
     return (
       <Segment inverted>
         <Header size='medium'>Nie masz konta? Zarejestruj się</Header>
-        <Form inverted onSubmit={handleSumbit}>
+        <Form inverted onSubmit={handleSubmit(this.onSubmit)}>
           <Form.Group widths='equal'>
-            <Field style={{margin: 6}}
+            <Field
                    name='username'
                    label='Nazwa użytkownika'
-                   component={username =>
-                     <div>
-                       <Form.Input
-                         type='text'
-                         {...username}
-                         placeholder='Nazwa użytkownika'/>
-                       {username.touched && username.error && <span>{username.error}</span>}
-                     </div>
-                   }/>
-            <Field style={{margin: 6}}
+                   type='text'
+                   placeholder='Nazwa użytkownika'
+                   component={this.drawInput}/>
+            <Field
                    name='email'
                    label='Adres e-mail'
-                   component={email =>
-                     <div>
-                       <Form.Input
-                         type='text'
-                         {...email}
-                         placeholder='Email'/>
-                       {email.touched && email.error && <span>{email.error}</span>}
-                     </div>
-                   }/>
+                   type='text'
+                   placeholder='Email'
+                   component={this.drawInput}/>
           </Form.Group>
           <Form.Group widths='equal'>
-            <Field style={{margin: 6}}
+            <Field
                    name='firstName'
                    label='Imię'
-                   component={firstName =>
-                     <div>
-                       <Form.Input
-                         type='text'
-                         {...firstName}
-                         placeholder='Podaj swoje imię'/>
-                       {firstName.touched && firstName.error && <span>{firstName.error}</span>}
-                     </div>
-                   }/>
-            <Field style={{margin: 6}}
+                   type='text'
+                   placeholder='Podaj swoje imię'
+                   component={this.drawInput}/>
+            <Field
                    name='lastName'
                    label='Nazwisko'
-                   component={lastName =>
-                     <div>
-                       <Form.Input
-                         type='text'
-                         {...lastName}
-                         placeholder='Tutaj nazwisko'/>
-                       {lastName.touched && lastName.error && <span>{lastName.error}</span>}
-                     </div>
-                   }/>
+                   placeholder='Tutaj nazwisko'
+                   type='text'
+                   component={this.drawInput}/>
           </Form.Group>
           <Form.Group widths='equal'>
-            <Field style={{margin: 6}}
+            <Field
                    name='password'
                    label='Hasło'
-                   component={password =>
-                     <div>
-                       <Form.Input
-                         type='password'
-                         {...password}
-                       />
-                       {password.touched && password.error && <span>{password.error}</span>}
-                     </div>
-                   }/>
-            <Field style={{margin: 6}}
+                   type='password'
+                   component={this.drawInput}/>
+            <Field
                    name='passwordConfirmation'
                    label='Potwierdź hasło'
-                   component={passwordConfirmation =>
-                     <div>
-                       <Form.Input
-                         type='password'
-                         {...passwordConfirmation}
-                       />
-                       {passwordConfirmation.touched && passwordConfirmation.error &&
-                       <span>{passwordConfirmation.error}</span>}
-                     </div>
-                   }/>
+                   type='password'
+                   component={this.drawInput}/>
           </Form.Group>
-          <Button color='green' type='submit' disabled={submitting}>Zarejestruj</Button>
+          <Button color='green' type='submit' disabled={submitting || !valid}>Zarejestruj</Button>
           <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
           <Button as={Link} to='/' color='blue'>Powrót</Button>
         </Form>
@@ -122,5 +89,5 @@ RegisterForm.propTypes = {
 
 export default reduxForm({
   form: 'register',
-  validateRegister
+  validate
 })(RegisterForm);
