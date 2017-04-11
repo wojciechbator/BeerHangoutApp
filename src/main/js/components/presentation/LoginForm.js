@@ -2,7 +2,13 @@ import React, {Component} from "react";
 import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
-import submitValidation from '../utils/submitValidation';
+import { Icon } from 'semantic-ui-react';
+import validate from '../utils/validateLogin';
+import asyncValidate from '../utils/asyncValidate';
+import { loginRequest } from '../../redux/authentication/authActions';
+import styles from '../styles/styles';
+
+require('../../../../../node_modules/semantic-ui/dist/components/icon.min.css');
 
 class LoginForm extends Component {
   constructor(props) {
@@ -12,6 +18,7 @@ class LoginForm extends Component {
       password: ''
     };
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(event) {
@@ -20,37 +27,45 @@ class LoginForm extends Component {
     });
   }
 
-  render() {
-    const {handleSumbit, pristine, reset, submitting} = this.props;
+  onSubmit(event) {
+    //TODO: add csrf token in header!
+    event.preventDefault();
+    const username = event.currentTarget.username.value;
+    const password = event.currentTarget.password.value;
+    if (username.length === 0) {
+      return;
+    }
+    const data = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+
+    this.props.dispatch(loginRequest(data));
+  }
+
+  drawInput = ({ input, label, placeholder, type, meta: { asyncValidating, touched, error } }) => {
     return (
-      <Form inverted onSubmit={handleSumbit}>
+      <div className={asyncValidating ? 'async-validating' : ''}>
+        <Form.Input label={label} placeholder={placeholder} {...input} type={type} style={{margin: 6}} />
+        {touched && error && <p style={styles.warningPrompt}><Icon name='warning'/>{error}</p>}
+      </div>
+    );
+  };
+  render() {
+    const {handleSubmit, pristine, reset, submitting, valid} = this.props;
+    return (
+      <Form inverted onSubmit={handleSubmit(event => this.onSubmit(event))}>
         <Form.Group widths='equal'>
-          <Field style={{margin: 6}}
-                 name='login'
+          <Field
+                 name='username'
                  label='Nazwa użytkownika'
-                 component={login =>
-                   <div>
-                     <Form.Input
-                       type='text'
-                       {...login}
-                     />
-                     {login.touched && login.error && <span>{login.error}</span>}
-                   </div>
-                 }/>
-          <Field style={{margin: 6}}
+                 type='text'
+                 placeholder='Podaj swój login'
+                 component={this.drawInput}/>
+          <Field
                  name='password'
                  label='Hasło'
-                 component={password =>
-                   <div>
-                     <Form.Input
-                       type='password'
-                       {...password}
-                     />
-                     {password.touched && password.error && <span>{password.error}</span>}
-                   </div>
-                 }/>
+                 type='password'
+                 component={this.drawInput}/>
         </Form.Group>
-        <Button type='submit' disabled={submitting}>Zaloguj</Button>
+        <Button type='submit' disabled={submitting || !valid}>Zaloguj</Button>
         <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
         <Button as={Link} to='/' color='blue'>Powrót</Button>
       </Form>
@@ -60,6 +75,7 @@ class LoginForm extends Component {
 
 export default reduxForm({
   form: 'login',
-  submitValidation,
-  asyncBlurFields: [ 'login', 'password' ]
+  validate,
+  asyncValidate,
+  asyncBlurFields: [ 'username', 'password' ]
 })(LoginForm);
