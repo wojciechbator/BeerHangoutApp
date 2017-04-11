@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { Icon } from 'semantic-ui-react';
 import validate from '../utils/validateLogin';
-import asyncValidate from '../utils/asyncValidate';
 import { loginRequest } from '../../redux/authentication/authActions';
 import styles from '../styles/styles';
 
@@ -76,6 +75,5 @@ class LoginForm extends Component {
 export default reduxForm({
   form: 'login',
   validate,
-  asyncValidate,
   asyncBlurFields: [ 'username', 'password' ]
 })(LoginForm);

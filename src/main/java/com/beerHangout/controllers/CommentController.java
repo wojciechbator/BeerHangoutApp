@@ -1,4 +1,4 @@
-package com.beerHangout.rest;
+package com.beerHangout.controllers;
 
 import com.beerHangout.domain.Comment;
 import com.beerHangout.repositories.CommentRepository;
@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Created by wojciech on 11.04.17.
+ */
 @RestController
 @RequestMapping("/api/comments")
-public class CommentResource {
+public class CommentController {
 
-    private static final Logger log = Logger.getLogger(CommentResource.class);
+    private static final Logger log = Logger.getLogger(CommentController.class);
 
     private final CommentRepository commentRepository;
 
     @Autowired
-    public CommentResource(CommentRepository commentRepository) {
+    public CommentController(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
 
@@ -68,4 +71,3 @@ public class CommentResource {
     }
 
 }
-
