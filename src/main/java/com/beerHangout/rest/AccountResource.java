@@ -14,11 +14,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api", produces = APPLICATION_JSON_VALUE)
 public class AccountResource {
 
-    private static final Logger LOGGER = Logger.getLogger(AccountResource.class);
+    private static final Logger log = Logger.getLogger(AccountResource.class);
 
     @RequestMapping("/account")
     public Map<String, Object> getAccountStatus(HttpServletRequest request) {
-        LOGGER.info("Getting account status! ");
+        log.info("Getting account status! ");
         return State.getAuthState(request);
     }
 

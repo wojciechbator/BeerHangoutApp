@@ -30,7 +30,6 @@ public class UserResource {
         this.userService = userService;
     }
 
-
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getAllUsers() {
         log.info("Getting all users!");
