@@ -3,8 +3,7 @@ package com.beerHangout.config;
 import com.beerHangout.config.ajax.AjaxAuthenticationFailureHandler;
 import com.beerHangout.config.ajax.AjaxAuthenticationSuccessHandler;
 import com.beerHangout.config.ajax.AjaxLogoutSuccessHandler;
-import com.beerHangout.domain.authorise.utils.SecurityUtility;
-import com.beerHangout.domain.login.services.UserSecurityService;
+import com.beerHangout.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -29,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final AjaxLogoutSuccessHandler logoutSuccessHandler;
 
     @Autowired
-    private UserSecurityService userSecurityService;
+    private SecurityService userSecurityService;
 
     @Autowired
     public Environment environment;
@@ -59,12 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private BCryptPasswordEncoder passwordEncoder() {
-        return SecurityUtility.passwordEncoder(password_length);
+        return userSecurityService.passwordEncoder(password_length);
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
 
     @Override

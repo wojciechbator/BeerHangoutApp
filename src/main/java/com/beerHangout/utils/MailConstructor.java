@@ -1,6 +1,6 @@
-package com.beerHangout.domain.login;
+package com.beerHangout.utils;
 
-import com.beerHangout.domain.User;
+import com.beerHangout.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;

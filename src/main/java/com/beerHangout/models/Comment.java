@@ -1,4 +1,4 @@
-package com.beerHangout.domain;
+package com.beerHangout.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

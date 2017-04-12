@@ -1,14 +1,15 @@
-package com.beerHangout.domain;
+package com.beerHangout.models;
 
-import com.beerHangout.domain.authorise.Authority;
-import com.beerHangout.domain.authorise.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,12 +23,22 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     private String Id;
+    @NotNull
+    @NotEmpty
     private String username;
+    @NotNull
+    @NotEmpty
     private String password;
+    @NotNull
+    @NotEmpty
+    @Email
     private String email;
+    @NotNull
+    @NotEmpty
     private String firstName;
+    @NotNull
+    @NotEmpty
     private String lastName;
-    private String phone;
 
     private Set<Role> userRoles = new HashSet<>();
     private boolean enabled = true;

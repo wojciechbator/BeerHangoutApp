@@ -1,14 +1,16 @@
 package com.beerHangout.services.impl;
 
-import com.beerHangout.domain.PasswordResetToken;
-import com.beerHangout.domain.User;
-import com.beerHangout.domain.authorise.Role;
-import com.beerHangout.domain.login.repositories.PasswordResetTokenRepository;
+import com.beerHangout.models.PasswordResetToken;
+import com.beerHangout.models.User;
+import com.beerHangout.models.Role;
+import com.beerHangout.repositories.PasswordResetTokenRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
+import com.beerHangout.validation.EmailExistsException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -74,8 +76,29 @@ public class UserServiceImpl implements UserService {
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
-        userToUpdate.setPhone(user.getPhone());
         userRepository.save(userToUpdate);
+    }
+
+    private boolean emailExist(String email) {
+        User user = userRepository.findByEmail(email);
+        return user != null;
+    }
+
+    @Transactional
+    @Override
+    public User registerNewUserAccount(User user) throws EmailExistsException {
+        if(emailExist(user.getEmail())) {
+            throw new EmailExistsException(
+                    String.format("Podany email: %s jest już używany!", user.getEmail()));
+        }
+        User registeredUser = new User();
+        registeredUser.setFirstName(user.getFirstName());
+        registeredUser.setLastName(user.getLastName());
+        registeredUser.setEmail(user.getEmail());
+        registeredUser.setPassword(user.getPassword());
+        registeredUser.setUserRoles(user.getUserRoles());
+        registeredUser.setUsername(user.getUsername());
+        return userRepository.save(registeredUser);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.beerHangout.controllers;
 
-import com.beerHangout.domain.User;
-import com.beerHangout.domain.authorise.Role;
+import com.beerHangout.models.User;
+import com.beerHangout.models.Role;
 import com.beerHangout.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

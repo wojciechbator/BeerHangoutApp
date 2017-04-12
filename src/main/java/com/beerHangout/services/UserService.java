@@ -1,8 +1,9 @@
 package com.beerHangout.services;
 
-import com.beerHangout.domain.PasswordResetToken;
-import com.beerHangout.domain.User;
-import com.beerHangout.domain.authorise.Role;
+import com.beerHangout.models.PasswordResetToken;
+import com.beerHangout.models.User;
+import com.beerHangout.models.Role;
+import com.beerHangout.validation.EmailExistsException;
 
 import java.util.List;
 import java.util.Set;
@@ -27,5 +28,7 @@ public interface UserService {
     void removeUser(String id);
 
     void updateUser(String username, User user);
+
+    User registerNewUserAccount(User user) throws EmailExistsException;
 
 }

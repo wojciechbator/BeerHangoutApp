@@ -1,6 +1,6 @@
 package com.beerHangout.controllers;
 
-import com.beerHangout.domain.Comment;
+import com.beerHangout.models.Comment;
 import com.beerHangout.repositories.CommentRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

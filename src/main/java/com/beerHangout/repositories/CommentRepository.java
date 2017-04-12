@@ -1,6 +1,6 @@
 package com.beerHangout.repositories;
 
-import com.beerHangout.domain.Comment;
+import com.beerHangout.models.Comment;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

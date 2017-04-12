@@ -27,7 +27,6 @@ class LoginForm extends Component {
   }
 
   onSubmit(event) {
-    //TODO: add csrf token in header!
     event.preventDefault();
     const username = event.currentTarget.username.value;
     const password = event.currentTarget.password.value;
