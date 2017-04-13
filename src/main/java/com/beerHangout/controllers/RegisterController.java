@@ -13,6 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/register")
 public class RegisterController {
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserValidator userValidator;
+
+    private static final Logger LOGGER = Logger.getLogger(RegisterController.class);
+
     @RequestMapping(method = RequestMethod.GET)
     public void addBackingUserToModel(Model model) {
         User formBackingUser = new User();
@@ -20,7 +28,18 @@ public class RegisterController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void handleRegister() {
+    public void handleRegister(@Valid @RequestBody User user, BindingResult result) {
 
+        userValidator.validate(user, result);
+
+        if (!result.hasErrors()){
+            try {
+                user = registerNewUserAccount(user);
+            } catch(Exception e) {
+                LOGGER.error(e);
+            }
+        } else {
+
+        }
     }
 }
