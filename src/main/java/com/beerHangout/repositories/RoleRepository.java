@@ -1,6 +1,6 @@
 package com.beerHangout.repositories;
 
-import com.beerHangout.domain.authorise.Role;
+import com.beerHangout.models.Role;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

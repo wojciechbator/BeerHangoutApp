@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { Icon } from 'semantic-ui-react';
 import validate from '../utils/validateLogin';
-import asyncValidate from '../utils/asyncValidate';
 import { loginRequest } from '../../redux/authentication/authActions';
 import styles from '../styles/styles';
 
@@ -28,7 +27,6 @@ class LoginForm extends Component {
   }
 
   onSubmit(event) {
-    //TODO: add csrf token in header!
     event.preventDefault();
     const username = event.currentTarget.username.value;
     const password = event.currentTarget.password.value;
@@ -76,6 +74,5 @@ class LoginForm extends Component {
 export default reduxForm({
   form: 'login',
   validate,
-  asyncValidate,
   asyncBlurFields: [ 'username', 'password' ]
 })(LoginForm);

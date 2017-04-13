@@ -1,24 +1,25 @@
 package com.beerHangout.controllers;
 
+import com.beerHangout.utils.State;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
-import static com.beerHangout.utils.State.populateModel;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@Controller
+@RestController
+@RequestMapping(value = "/api", produces = APPLICATION_JSON_VALUE)
 public class AccountController {
 
     private static final Logger log = Logger.getLogger(AccountController.class);
 
-    @RequestMapping("/signin")
-    public String showSignIn(Model model, HttpServletRequest request) {
-        log.info("Signing in!");
-        populateModel(model, request);
-        return "index";
+    @RequestMapping("/account")
+    public Map<String, Object> getAccountStatus(HttpServletRequest request) {
+        log.info("Getting account status! ");
+        return State.getAuthState(request);
     }
 
 }

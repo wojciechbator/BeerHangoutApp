@@ -1,4 +1,4 @@
-package com.beerHangout.domain.login;
+package com.beerHangout.utils;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;

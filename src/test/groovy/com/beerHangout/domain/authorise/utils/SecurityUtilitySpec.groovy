@@ -1,5 +1,6 @@
-package com.beerHangout.domain.authorise.utils
+package com.beerHangout.models.authorise.utils
 
+import com.beerHangout.services.impl.SecurityServiceImpl
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -15,7 +16,7 @@ class SecurityUtilitySpec extends Specification {
         def passwordLen = 10
 
         when:
-        generatedPassword = SecurityUtility.randomPassword(passwordLen)
+        generatedPassword = SecurityServiceImpl.randomPassword(passwordLen)
 
         then:
         generatedPassword.length() == 10
@@ -28,8 +29,8 @@ class SecurityUtilitySpec extends Specification {
 
         where:
         signs | expectedResult | generatedPassword
-        10    | true           | SecurityUtility.randomPassword(10)
-        15    | false          | SecurityUtility.randomPassword(1)
-        25    | false          | SecurityUtility.randomPassword(50)
+        10    | true           | SecurityServiceImpl.randomPassword(10)
+        15    | false          | SecurityServiceImpl.randomPassword(1)
+        25    | false          | SecurityServiceImpl.randomPassword(50)
     }
 }

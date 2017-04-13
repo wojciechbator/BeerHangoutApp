@@ -1,4 +1,4 @@
-package com.beerHangout.domain.authorise;
+package com.beerHangout.models;
 
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
