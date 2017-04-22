@@ -39,7 +39,7 @@ public class RegisterController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void handleRegister(
-            @ModelAttribute("formBackingUser") @Validated @Valid User user,
+            @RequestBody @Validated @Valid User user,
                                BindingResult bindingResult,
                                Model model) {
         if(bindingResult.hasErrors()){

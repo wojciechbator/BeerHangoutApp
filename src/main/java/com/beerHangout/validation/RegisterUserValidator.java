@@ -2,7 +2,6 @@ package com.beerHangout.validation;
 
 
 import com.beerHangout.models.User;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
