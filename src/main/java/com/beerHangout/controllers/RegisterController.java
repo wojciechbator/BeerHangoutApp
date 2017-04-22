@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/register")
 public class RegisterController {
 
+
     @RequestMapping(method = RequestMethod.GET)
     public void addBackingUserToModel(Model model) {
         User formBackingUser = new User();

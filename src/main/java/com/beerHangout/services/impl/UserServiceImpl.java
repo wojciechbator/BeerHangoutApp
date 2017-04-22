@@ -6,7 +6,7 @@ import com.beerHangout.models.Role;
 import com.beerHangout.repositories.PasswordResetTokenRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
-import com.beerHangout.validation.EmailExistsException;
+import com.beerHangout.validation.exceptions.EmailExistsException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
