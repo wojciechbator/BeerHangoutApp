@@ -1,87 +1,105 @@
-export default {
-    universal: {
-        margin_left_minus_15: {
-            "margin-left": -15
-        },
-        header: {
-            marginTop: 12,
-            color: '#FFFFFF',
-        }
-    },
-    comment: {
-        commentsContainer: {
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            padding: 15
+import LoginImg from "../../../../../public/images/back.png";
+import RegisterImg from "../../../../../public/images/back2.png";
 
-        },
-        singleComment: {
-            fontSize: 15,
-            fontWeight: 400,
-            overflowWrap: 'break-word'
-        },
-        commentsList: {
-            padding: 0,
-            color: '#ffffff',
-            listStyleType: 'none',
-        },
-        pipeStyle: {
-            fontWeight: 200,
-            marginLeft: 12,
-            marginRight: 12,
-            color: '#bbbbbb'
-        },
-        nameAndDate: {
-            fontWeight: 200,
-            color: '#bbbbbb'
-        }
+export default {
+  universal: {
+    margin_left_minus_15: {
+      marginLeft: -15
     },
-    users: {
-        usersSidebarDiv: {
-            width: "20%",
-            height: "100%",
-            position: "absolute",
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            padding: 12
-        },
-        refreshButton: {
-            position: "absolute",
-            bottom: "2%",
-            width:"92%"
-        },
-        hr_style: {
-            "margin-bottom": "10%"
-        }
+    header: {
+      marginTop: 12,
+      color: '#FFFFFF',
+    }
+  },
+  comment: {
+    commentsContainer: {
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      padding: 15
+
     },
-    place: {
-        container: {
-            padding: 16,
-            background: '#f9f9f9',
-            marginTop: 12,
-            marginLeft: 16,
-            border: '1px solid #ddd'
-        },
-        header: {
-            marginTop: 0,
-            marginBottom: 0
-        },
-        title: {
-            textDecoration: 'none',
-            color: 'red'
-        }
+    singleComment: {
+      fontSize: 15,
+      fontWeight: 400,
+      overflowWrap: 'break-word'
     },
-    inputs: {
-        textArea: {
-            width: "93%"
-        }
+    commentsList: {
+      padding: 0,
+      color: '#ffffff',
+      listStyleType: 'none',
     },
-    image: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      minWidth: '100%',
-      minHeight: '100%'
+    pipeStyle: {
+      fontWeight: 200,
+      marginLeft: 12,
+      marginRight: 12,
+      color: '#bbbbbb'
     },
-    warningPrompt: {
+    nameAndDate: {
+      fontWeight: 200,
+      color: '#bbbbbb'
+    }
+  },
+  users: {
+    usersSidebarDiv: {
+      width: "20%",
+      height: "100%",
+      position: "absolute",
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      padding: 12
+    },
+    refreshButton: {
+      position: "absolute",
+      bottom: "2%",
+      width: "92%"
+    },
+    hr_style: {
+      "margin-bottom": "10%"
+    }
+  },
+  place: {
+    container: {
+      padding: 16,
+      background: '#f9f9f9',
+      marginTop: 12,
+      marginLeft: 16,
+      border: '1px solid #ddd'
+    },
+    header: {
+      marginTop: 0,
+      marginBottom: 0
+    },
+    title: {
+      textDecoration: 'none',
       color: 'red'
     }
+  },
+  inputs: {
+    textArea: {
+      width: "93%"
+    }
+  },
+  loginStyle: {
+    backgroundImage: `url(${LoginImg})`,
+    backgroundSize: 'cover',
+    position: 'fixed',
+    height: '100%',
+    width: '100%',
+    padding: 0,
+    margin: 0,
+    top: 0,
+    left: 0
+  },
+  registerStyle: {
+    backgroundImage: `url(${RegisterImg})`,
+    backgroundSize: 'cover',
+    position: 'fixed',
+    height: '100%',
+    width: '100%',
+    padding: 0,
+    margin: 0,
+    top: 0,
+    left: 0
+  },
+  warningPrompt: {
+    color: 'red'
+  }
 }
