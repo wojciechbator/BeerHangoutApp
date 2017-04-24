@@ -7,9 +7,6 @@ import styles from '../styles/styles';
  */
 
 export default class SidebarRow extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <Grid.Row verticalAlign="middle" style={styles.comment.commentsList}>
@@ -20,7 +17,7 @@ export default class SidebarRow extends Component {
           {this.props.data.lastName}
         </Grid.Column>
         <Grid.Column width={1}>
-          {this.props.data.is_active ? "aktywny" : "nie aktywny"}
+          {this.props.data.is_active ? "aktywny" : "nieaktywny"}
         </Grid.Column>
       </Grid.Row>
     )
