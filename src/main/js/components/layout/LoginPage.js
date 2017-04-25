@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Grid, Header, Segment} from "semantic-ui-react";
 import LoginForm from "../presentation/LoginForm";
+import styles from '../styles/styles';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <div style={styles.loginStyle}>
         <Grid>
           <Grid.Row centered>
             <Segment inverted compact>
