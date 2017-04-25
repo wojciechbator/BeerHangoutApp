@@ -31,8 +31,8 @@ class CommentsContainer extends Component {
     }
   }
 
-  submitComment(e) {
-    e.preventDefault();
+  submitComment(event) {
+    event.preventDefault();
     const author = this.state.comment.author;
     const content = this.state.comment.content;
     const timestamp = (new Date()).getTime();
@@ -40,6 +40,7 @@ class CommentsContainer extends Component {
     this.setState({
       comments: this.props.comments
     });
+    this.handleRefreshComments();
   }
 
   handleRefreshComments() {

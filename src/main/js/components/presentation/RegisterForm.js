@@ -76,7 +76,7 @@ class RegisterForm extends Component {
           </Form.Group>
           <Button color='green' type='submit' disabled={submitting || !valid}>Zarejestruj</Button>
           <Button disabled={pristine || submitting} onClick={reset}>Wyczyść dane</Button>
-          <Button as={Link} to='/' color='blue'>Powrót</Button>
+          <Button as={Link} to='/signin' color='blue'>Zaloguj się</Button>
         </Form>
       </Segment>
     );
