@@ -3,7 +3,7 @@ package com.beerHangout.services;
 import com.beerHangout.models.PasswordResetToken;
 import com.beerHangout.models.User;
 import com.beerHangout.models.Role;
-import com.beerHangout.validation.EmailExistsException;
+import com.beerHangout.validation.exceptions.EmailExistsException;
 
 import java.util.List;
 import java.util.Set;

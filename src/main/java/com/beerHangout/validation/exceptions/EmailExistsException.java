@@ -1,4 +1,4 @@
-package com.beerHangout.validation;
+package com.beerHangout.validation.exceptions;
 
 /**
  * Created by wojciech on 12.04.17.

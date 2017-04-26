@@ -1,8 +1,9 @@
 package com.beerHangout.models;
 
+import com.beerHangout.validation.tags.Email;
+import com.beerHangout.validation.tags.Phone;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -29,9 +30,10 @@ public class User implements UserDetails {
     @NotNull
     @NotEmpty
     private String password;
-    @NotNull
+    @Phone
+    private String phone;
     @NotEmpty
-    @Email
+    @Email //Own tag
     private String email;
     @NotNull
     @NotEmpty
