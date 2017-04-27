@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
 import {routerReducer} from "react-router-redux";
 import {reducer as formReducer} from "redux-form";
-import {AUTHENTICATED, LOGGED_OUT} from "./authentication/authActions";
+import {AUTHENTICATED, AUTH_FAILED, UNSUCCESSFUL_LOGOUT, LOGGED_OUT} from "./authentication/authActions";
 import {ADD_COMMENT, COMMENTS_REFRESHED} from "./comments/commentsActions";
 import {ADD_USER, GET_USERS} from "./users/usersActions";
 
@@ -41,18 +41,31 @@ const usersReducer = (state = {data: []}, action) => {
   }
 };
 
-const authReducer = (state = {signedIn: false, roles: []}, action) => {
+const authReducer = (state = {signedIn: false, roles: [], authFailed: false}, action) => {
   switch (action.type) {
     case AUTHENTICATED:
       return Object.assign({}, state, {
         signedIn: true,
-        roles: action.roles
+        roles: action.roles,
+        authFailed: false
+      });
+
+    case AUTH_FAILED:
+      return Object.assign({}, state, {
+        signedIn: false,
+        roles: [],
+        authFailed: true
       });
 
     case LOGGED_OUT:
       return Object.assign({}, state, {
         signedIn: false,
         roles: ['ROLE_ANONYMOUS']
+      });
+
+    case UNSUCCESSFUL_LOGOUT:
+      return Object.assign({}, state, {
+        signedIn: true
       });
 
     default:
@@ -72,6 +85,5 @@ const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer
 });
-
 
 export default reducers;

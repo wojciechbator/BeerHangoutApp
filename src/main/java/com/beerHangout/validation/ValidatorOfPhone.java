@@ -1,6 +1,7 @@
 package com.beerHangout.validation;
 
 import com.beerHangout.validation.tags.Phone;
+import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -26,6 +27,6 @@ public class ValidatorOfPhone implements ConstraintValidator<Phone, String> {
     public boolean isValid(String phone, ConstraintValidatorContext constraintValidatorContext) {
         //TO DO VALIDATE MAIL BY REGEX OR STH ELSE
 
-        return false;
+        return true;
     }
 }
