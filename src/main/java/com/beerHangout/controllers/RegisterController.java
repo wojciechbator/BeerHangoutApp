@@ -11,13 +11,15 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
  * Created by wojciech on 11.04.17.
  */
+@CrossOrigin
 @RestController
-@RequestMapping(value = "/register")
+@RequestMapping(value = "/api/register")
 public class RegisterController {
 
     @Autowired
@@ -40,18 +42,16 @@ public class RegisterController {
     @RequestMapping(method = RequestMethod.POST)
     public void handleRegister(
             @RequestBody @Validated @Valid User user,
-                               BindingResult bindingResult,
-                               Model model) {
+            BindingResult bindingResult,
+            Model model, HttpServletResponse response) {
         if(bindingResult.hasErrors()){
             logger.warn("Validation of user register not success");
-            //return some view TO DO Wojtek
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
          }
 
-        logger.info("Validation succes");
+        logger.info("Validation success");
         model.addAttribute("registeredUser");
-
-        //return view of success;
-
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 
 

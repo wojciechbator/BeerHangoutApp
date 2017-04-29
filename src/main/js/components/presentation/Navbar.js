@@ -10,7 +10,8 @@ export default class Navbar extends Component {
     super(props);
     this.state = {
       activeItem: 'Home',
-      authFailed: false
+      authFailed: false,
+      signedIn: this.props.signedIn
     };
   }
 
@@ -24,10 +25,20 @@ export default class Navbar extends Component {
         <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick}/>
         <Menu.Item as={Link} to='/friends' name='Friends' active={activeItem === 'Friends'}
                    onClick={this.handleItemClick}/>
-        <Menu.Menu position='right'>
-          <Menu.Item as={Link} to='/signin' name='Login' active={activeItem === 'Login'} onClick={this.handleItemClick}/>
-          <Menu.Item as={Link} to='/register' name='Register' active={activeItem === 'Register'} onClick={this.handleItemClick}/>
+        {this.state.signedIn ? <Menu.Menu position='right'>
+          <Menu.Item as={Link} to='/admin' name='Admin' active={activeItem === 'Admin'}
+                     onClick={this.handleItemClick}/>
+          <Menu.Item as={Link} to='/chat' name='Chat' active={activeItem === 'Chat'}
+                     onClick={this.handleItemClick}/>
         </Menu.Menu>
+          :
+          <Menu.Menu position='right'>
+            <Menu.Item as={Link} to='/signin' name='Login' active={activeItem === 'Login'}
+                       onClick={this.handleItemClick}/>
+            <Menu.Item as={Link} to='/register' name='Register' active={activeItem === 'Register'}
+                       onClick={this.handleItemClick}/>
+          </Menu.Menu>}
+
       </Menu>
     );
   }

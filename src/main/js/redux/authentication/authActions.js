@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {push} from 'react-router-redux';
 
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const AUTH_FAILED = 'AUTH_FAILED';
@@ -38,6 +39,7 @@ export const loginRequest = (data) => {
       .then(
         success => {
           dispatch(authenticated(success.data));
+          dispatch(push('/'));
         },
         failure => {
           dispatch(authFailed(failure.data));

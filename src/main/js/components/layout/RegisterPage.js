@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
-import DocumentTitle from 'react-document-title';
 
 import RegisterForm from "../presentation/RegisterForm";
 import { registerUser } from "../../redux/users/usersActions";
@@ -10,7 +9,7 @@ import styles from '../styles/styles';
 class RegisterPage extends Component {
   render() {
     return (
-      <DocumentTitle title={`zarejestruj się`}>
+      <div>
         <div style={styles.registerStyle}>
           <Grid verticalAlign="middle">
             <Grid.Row centered>
@@ -18,7 +17,7 @@ class RegisterPage extends Component {
             </Grid.Row>
           </Grid>
         </div>
-      </DocumentTitle>
+      </div>
     );
   }
 }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import {push} from 'react-router-redux';
 
 export const ADD_USER = 'ADD_USER';
 export const GET_USERS = 'GET_USERS';
@@ -12,9 +13,14 @@ export const addUser = (userData) => {
 
 export const registerUser = (userData) => {
   return dispatch => {
-    axios.post('/api/users', userData).then(
-      success => dispatch(addUser(success.data)),
-      failure => console.error('Failure when trying to register user, reason: ' + failure)
+    axios.post('/api/register', userData).then(
+      success => {
+        dispatch(addUser(success.data));
+        dispatch(push('/signin'));
+      },
+      failure => {
+        console.error('Failure when trying to register user, reason: ' + failure)
+      }
     );
   };
 };

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Grid} from "semantic-ui-react";
-import DocumentTitle from 'react-document-title';
 
 import HangoutsMap from "../presentation/HangoutsMap";
 import {CommentsContainer} from "../containers";
@@ -13,7 +12,7 @@ require('../../../../../node_modules/semantic-ui/dist/components/grid.min.css');
 class Home extends Component {
   render() {
     return (
-      <DocumentTitle title={`strona domowa`}>
+      <div>
         <Navbar/>
         <Grid columns='equal'>
           <Grid.Row >
@@ -26,7 +25,7 @@ class Home extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </DocumentTitle>
+      </div>
     );
   }
 }

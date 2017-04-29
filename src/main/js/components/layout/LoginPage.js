@@ -1,22 +1,11 @@
-import React, { Component } from "react";
-import { Form, Grid, Header, Segment } from "semantic-ui-react";
-import DocumentTitle from 'react-document-title';
+import React, {Component} from "react";
+import {Form, Grid, Header, Segment} from "semantic-ui-react";
 import {Icon} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 
 import LoginForm from "../presentation/LoginForm";
 import {loginRequest} from '../../redux/authentication/authActions';
 import styles from '../styles/styles';
-
-
-const handleSubmit = (values) => {
-  if (values.username.length === 0) {
-    return;
-  }
-  const credentials = `username=${encodeURIComponent(values.username)}&password=${encodeURIComponent(values.password)}`;
-
-  this.props.dispatch(loginRequest(credentials));
-};
 
 const drawInput = ({input, label, placeholder, type, meta: {asyncValidating, touched, error}}) => {
   return (
@@ -36,20 +25,30 @@ class LoginPage extends Component {
     };
   }
 
+  handleSubmit = (values) => {
+    if (values.username.length === 0) {
+      return;
+    }
+    const credentials = `username=${encodeURIComponent(values.username)}&password=${encodeURIComponent(values.password)}`;
+
+    this.props.dispatch(loginRequest(credentials));
+  };
+
   render() {
     return (
-      <DocumentTitle title={`zaloguj się`}>
+      <div>
         <div style={styles.loginStyle}>
           <Grid>
             <Grid.Row centered>
               <Segment inverted compact>
-                <Header size='medium' style={{ marginTop: 12 }}>Zaloguj się</Header>
-                <LoginForm onSubmit={handleSubmit} authFailed={this.state.authFailed} isLogged={this.state.signedIn} drawInput={drawInput} />
+                <Header size='medium' style={{marginTop: 12}}>Zaloguj się</Header>
+                <LoginForm onSubmit={this.handleSubmit} authFailed={this.state.authFailed} isLogged={this.state.signedIn}
+                           drawInput={drawInput}/>
               </Segment>
             </Grid.Row>
           </Grid>
         </div>
-      </DocumentTitle>
+      </div>
     );
   }
 }
