@@ -5,7 +5,7 @@ import reducers from "./reducers";
 export default function configureStore(initialState) {
   const store = createStore(reducers, initialState, compose(
     applyMiddleware(thunk),
-    (typeof window !== 'undefined' && window.devToolsExtension) ? window.devToolsExtension() : fn => fn
+    (typeof window !== 'undefined' && window.devToolsExtension) ? window.devToolsExtension() : ''
   ));
   return store;
 }

@@ -11,24 +11,24 @@ import Sidebar from "../containers/Sidebar";
 require('../../../../../node_modules/semantic-ui/dist/components/grid.min.css');
 
 class Home extends Component {
-    render() {
-        return (
-            <DocumentTitle title={`Strona domowa`}>
-                <Navbar/>
-                <Grid columns='equal'>
-                    <Grid.Row >
-                        <Grid.Column>
-                            <HangoutsMap />
-                            <Sidebar/>
-                        </Grid.Column>
-                        <Grid.Column width={4}>
-                            <CommentsContainer />
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-            </DocumentTitle>
-        );
-    }
+  render() {
+    return (
+      <DocumentTitle title={`strona domowa`}>
+        <Navbar/>
+        <Grid columns='equal'>
+          <Grid.Row >
+            <Grid.Column>
+              <HangoutsMap />
+              <Sidebar/>
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <CommentsContainer />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </DocumentTitle>
+    );
+  }
 }
 
 export default Home;

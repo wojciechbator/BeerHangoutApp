@@ -15,6 +15,7 @@ import javax.validation.Valid;
 /**
  * Created by wojciech on 26.04.17.
  */
+@RequestMapping(name = "/api", method = RequestMethod.GET)
 @Controller
 public class LoginController {
     private static final Logger logger = Logger.getLogger(LoginController.class);
@@ -25,7 +26,7 @@ public class LoginController {
         this.loginValidator = loginValidator;
     }
 
-    @RequestMapping(name = "/api/authenticate", method = RequestMethod.POST)
+    @RequestMapping(name = "/authenticate", method = RequestMethod.POST)
     public void handleLogin(@Valid @RequestBody User user, HttpServletResponse response) {
         if(loginValidator.validateUser(user)) {
             logger.info("User validated, login performed.");

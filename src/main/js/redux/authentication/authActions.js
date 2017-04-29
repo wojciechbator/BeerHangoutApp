@@ -26,6 +26,12 @@ export const loggedOut = () => {
   };
 };
 
+export const unsuccessfulLogoutAttempt = () => {
+  return {
+    type: UNSUCCESSFUL_LOGOUT
+  }
+};
+
 export const loginRequest = (data) => {
   return dispatch => {
     axios.post('/api/authenticate', data)
@@ -48,15 +54,10 @@ export const logoutRequest = (data) => {
           dispatch(loggedOut(success.data));
         },
         failure => {
-
+          dispatch(unsuccessfulLogoutAttempt(failure.data));
         }
       )
   }
 };
 
 
-export const unsuccessfulLogoutAttempt = () => {
-  return {
-    type: UNSUCCESSFUL_LOGOUT
-  }
-};
