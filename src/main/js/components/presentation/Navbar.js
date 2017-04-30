@@ -23,12 +23,12 @@ class Navbar extends Component {
     return (
       <Menu inverted fixed="top">
         <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'HomePage'} onClick={this.handleItemClick}/>
-        <Menu.Item as={Link} to='/friends' name='Friends' active={activeItem === 'Friends'}
+        <Menu.Item as={Link} to='/chat' name='Chat' active={activeItem === 'Chat'}
                    onClick={this.handleItemClick}/>
         {this.props.signedIn ? <Menu.Menu position='right'>
           <Menu.Item as={Link} to='/admin' name='Admin' active={activeItem === 'Admin'}
                      onClick={this.handleItemClick}/>
-          <Menu.Item as={Link} to='/chat' name='Chat' active={activeItem === 'Chat'}
+          <Menu.Item as={Link} to='/logout' name='Logout' active={activeItem === 'Logout'}
                      onClick={this.handleItemClick}/>
         </Menu.Menu>
           :

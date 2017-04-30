@@ -14,8 +14,12 @@ export default {
   comment: {
     commentsContainer: {
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      padding: 15
+      padding: 15,
 
+    },
+    commentsBox: {
+      overflowY: 'scroll',
+      height: '500px',
     },
     singleComment: {
       fontSize: 15,

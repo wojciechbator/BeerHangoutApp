@@ -66,8 +66,8 @@ class CommentsContainer extends Component {
   render() {
     return (
       <div style={styles.comment.commentsContainer}>
-        <Comment.Group>
-          <Header as="h3" style={styles.universal.header}>Komentarze: </Header>
+        <Header as="h3" style={styles.universal.header}>Komentarze: </Header>
+        <Comment.Group style={styles.comment.commentsBox}>
           { this.props.comments.length === 0
             ? <p>Bądź pierwszym, który skomentuje!</p>
             : <CommentsList comments={this.props.comments}/>}
@@ -75,7 +75,7 @@ class CommentsContainer extends Component {
         <Form reply onSubmit={this.submitComment}>
           <Header as="h3" style={styles.universal.header}>Skomentuj</Header>
           <Form.Input fluid onChange={this.updateUsername} type="text"/>
-          <Form.TextArea autoHeight style={styles.inputs.textArea}  onChange={this.updateBody} type="text"/>
+          <Form.TextArea autoHeight style={styles.inputs.textArea} onChange={this.updateBody} type="text"/>
           <Button type="submit" content='Odpowiedz' color="green"/>
         </Form>
       </div>

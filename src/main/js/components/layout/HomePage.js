@@ -8,7 +8,6 @@ import Navbar from "../presentation/Navbar";
 import Sidebar from "../containers/Sidebar";
 import {transitionToLogin} from '../../redux/authentication/authActions';
 
-
 require('../../../../../node_modules/semantic-ui/dist/components/grid.min.css');
 
 class HomePage extends Component {
@@ -28,7 +27,7 @@ class HomePage extends Component {
         <Navbar/>
         <Grid columns='equal'>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column styles={{paddingRight: 0}}>
               <HangoutsMap />
               <Sidebar />
             </ Grid.Column>
