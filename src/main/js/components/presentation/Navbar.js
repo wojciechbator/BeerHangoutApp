@@ -1,17 +1,17 @@
 import React, {Component} from "react";
+import {connect} from 'react-redux';
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router";
 
 require('../../../../../node_modules/semantic-ui/dist/components/menu.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/segment.min.css');
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeItem: 'Home',
-      authFailed: false,
-      signedIn: this.props.signedIn
+      signedIn: false
     };
   }
 
@@ -25,7 +25,7 @@ export default class Navbar extends Component {
         <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick}/>
         <Menu.Item as={Link} to='/friends' name='Friends' active={activeItem === 'Friends'}
                    onClick={this.handleItemClick}/>
-        {this.state.signedIn ? <Menu.Menu position='right'>
+        {this.props.signedIn ? <Menu.Menu position='right'>
           <Menu.Item as={Link} to='/admin' name='Admin' active={activeItem === 'Admin'}
                      onClick={this.handleItemClick}/>
           <Menu.Item as={Link} to='/chat' name='Chat' active={activeItem === 'Chat'}
@@ -43,3 +43,17 @@ export default class Navbar extends Component {
     );
   }
 }
+
+Navbar.propTypes = {
+  activeItem: React.PropTypes.string,
+  signedIn: React.PropTypes.boolean
+};
+
+const mapStateToProps = (store) => {
+  return {
+    signedIn: store.auth.signedIn
+  }
+
+};
+
+export default connect(mapStateToProps)(Navbar);

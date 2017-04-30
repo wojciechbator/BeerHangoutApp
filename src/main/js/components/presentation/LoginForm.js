@@ -14,7 +14,6 @@ const LoginForm = (props) => {
     const {handleSubmit, pristine, reset, submitting, valid} = props;
     return (
       <div>
-        {props.authFailed ? <Message negative>Nie istnieje użytkownik o takich danych, spróbuj jeszcze raz!</Message> : ''}
         <Form inverted onSubmit={handleSubmit(props.onSubmit)}>
           <Form.Group widths='equal'>
             <Field

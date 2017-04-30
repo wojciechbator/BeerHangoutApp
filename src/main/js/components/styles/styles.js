@@ -101,5 +101,9 @@ export default {
   },
   warningPrompt: {
     color: 'red'
+  },
+  errorMessage: {
+    margin: 12,
+    padding: 6
   }
 }

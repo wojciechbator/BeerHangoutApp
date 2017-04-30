@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import LoginForm from "../presentation/LoginForm";
 import {loginRequest} from '../../redux/authentication/authActions';
+import {LoginError} from '../presentation/ErrorMessages';
 import styles from '../styles/styles';
 
 const drawInput = ({input, label, placeholder, type, meta: {asyncValidating, touched, error}}) => {
@@ -42,8 +43,8 @@ class LoginPage extends Component {
             <Grid.Row centered>
               <Segment inverted compact>
                 <Header size='medium' style={{marginTop: 12}}>Zaloguj się</Header>
-                <LoginForm onSubmit={this.handleSubmit} authFailed={this.state.authFailed} isLogged={this.state.signedIn}
-                           drawInput={drawInput}/>
+                <LoginForm onSubmit={this.handleSubmit} drawInput={drawInput}/>
+                {this.props.authFailed ? <LoginError /> : ''}
               </Segment>
             </Grid.Row>
           </Grid>
@@ -52,6 +53,11 @@ class LoginPage extends Component {
     );
   }
 }
+
+LoginPage.propTypes = {
+  authFailed: React.PropTypes.boolean,
+  signedIn: React.PropTypes.boolean
+};
 
 const mapStateToProps = (store) => {
   return {
