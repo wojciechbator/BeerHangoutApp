@@ -11,6 +11,7 @@ class App extends Component {
     }
   }
   componentWillMount() {
+    // eslint-disable-next-line
     !this.props.signedIn ? this.props.dispatch(transitionToLogin()) : '';
   }
 
