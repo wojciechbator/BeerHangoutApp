@@ -84,11 +84,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/signin", "/api/**").permitAll()
+                .antMatchers("/", "/login", "/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/signin")
+                .loginPage("/login")
                 .loginProcessingUrl("/api/authenticate")
                 .successHandler(authSuccessHandler)
                 .failureHandler(authFailureHandler)
@@ -98,7 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().csrfTokenRepository(csrfTokenRepository())
                 .and()
                 .logout()
-                .logoutUrl("/api/signout")
+                .logoutUrl("/api/logout")
                 .logoutSuccessHandler(logoutSuccessHandler)
                 .permitAll();
     }

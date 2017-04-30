@@ -2,11 +2,9 @@ import React from "react";
 import {Form, Button} from 'semantic-ui-react';
 import {Link} from 'react-router';
 import {Field} from 'redux-form';
-
 import {reduxForm} from 'redux-form';
 
 import validate from '../utils/validateLogin';
-import {Message} from "semantic-ui-react";
 
 require('../../../../../node_modules/semantic-ui/dist/components/icon.min.css');
 

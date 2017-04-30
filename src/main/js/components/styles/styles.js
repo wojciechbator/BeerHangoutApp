@@ -52,7 +52,7 @@ export default {
       width: "92%"
     },
     hr_style: {
-      "margin-bottom": "10%"
+      marginBottom: "10%"
     }
   },
   place: {

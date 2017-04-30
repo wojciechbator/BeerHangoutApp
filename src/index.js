@@ -20,7 +20,7 @@ if (typeof window !== 'undefined') {
       <Router history={history}>
         <Route path='/' component={App}>
           <IndexRoute component={Home}/>
-          <Route path='/signin' component={LoginPage}/>
+          <Route path='/login' component={LoginPage}/>
           <Route path='/register' component={RegisterPage}/>
         </Route>
       </Router>

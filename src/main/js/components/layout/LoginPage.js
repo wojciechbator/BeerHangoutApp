@@ -43,8 +43,8 @@ class LoginPage extends Component {
             <Grid.Row centered>
               <Segment inverted compact>
                 <Header size='medium' style={{marginTop: 12}}>Zaloguj się</Header>
-                <LoginForm onSubmit={this.handleSubmit} drawInput={drawInput}/>
                 {this.props.authFailed ? <LoginError /> : ''}
+                <LoginForm onSubmit={this.handleSubmit} drawInput={drawInput}/>
               </Segment>
             </Grid.Row>
           </Grid>

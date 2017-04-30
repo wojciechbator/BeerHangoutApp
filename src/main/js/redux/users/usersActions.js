@@ -16,7 +16,7 @@ export const registerUser = (userData) => {
     axios.post('/api/register', userData).then(
       success => {
         dispatch(addUser(success.data));
-        dispatch(push('/signin'));
+        dispatch(push('/login'));
       },
       failure => {
         console.error('Failure when trying to register user, reason: ' + failure)

@@ -5,7 +5,7 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const AUTH_FAILED = 'AUTH_FAILED';
 export const LOGGED_OUT = 'LOGGED_OUT';
 export const UNSUCCESSFUL_LOGOUT = "UNSUCCESSFUL_LOGOUT";
-
+export const TRANSITION_TO_LOGIN = "TRANSITION_TO_LOGIN";
 
 export const authenticated = (authData) => {
   return {
@@ -21,15 +21,23 @@ export const authFailed = (authData) => {
   }
 };
 
-export const loggedOut = () => {
+export const loggedOut = (data) => {
   return {
-    type: LOGGED_OUT
+    type: LOGGED_OUT,
+    data
   };
 };
 
-export const unsuccessfulLogoutAttempt = () => {
+export const unsuccessfulLogoutAttempt = (data) => {
   return {
-    type: UNSUCCESSFUL_LOGOUT
+    type: UNSUCCESSFUL_LOGOUT,
+    data
+  }
+};
+
+export const transitionToLoginAction = () => {
+  return {
+    type: TRANSITION_TO_LOGIN
   }
 };
 
@@ -50,7 +58,7 @@ export const loginRequest = (data) => {
 
 export const logoutRequest = (data) => {
   return dispatch => {
-    axios.post('/api/signout', data)
+    axios.post('/api/logout', data)
       .then(
         success => {
           dispatch(loggedOut(success.data));
@@ -60,6 +68,14 @@ export const logoutRequest = (data) => {
         }
       )
   }
+};
+
+export const transitionToLogin = () => {
+  return dispatch => {
+    dispatch(transitionToLoginAction());
+    dispatch(push('/login'));
+  }
+
 };
 
 
