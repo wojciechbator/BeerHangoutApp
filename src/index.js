@@ -8,8 +8,8 @@ import App from './main/js/App';
 import createStore from './main/js/redux/store';
 import LoginPage from './main/js/components/layout/LoginPage';
 import RegisterPage from './main/js/components/layout/RegisterPage';
-import HomePage from './main/js/components/layout/HomePage';
-import ChatPage from './main/js/components/layout/ChatPage';
+import {HomePage} from './main/js/components/layout/HomePage';
+import ChatApp from './main/js/components/ChatApp';
 // import AdminPage from './main/js/components/layout/AdminPage';
 
 if (typeof window !== 'undefined') {
@@ -24,8 +24,7 @@ if (typeof window !== 'undefined') {
           <IndexRoute component={HomePage}/>
           <Route path='/login' component={LoginPage}/>
           <Route path='/register' component={RegisterPage}/>
-          {/*<Route path="'/admin" component={AdminPage}/>*/}
-          <Route path="'/chat" component={ChatPage}/>
+          <Route path='/chat' component={ChatApp}/>
         </Route>
       </Router>
     </Provider>,
