@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import CommentsList from "./CommentsList";
+import {CommentsList} from "./CommentsList";
 import styles from "../styles/styles";
 import {Button, Comment, Form, Header} from "semantic-ui-react";
 import {connect} from "react-redux";

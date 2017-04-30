@@ -2,9 +2,8 @@
  * Created by wojciech on 30.04.17.
  */
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 
-class Chat extends Component {
+export default class ChatWidget extends Component {
   render() {
     return (
       <div>
@@ -13,11 +12,3 @@ class Chat extends Component {
     );
   }
 }
-
-const mapStateToProps = (store) => {
-  return {
-
-  }
-};
-
-export default connect(mapStateToProps)(Chat);

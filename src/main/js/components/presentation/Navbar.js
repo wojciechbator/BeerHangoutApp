@@ -10,7 +10,7 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: 'Home',
+      activeItem: 'HomePage',
       signedIn: false
     };
   }
@@ -22,7 +22,7 @@ class Navbar extends Component {
 
     return (
       <Menu inverted fixed="top">
-        <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick}/>
+        <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'HomePage'} onClick={this.handleItemClick}/>
         <Menu.Item as={Link} to='/friends' name='Friends' active={activeItem === 'Friends'}
                    onClick={this.handleItemClick}/>
         {this.props.signedIn ? <Menu.Menu position='right'>
@@ -46,7 +46,7 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
   activeItem: React.PropTypes.string,
-  signedIn: React.PropTypes.boolean
+  signedIn: React.PropTypes.bool
 };
 
 const mapStateToProps = (store) => {

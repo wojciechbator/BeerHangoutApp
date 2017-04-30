@@ -55,8 +55,8 @@ class LoginPage extends Component {
 }
 
 LoginPage.propTypes = {
-  authFailed: React.PropTypes.boolean,
-  signedIn: React.PropTypes.boolean
+  authFailed: React.PropTypes.bool,
+  signedIn: React.PropTypes.bool
 };
 
 const mapStateToProps = (store) => {

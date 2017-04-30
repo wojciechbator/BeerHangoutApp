@@ -3,7 +3,7 @@ import {Grid} from "semantic-ui-react";
 import {connect} from 'react-redux';
 
 import HangoutsMap from "../presentation/HangoutsMap";
-import {CommentsContainer} from "../containers";
+import CommentsContainer from "../containers/CommentsContainer";
 import Navbar from "../presentation/Navbar";
 import Sidebar from "../containers/Sidebar";
 import {transitionToLogin} from '../../redux/authentication/authActions';
@@ -11,7 +11,7 @@ import {transitionToLogin} from '../../redux/authentication/authActions';
 
 require('../../../../../node_modules/semantic-ui/dist/components/grid.min.css');
 
-class Home extends Component {
+class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,6 @@ class Home extends Component {
     }
   }
   componentWillMount() {
-    console.log(this.state.signedIn);
     !this.props.signedIn ? this.props.dispatch(transitionToLogin()) : '';
   }
 
@@ -43,8 +42,8 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
-  signedIn: React.PropTypes.boolean
+HomePage.propTypes = {
+  signedIn: React.PropTypes.bool
 };
 
 const mapStateToProps = (store) => {
@@ -53,4 +52,4 @@ const mapStateToProps = (store) => {
   }
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(HomePage);
