@@ -7,6 +7,12 @@ import { registerUser } from "../../redux/users/usersActions";
 import styles from '../styles/styles';
 
 class RegisterPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      registerFailed: false
+    };
+  }
   render() {
     return (
       <div>
@@ -23,7 +29,13 @@ class RegisterPage extends Component {
 }
 
 RegisterPage.propTypes = {
-  registerUser: React.PropTypes.func.isRequired
+  registerUser: React.PropTypes.func,
+  registerFailed: React.PropTypes.bool
 };
 
-export default connect(null, { registerUser })(RegisterPage);
+const mapStateToProps = (store) => {
+  return {
+    registerFailed: store.users.registerFailed
+  }
+};
+export default connect(mapStateToProps, { registerUser })(RegisterPage);

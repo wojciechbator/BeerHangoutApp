@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router";
 
+import {logoutRequest} from '../../redux/authentication/authActions';
+
 require('../../../../../node_modules/semantic-ui/dist/components/menu.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/segment.min.css');
 
@@ -14,6 +16,10 @@ class Navbar extends Component {
       signedIn: false
     };
   }
+
+  handleLogoutRequest = (data) => {
+    this.props.dispatch(logoutRequest(data));
+  };
 
   handleItemClick = (event, {name}) => this.setState({activeItem: name});
 
@@ -28,8 +34,8 @@ class Navbar extends Component {
         {this.props.signedIn ? <Menu.Menu position='right'>
           <Menu.Item as={Link} to='/admin' name='Admin' active={activeItem === 'Admin'}
                      onClick={this.handleItemClick}/>
-          <Menu.Item as={Link} to='/logout' name='Logout' active={activeItem === 'Logout'}
-                     onClick={this.handleItemClick}/>
+          <Menu.Item as={Link} to='/login' name='Logout' active={activeItem === 'Logout'}
+                     onClick={this.handleLogoutRequest}/>
         </Menu.Menu>
           :
           <Menu.Menu position='right'>

@@ -3,7 +3,7 @@ import {routerReducer} from "react-router-redux";
 import {reducer as formReducer} from "redux-form";
 import {AUTHENTICATED, AUTH_FAILED, UNSUCCESSFUL_LOGOUT, LOGGED_OUT} from "./authentication/authActions";
 import {ADD_COMMENT, COMMENTS_REFRESHED} from "./comments/commentsActions";
-import {ADD_USER, GET_USERS} from "./users/usersActions";
+import {ADD_USER, GET_USERS, DELETE_USER} from "./users/usersActions";
 
 const commentsReducer = (state = {status: 'stale', data: []}, action) => {
   switch (action.type) {
@@ -36,6 +36,10 @@ const usersReducer = (state = {data: []}, action) => {
         data: action.users
       };
 
+    case DELETE_USER:
+      return {
+        data: state.data.remove(action.user)
+      };
     default:
       return state;
   }

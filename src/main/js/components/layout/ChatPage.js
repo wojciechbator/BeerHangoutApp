@@ -7,6 +7,7 @@ import io from 'socket.io-client';
 
 import Messages from '../containers/Messages';
 import ChatInput from '../presentation/ChatInput';
+import socketsConfig from '../utils/socketsConfig';
 
 export default class ChatPage extends Component {
   socket = {};
@@ -14,7 +15,7 @@ export default class ChatPage extends Component {
     super(props);
     this.state = { messages: [] };
     this.handleSend = this.handleSend.bind(this);
-    this.socket = io().connect();
+    this.socket = io().connect(socketsConfig.api);
     this.socket.on('server:message', message => {
       this.addMessage(message);
     });
