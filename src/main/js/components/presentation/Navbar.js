@@ -12,7 +12,7 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: 'HomePage',
+      activeItem: this.props.activeItem || 'Home',
       signedIn: false
     };
   }
@@ -29,7 +29,7 @@ class Navbar extends Component {
 
     return (
       <Menu inverted fixed="top">
-        <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'HomePage'} onClick={this.handleItemClick}/>
+        <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick}/>
         <Menu.Item as={Link} to='/chat' name='Chat' active={activeItem === 'Chat'}
                    onClick={this.handleItemClick}/>
         {this.props.signedIn ? <Menu.Menu position='right'>

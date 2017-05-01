@@ -10,7 +10,7 @@ import LoginPage from './main/js/components/layout/LoginPage';
 import RegisterPage from './main/js/components/layout/RegisterPage';
 import {HomePage} from './main/js/components/layout/HomePage';
 import ChatApp from './main/js/components/ChatApp';
-// import AdminPage from './main/js/components/layout/AdminPage';
+import AdminPage from './main/js/components/layout/AdminPage';
 
 if (typeof window !== 'undefined') {
   const reduxRouting = routerMiddleware(browserHistory);
@@ -25,6 +25,7 @@ if (typeof window !== 'undefined') {
           <Route path='/login' component={LoginPage}/>
           <Route path='/register' component={RegisterPage}/>
           <Route path='/chat' component={ChatApp}/>
+          <Route path='/admin' component={AdminPage}/>
         </Route>
       </Router>
     </Provider>,

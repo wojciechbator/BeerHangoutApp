@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import io from 'socket.io-client';
+import Navbar from '../presentation/Navbar';
 
 import Messages from '../containers/Messages';
 import ChatInput from '../presentation/ChatInput';
@@ -11,9 +12,10 @@ import socketsConfig from '../utils/socketsConfig';
 
 export default class ChatPage extends Component {
   socket = {};
+
   constructor(props) {
     super(props);
-    this.state = { messages: [] };
+    this.state = {messages: []};
     this.handleSend = this.handleSend.bind(this);
     this.socket = io().connect(socketsConfig.api);
     this.socket.on('server:message', message => {
@@ -34,15 +36,18 @@ export default class ChatPage extends Component {
   addMessage(message) {
     const messages = this.state.messages;
     messages.push(message);
-    this.setState({ messages });
+    this.setState({messages});
   }
 
   render() {
     return (
-      <div className="container">
-        <h3>Czat!</h3>
-        <Messages messages={this.state.messages} />
-        <ChatInput onSend={this.handleSend}/>
+      <div>
+        <Navbar activeItem='Chat'/>
+        <div className="container">
+          <h3>Czat!</h3>
+          <Messages messages={this.state.messages}/>
+          <ChatInput onSend={this.handleSend}/>
+        </div>
       </div>
     );
   }
