@@ -28,7 +28,7 @@ public class LoginController {
 
     @RequestMapping(name = "/authenticate", method = RequestMethod.POST)
     public void handleLogin(@Valid @RequestBody User user, HttpServletResponse response) {
-        if(loginValidator.validateUser(user)) {
+        if (loginValidator.validateUser(user)) {
             logger.info("User validated, login performed.");
             response.setStatus(HttpServletResponse.SC_OK);
         } else {

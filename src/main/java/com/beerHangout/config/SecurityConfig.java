@@ -2,7 +2,6 @@ package com.beerHangout.config;
 
 import com.beerHangout.config.ajax.AjaxAuthenticationFailureHandler;
 import com.beerHangout.config.ajax.AjaxAuthenticationSuccessHandler;
-import com.beerHangout.config.ajax.AjaxLogoutSuccessHandler;
 import com.beerHangout.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AjaxAuthenticationSuccessHandler authSuccessHandler;
     private final AjaxAuthenticationFailureHandler authFailureHandler;
-    private final AjaxLogoutSuccessHandler logoutSuccessHandler;
 
     @Autowired
     private SecurityService userSecurityService;
@@ -47,10 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public Environment environment;
 
     @Autowired
-    public SecurityConfig(AjaxAuthenticationSuccessHandler authSuccessHandler, AjaxAuthenticationFailureHandler authFailureHandler, AjaxLogoutSuccessHandler logoutSuccessHandler) {
+    public SecurityConfig(AjaxAuthenticationSuccessHandler authSuccessHandler, AjaxAuthenticationFailureHandler authFailureHandler) {
         this.authSuccessHandler = authSuccessHandler;
         this.authFailureHandler = authFailureHandler;
-        this.logoutSuccessHandler = logoutSuccessHandler;
     }
 
 
@@ -98,14 +95,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().csrfTokenRepository(csrfTokenRepository())
                 .and()
                 .logout()
-                .logoutUrl("/api/logout")
-                .logoutSuccessHandler(logoutSuccessHandler)
                 .permitAll();
     }
 
     private static CsrfTokenRepository csrfTokenRepository() {
         HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
         repository.setHeaderName("X-XSRF-TOKEN");
+        repository.setSessionAttributeName("_csrf");
         return repository;
     }
 

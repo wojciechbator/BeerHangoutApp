@@ -4,7 +4,6 @@ import {push} from 'react-router-redux';
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const AUTH_FAILED = 'AUTH_FAILED';
 export const LOGGED_OUT = 'LOGGED_OUT';
-export const UNSUCCESSFUL_LOGOUT = "UNSUCCESSFUL_LOGOUT";
 export const TRANSITION_TO_LOGIN = "TRANSITION_TO_LOGIN";
 
 export const authenticated = (authData) => {
@@ -21,17 +20,9 @@ export const authFailed = (authData) => {
   }
 };
 
-export const loggedOut = (data) => {
+export const loggedOut = () => {
   return {
     type: LOGGED_OUT,
-    data
-  };
-};
-
-export const unsuccessfulLogoutAttempt = (data) => {
-  return {
-    type: UNSUCCESSFUL_LOGOUT,
-    data
   }
 };
 
@@ -56,17 +47,9 @@ export const loginRequest = (data) => {
   };
 };
 
-export const logoutRequest = (data) => {
+export const logoutRequest = () => {
   return dispatch => {
-    axios.post('/api/logout', data)
-      .then(
-        success => {
-          dispatch(loggedOut(success.data));
-        },
-        failure => {
-          dispatch(unsuccessfulLogoutAttempt(failure.data));
-        }
-      )
+          dispatch(loggedOut());
   }
 };
 

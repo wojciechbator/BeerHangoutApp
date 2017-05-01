@@ -17,8 +17,9 @@ class Navbar extends Component {
     };
   }
 
-  handleLogoutRequest = (data) => {
-    this.props.dispatch(logoutRequest(data));
+  handleLogoutRequest = (event) => {
+    event.persist();
+    this.props.dispatch(logoutRequest());
   };
 
   handleItemClick = (event, {name}) => this.setState({activeItem: name});
