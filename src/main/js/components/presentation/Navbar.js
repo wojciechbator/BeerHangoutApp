@@ -1,18 +1,26 @@
 import React, {Component} from "react";
+import {connect} from 'react-redux';
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router";
+
+import {logoutRequest} from '../../redux/authentication/authActions';
 
 require('../../../../../node_modules/semantic-ui/dist/components/menu.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/segment.min.css');
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: 'Home',
-      authFailed: false
+      activeItem: 'HomePage',
+      signedIn: false
     };
   }
+
+  handleLogoutRequest = (event) => {
+    event.persist();
+    this.props.dispatch(logoutRequest());
+  };
 
   handleItemClick = (event, {name}) => this.setState({activeItem: name});
 
@@ -21,14 +29,38 @@ export default class Navbar extends Component {
 
     return (
       <Menu inverted fixed="top">
-        <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick}/>
-        <Menu.Item as={Link} to='/friends' name='Friends' active={activeItem === 'Friends'}
+        <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'HomePage'} onClick={this.handleItemClick}/>
+        <Menu.Item as={Link} to='/chat' name='Chat' active={activeItem === 'Chat'}
                    onClick={this.handleItemClick}/>
-        <Menu.Menu position='right'>
-          <Menu.Item as={Link} to='/signin' name='Login' active={activeItem === 'Login'} onClick={this.handleItemClick}/>
-          <Menu.Item as={Link} to='/register' name='Register' active={activeItem === 'Register'} onClick={this.handleItemClick}/>
+        {this.props.signedIn ? <Menu.Menu position='right'>
+          <Menu.Item as={Link} to='/admin' name='Admin' active={activeItem === 'Admin'}
+                     onClick={this.handleItemClick}/>
+          <Menu.Item as={Link} to='/login' name='Logout' active={activeItem === 'Logout'}
+                     onClick={this.handleLogoutRequest}/>
         </Menu.Menu>
+          :
+          <Menu.Menu position='right'>
+            <Menu.Item as={Link} to='/login' name='Login' active={activeItem === 'Login'}
+                       onClick={this.handleItemClick}/>
+            <Menu.Item as={Link} to='/register' name='Register' active={activeItem === 'Register'}
+                       onClick={this.handleItemClick}/>
+          </Menu.Menu>}
+
       </Menu>
     );
   }
 }
+
+Navbar.propTypes = {
+  activeItem: React.PropTypes.string,
+  signedIn: React.PropTypes.bool
+};
+
+const mapStateToProps = (store) => {
+  return {
+    signedIn: store.auth.signedIn
+  }
+
+};
+
+export default connect(mapStateToProps)(Navbar);

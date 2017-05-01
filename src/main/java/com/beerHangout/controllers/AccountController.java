@@ -18,7 +18,7 @@ public class AccountController {
 
     @RequestMapping("/account")
     public Map<String, Object> getAccountStatus(HttpServletRequest request) {
-        log.info("Getting account status! ");
+        log.info("Getting account status!");
         return State.getAuthState(request);
     }
 

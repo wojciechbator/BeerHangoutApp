@@ -22,6 +22,7 @@ public class RegisterUserValidator implements Validator {
         //link:
         //http://www.journaldev.com/2610/spring-mvc-internationalization-i18n-and-localization-l10n-example
 
+
         //as
         //ValidationUtils.rejectIfEmptyOrWhitespace(errors, field, "message");
     }

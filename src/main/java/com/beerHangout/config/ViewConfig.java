@@ -7,7 +7,7 @@ import org.springframework.web.servlet.view.script.ScriptTemplateConfigurer;
 import org.springframework.web.servlet.view.script.ScriptTemplateViewResolver;
 
 /**
- * Ważne, konfig view resolvera pod react
+ * React view resolver
  */
 @Configuration
 public class ViewConfig {
@@ -21,7 +21,6 @@ public class ViewConfig {
     @Bean
     public ViewResolver reactViewResolver() {
         ScriptTemplateViewResolver viewResolver = new ScriptTemplateViewResolver();
-        //index.txt :) Kotwica dla naszego reacta
         viewResolver.setPrefix("templates/");
         viewResolver.setSuffix(".txt");
         return viewResolver;

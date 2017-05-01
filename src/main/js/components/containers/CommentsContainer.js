@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import CommentsList from "./CommentsList";
+import {CommentsList} from "./CommentsList";
 import styles from "../styles/styles";
 import {Button, Comment, Form, Header} from "semantic-ui-react";
 import {connect} from "react-redux";
@@ -31,8 +31,8 @@ class CommentsContainer extends Component {
     }
   }
 
-  submitComment(e) {
-    e.preventDefault();
+  submitComment(event) {
+    event.preventDefault();
     const author = this.state.comment.author;
     const content = this.state.comment.content;
     const timestamp = (new Date()).getTime();
@@ -40,6 +40,7 @@ class CommentsContainer extends Component {
     this.setState({
       comments: this.props.comments
     });
+    this.handleRefreshComments();
   }
 
   handleRefreshComments() {
@@ -65,8 +66,8 @@ class CommentsContainer extends Component {
   render() {
     return (
       <div style={styles.comment.commentsContainer}>
-        <Comment.Group>
-          <Header as="h3" style={styles.universal.header}>Komentarze: </Header>
+        <Header as="h3" style={styles.universal.header}>Komentarze: </Header>
+        <Comment.Group style={styles.comment.commentsBox}>
           { this.props.comments.length === 0
             ? <p>Bądź pierwszym, który skomentuje!</p>
             : <CommentsList comments={this.props.comments}/>}
@@ -74,7 +75,7 @@ class CommentsContainer extends Component {
         <Form reply onSubmit={this.submitComment}>
           <Header as="h3" style={styles.universal.header}>Skomentuj</Header>
           <Form.Input fluid onChange={this.updateUsername} type="text"/>
-          <Form.TextArea autoHeight style={styles.inputs.textArea}  onChange={this.updateBody} type="text"/>
+          <Form.TextArea autoHeight style={styles.inputs.textArea} onChange={this.updateBody} type="text"/>
           <Button type="submit" content='Odpowiedz' color="green"/>
         </Form>
       </div>

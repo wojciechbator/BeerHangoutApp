@@ -26,6 +26,6 @@ public class ValidatorOfMail implements ConstraintValidator<Email, String>{
     public boolean isValid(String mail, ConstraintValidatorContext constraintValidatorContext) {
         //TO DO VALIDATE MAIL BY REGEX OR STH ELSE
 
-        return false;
+        return true;
     }
 }
