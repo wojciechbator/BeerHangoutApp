@@ -1,4 +1,6 @@
 import React from "react";
+import {Button} from 'semantic-ui-react';
+
 import {commentStyles} from "../styles/styles";
 
 const SingleComment = (props) => {
@@ -12,14 +14,17 @@ const SingleComment = (props) => {
         <span style={commentStyles.comment.nameAndDate}>{props.author}</span>
         <span style={commentStyles.comment.pipeStyle}>|</span>
         <span style={commentStyles.comment.nameAndDate}>{time.toLocaleString()}</span>
-
         <hr />
+        <Button negative onClick={props.deleteComment}>Usuń</Button>
       </div>
     );
 };
 
 SingleComment.PropTypes = {
-  currentComment: React.PropTypes.string
+  message: React.PropTypes.string,
+  author: React.PropTypes.string,
+  deleteComment: React.PropTypes.func,
+  fromMe: React.PropTypes.bool
 };
 
 SingleComment.defaultProps = {
