@@ -3,6 +3,9 @@ package com.beerHangout.config;
 import com.beerHangout.config.ajax.AjaxAuthenticationFailureHandler;
 import com.beerHangout.config.ajax.AjaxAuthenticationSuccessHandler;
 import com.beerHangout.services.SecurityService;
+import com.beerHangout.services.UserService;
+import com.beerHangout.services.impl.MongoDBAuthenticationProvider;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,29 +37,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private static final int password_length = 10;
+    private static final Logger logger = Logger.getLogger(SecurityConfig.class);
 
     private final AjaxAuthenticationSuccessHandler authSuccessHandler;
     private final AjaxAuthenticationFailureHandler authFailureHandler;
 
-    @Autowired
-    private SecurityService userSecurityService;
+    private final SecurityService userSecurityService;
+    private final UserService userService;
 
     @Autowired
     public Environment environment;
 
     @Autowired
-    public SecurityConfig(AjaxAuthenticationSuccessHandler authSuccessHandler, AjaxAuthenticationFailureHandler authFailureHandler) {
+    public SecurityConfig(AjaxAuthenticationSuccessHandler authSuccessHandler,
+                          AjaxAuthenticationFailureHandler authFailureHandler,
+                          UserService userService,
+                          SecurityService userSecurityService) {
         this.authSuccessHandler = authSuccessHandler;
         this.authFailureHandler = authFailureHandler;
+        this.userService = userService;
+        this.userSecurityService = userSecurityService;
     }
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //admin admin
-        auth.inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER").and()
-                .withUser("admin").password("admin").roles("USER", "ADMIN");
+        userService.findAll().forEach(user -> {
+            try {
+                auth.inMemoryAuthentication()
+                        .withUser(user.getUsername()).password(user.getPassword()).roles(user.getUserRoles().toString());
+            } catch (Exception e) {
+                logger.error("Exception has been thrown during inMEmory Authentication, trace: ", e);
+            }
+        });
     }
 
     @Override
@@ -73,8 +86,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
+    private MongoDBAuthenticationProvider mongoDBAuthenticationProvider;
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+        auth.authenticationProvider(mongoDBAuthenticationProvider);
     }
 
     @Override

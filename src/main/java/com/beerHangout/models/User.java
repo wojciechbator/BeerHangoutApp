@@ -75,4 +75,12 @@ public class User implements UserDetails {
         return this.enabled;
     }
 
+    public User(String username, String password, String email, String firstName, String lastName, Set<Role> userRoles) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userRoles = userRoles;
+    }
 }

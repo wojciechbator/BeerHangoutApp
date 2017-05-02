@@ -17,4 +17,8 @@ public class Role {
     private String userRoleId;
     private String name;
 
+    public String toString() {
+        return name;
+    }
+
 }

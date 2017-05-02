@@ -57,7 +57,7 @@ export const deleteUser = (user) => {
         dispatch(usersRefreshed(success.data));
       },
       failure => {
-        console.log("Failed to remove user, reason: " + failure);
+        console.log("Failed to remove user, error: " + failure);
       }
     );
   }
