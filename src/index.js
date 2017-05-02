@@ -8,7 +8,7 @@ import App from './main/js/App';
 import createStore from './main/js/redux/store';
 import LoginPage from './main/js/components/layout/LoginPage';
 import RegisterPage from './main/js/components/layout/RegisterPage';
-import {HomePage} from './main/js/components/layout/HomePage';
+import HomePage from './main/js/components/layout/HomePage';
 import ChatApp from './main/js/components/ChatApp';
 import AdminPage from './main/js/components/layout/AdminPage';
 

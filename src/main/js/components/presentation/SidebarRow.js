@@ -1,28 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Grid} from 'semantic-ui-react';
 
-import styles from '../styles/styles';
+import {commentStyles} from '../styles/styles';
 /**
  * Created by wojciech on 11.04.17.
  */
 
-export default class SidebarRow extends Component {
-  render() {
-    return (
-      <Grid.Row verticalAlign="middle" style={styles.comment.commentsList}>
-        <Grid.Column width={3}>
-          {this.props.data.username}
-        </Grid.Column>
-        <Grid.Column width={3}>
-          {this.props.data.lastName}
-        </Grid.Column>
-        <Grid.Column width={1}>
-          {this.props.data.is_active ? "aktywny" : "nieaktywny"}
-        </Grid.Column>
-      </Grid.Row>
-    )
-  }
-}
+const SidebarRow = (props) => (
+  <Grid.Row verticalAlign="middle" style={commentStyles.comment.commentsList}>
+    <Grid.Column width={3}>
+      {props.data.username}
+    </Grid.Column>
+    <Grid.Column width={3}>
+      {props.data.lastName}
+    </Grid.Column>
+    <Grid.Column width={1}>
+      {props.data.is_active ? "aktywny" : "nieaktywny"}
+    </Grid.Column>
+  </Grid.Row>
+);
+
 SidebarRow.propTypes = {
   data: React.PropTypes.object.isRequired
 };
+
+//TODO: Connect with redux
+
+export default SidebarRow;

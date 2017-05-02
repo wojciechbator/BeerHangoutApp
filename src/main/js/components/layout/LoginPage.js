@@ -6,13 +6,13 @@ import {connect} from 'react-redux';
 import LoginForm from "../presentation/LoginForm";
 import {loginRequest} from '../../redux/authentication/authActions';
 import {LoginError} from '../presentation/ErrorMessages';
-import styles from '../styles/styles';
+import {formsStyle} from '../styles/styles';
 
 const drawInput = ({input, label, placeholder, type, meta: {asyncValidating, touched, error}}) => {
   return (
     <div className={asyncValidating ? 'async-validating' : ''}>
       <Form.Input label={label} placeholder={placeholder} {...input} type={type} style={{margin: 6}}/>
-      {touched && error && <p style={styles.warningPrompt}><Icon name='warning'/>{error}</p>}
+      {touched && error && <p style={formsStyle.warningPrompt}><Icon name='warning'/>{error}</p>}
     </div>
   );
 };
@@ -38,7 +38,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <div style={styles.loginStyle}>
+        <div style={formsStyle.loginStyle}>
           <Grid>
             <Grid.Row centered>
               <Segment inverted compact>

@@ -8,7 +8,7 @@ import Sidebar from "../containers/Sidebar";
 
 require('../../../../../node_modules/semantic-ui/dist/components/grid.min.css');
 
-export const HomePage = (props) => (
+const HomePage = (props) => (
   <div>
     <Navbar/>
     <Grid columns='equal'>
@@ -24,4 +24,6 @@ export const HomePage = (props) => (
     </Grid>
   </div>
 );
+
+export default HomePage;
 

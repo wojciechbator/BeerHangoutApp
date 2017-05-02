@@ -4,7 +4,7 @@ import { Grid } from 'semantic-ui-react';
 
 import RegisterForm from "../presentation/RegisterForm";
 import { registerUser } from "../../redux/users/usersActions";
-import styles from '../styles/styles';
+import {formsStyle} from '../styles/styles';
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class RegisterPage extends Component {
   render() {
     return (
       <div>
-        <div style={styles.registerStyle}>
+        <div style={formsStyle.registerStyle}>
           <Grid verticalAlign="middle">
             <Grid.Row centered>
               <RegisterForm registerUser={registerUser} />

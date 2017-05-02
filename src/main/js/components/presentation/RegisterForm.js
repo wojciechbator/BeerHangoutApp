@@ -5,7 +5,7 @@ import {Field, reduxForm} from 'redux-form';
 import {Icon} from 'semantic-ui-react';
 import { registerUser } from '../../redux/users/usersActions'
 import validate from '../utils/validateRegister';
-import styles from '../styles/styles';
+import {formsStyle} from '../styles/styles';
 
 require('../../../../../node_modules/semantic-ui/dist/components/icon.min.css');
 
@@ -23,7 +23,7 @@ class RegisterForm extends Component {
     return (
       <div className={asyncValidating ? 'async-validating' : ''}>
         <Form.Input label={label} placeholder={placeholder} {...input} type={type} style={{margin: 6}} />
-        {touched && error && <p style={styles.warningPrompt}><Icon name='warning'/>{error}</p>}
+        {touched && error && <p style={formsStyle.warningPrompt}><Icon name='warning'/>{error}</p>}
       </div>
     );
   };

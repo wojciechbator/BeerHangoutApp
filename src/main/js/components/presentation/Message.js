@@ -1,6 +1,6 @@
 /**
- * Created by wojciech on 30.04.17.
- */
+  * Created by wojciech on 30.04.17.
+  */
 import React from 'react';
 
 const Message = (props) => {
