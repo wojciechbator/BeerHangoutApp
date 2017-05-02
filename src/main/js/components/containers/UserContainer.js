@@ -2,15 +2,14 @@
  * Created by wojciech on 01.05.17.
  */
 
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Table, Container, Header} from 'semantic-ui-react';
-import User from '../presentation/User';
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {Container, Header, Table} from "semantic-ui-react";
+import User from "../presentation/User";
+import {deleteUser, refreshUsers} from "../../redux/users/usersActions";
 
 require('../../../../../node_modules/semantic-ui/dist/components/table.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/container.min.css');
-
-import {deleteUser, refreshUsers} from '../../redux/users/usersActions';
 
 class UserContainer extends Component {
   constructor(props) {

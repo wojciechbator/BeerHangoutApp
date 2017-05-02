@@ -1,7 +1,7 @@
-import React from 'react';
-import {Grid} from 'semantic-ui-react';
+import React from "react";
+import {Grid} from "semantic-ui-react";
 
-import {commentStyles} from '../styles/styles';
+import {commentStyles} from "../styles/styles";
 /**
  * Created by wojciech on 11.04.17.
  */

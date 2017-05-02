@@ -1,7 +1,7 @@
 package com.beerHangout.controllers;
 
-import com.beerHangout.models.User;
 import com.beerHangout.models.Role;
+import com.beerHangout.models.User;
 import com.beerHangout.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

@@ -1,12 +1,11 @@
 import React, {Component} from "react";
-import {Form, Grid, Header, Segment} from "semantic-ui-react";
-import {Icon} from 'semantic-ui-react';
-import {connect} from 'react-redux';
+import {Form, Grid, Header, Icon, Segment} from "semantic-ui-react";
+import {connect} from "react-redux";
 
 import LoginForm from "../presentation/LoginForm";
-import {loginRequest, resetAuth} from '../../redux/authentication/authActions';
-import {LoginError} from '../presentation/ErrorMessages';
-import {formsStyle} from '../styles/styles';
+import {loginRequest, resetAuth} from "../../redux/authentication/authActions";
+import {LoginError} from "../presentation/ErrorMessages";
+import {formsStyle} from "../styles/styles";
 
 const drawInput = ({input, label, placeholder, type, meta: {asyncValidating, touched, error}}) => {
   return (

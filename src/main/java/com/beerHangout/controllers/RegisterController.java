@@ -17,7 +17,6 @@ import javax.validation.Valid;
 /**
  * Created by wojciech on 11.04.17.
  */
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/register")
 public class RegisterController {

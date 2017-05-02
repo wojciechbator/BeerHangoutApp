@@ -2,14 +2,13 @@
  * Created by wojciech on 30.04.17.
  */
 
-import React, {Component} from 'react';
-import io from 'socket.io-client';
-import Navbar from '../presentation/Navbar';
-import {Container} from 'semantic-ui-react';
+import React, {Component} from "react";
+import io from "socket.io-client";
+import Navbar from "../presentation/Navbar";
+import {Container} from "semantic-ui-react";
 
-import CommentsContainer from '../containers/CommentsContainer';
-import ChatInput from '../presentation/ChatInput';
-import socketsConfig from '../utils/socketsConfig';
+import CommentsContainer from "../containers/CommentsContainer";
+import socketsConfig from "../utils/socketsConfig";
 
 export default class ChatPage extends Component {
   socket = {};

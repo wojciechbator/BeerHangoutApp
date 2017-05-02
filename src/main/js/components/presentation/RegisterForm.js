@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
-import { Button, Form, Header, Segment } from 'semantic-ui-react';
-import {Link} from 'react-router';
-import {Field, reduxForm} from 'redux-form';
-import {Icon} from 'semantic-ui-react';
-import { registerUser } from '../../redux/users/usersActions'
-import validate from '../utils/validateRegister';
-import {formsStyle} from '../styles/styles';
+import React, {Component} from "react";
+import {Button, Form, Header, Icon, Segment} from "semantic-ui-react";
+import {Link} from "react-router";
+import {Field, reduxForm} from "redux-form";
+import {registerUser} from "../../redux/users/usersActions";
+import validate from "../utils/validateRegister";
+import {formsStyle} from "../styles/styles";
 
 require('../../../../../node_modules/semantic-ui/dist/components/icon.min.css');
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {push} from 'react-router-redux';
+import {push} from "react-router-redux";
 
 export const ADD_USER = 'ADD_USER';
 export const GET_USERS = 'GET_USERS';

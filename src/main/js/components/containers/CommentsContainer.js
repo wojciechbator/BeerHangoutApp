@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {CommentsList} from "./CommentsList";
-import {commentStyles, universalStyles, placeStyle} from "../styles/styles";
+import {commentStyles, placeStyle, universalStyles} from "../styles/styles";
 import {Button, Comment, Form, Header} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {refreshComments, saveComment} from "../../redux/comments/commentsActions";

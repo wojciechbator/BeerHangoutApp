@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import {routerMiddleware, syncHistoryWithStore} from 'react-router-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import {Provider} from "react-redux";
+import {browserHistory, IndexRoute, Route, Router} from "react-router";
+import {routerMiddleware, syncHistoryWithStore} from "react-router-redux";
 
-import App from './main/js/App';
-import createStore from './main/js/redux/store';
-import LoginPage from './main/js/components/layout/LoginPage';
-import RegisterPage from './main/js/components/layout/RegisterPage';
-import HomePage from './main/js/components/layout/HomePage';
-import ChatApp from './main/js/components/ChatApp';
-import AdminPage from './main/js/components/layout/AdminPage';
+import App from "./main/js/App";
+import createStore from "./main/js/redux/store";
+import LoginPage from "./main/js/components/layout/LoginPage";
+import RegisterPage from "./main/js/components/layout/RegisterPage";
+import HomePage from "./main/js/components/layout/HomePage";
+import ChatApp from "./main/js/components/ChatApp";
+import AdminPage from "./main/js/components/layout/AdminPage";
 
 if (typeof window !== 'undefined') {
   const reduxRouting = routerMiddleware(browserHistory);

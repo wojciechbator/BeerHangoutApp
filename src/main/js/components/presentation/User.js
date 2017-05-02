@@ -2,7 +2,7 @@
  * Created by wojciech on 01.05.17.
  */
 import React from "react";
-import {Table, Button} from 'semantic-ui-react';
+import {Button, Table} from "semantic-ui-react";
 
 const User = (props) => (
   <Table.Row>

@@ -2,7 +2,7 @@
  * Created by wojciech on 30.04.17.
  */
 
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
 export default class ChatInput extends Component {
   constructor(props) {
