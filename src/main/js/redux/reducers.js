@@ -45,13 +45,14 @@ const usersReducer = (state = {data: []}, action) => {
   }
 };
 
-const authReducer = (state = {signedIn: false, roles: [], authFailed: false}, action) => {
+const authReducer = (state = {signedIn: false, roles: [], authFailed: false, username: ''}, action) => {
   switch (action.type) {
     case AUTHENTICATED:
       return Object.assign({}, state, {
         signedIn: true,
         roles: action.roles,
-        authFailed: false
+        authFailed: false,
+        username: action.username
       });
 
     case AUTH_FAILED:
@@ -65,7 +66,8 @@ const authReducer = (state = {signedIn: false, roles: [], authFailed: false}, ac
       return Object.assign({}, state, {
         signedIn: false,
         roles: ['ROLE_ANONYMOUS'],
-        authFailed: false
+        authFailed: false,
+        username: ''
       });
 
     case AUTH_RESET:

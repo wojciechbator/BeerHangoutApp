@@ -22,7 +22,8 @@ class LoginPage extends Component {
     super(props);
     this.state = {
       authFailed: false,
-      signedIn: false
+      signedIn: false,
+      username: ''
     };
   }
 
@@ -31,6 +32,7 @@ class LoginPage extends Component {
   }
 
   handleSubmit = (values) => {
+    this.setState({username: values.username});
     if (values.username.length === 0) {
       return;
     }
@@ -60,13 +62,15 @@ class LoginPage extends Component {
 
 LoginPage.propTypes = {
   authFailed: React.PropTypes.bool,
-  signedIn: React.PropTypes.bool
+  signedIn: React.PropTypes.bool,
+  username: React.PropTypes.string
 };
 
 const mapStateToProps = (store) => {
   return {
     authFailed: store.auth.authFailed,
-    signedIn: store.auth.signedIn
+    signedIn: store.auth.signedIn,
+    username: store.auth.username
   }
 
 };

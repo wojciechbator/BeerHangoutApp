@@ -116,5 +116,8 @@ export const formsStyle = {
   }
 };
 export const chatStyle = {
-  chatWidget: {}
+  chatWidget: {
+  },
+  chatPage: {
+  }
 };

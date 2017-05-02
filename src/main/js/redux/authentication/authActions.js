@@ -17,7 +17,8 @@ export const authReset = (authState) => {
 export const authenticated = (authData) => {
   return {
     type: AUTHENTICATED,
-    roles: authData.roles
+    roles: authData.roles,
+    username: authData.username
   };
 };
 

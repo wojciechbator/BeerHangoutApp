@@ -7,9 +7,20 @@ export const CommentsList = (props) => (
     {props.comments.map((comment, i) => {
       return (
         <li key={i}>
-          <SingleComment currentComment={comment}/>
+          <SingleComment author={comment.author}
+                         message={comment.content}
+                         timestamp={comment.timestamp}
+                         fromMe={comment.fromMe}/>
         </li>
       );
     })}
   </ul>
 );
+
+CommentsList.PropTypes = {
+  comments: React.PropTypes.array
+};
+
+CommentsList.defaultProps = {
+  comments: []
+};

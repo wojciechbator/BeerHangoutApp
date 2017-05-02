@@ -5,8 +5,9 @@
 import React, {Component} from 'react';
 import io from 'socket.io-client';
 import Navbar from '../presentation/Navbar';
+import {Container} from 'semantic-ui-react';
 
-import Messages from '../containers/Messages';
+import CommentsContainer from '../containers/CommentsContainer';
 import ChatInput from '../presentation/ChatInput';
 import socketsConfig from '../utils/socketsConfig';
 
@@ -15,7 +16,7 @@ export default class ChatPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {messages: []};
+    this.state = {comments: []};
     this.handleSend = this.handleSend.bind(this);
     this.socket = io().connect(socketsConfig.api);
     this.socket.on('server:message', message => {
@@ -41,13 +42,13 @@ export default class ChatPage extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginTop: 50}}>
         <Navbar activeItem='Chat'/>
-        <div className="container">
-          <h3>Czat!</h3>
-          <Messages messages={this.state.messages}/>
-          <ChatInput onSend={this.handleSend}/>
-        </div>
+        <Container>
+          <div className="container">
+            <CommentsContainer comments={this.state.comments}/>
+          </div>
+        </Container>
       </div>
     );
   }
