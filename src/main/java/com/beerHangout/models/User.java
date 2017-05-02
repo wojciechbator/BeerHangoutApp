@@ -2,6 +2,7 @@ package com.beerHangout.models;
 
 import com.beerHangout.validation.tags.Email;
 import com.beerHangout.validation.tags.Phone;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,10 +21,11 @@ import java.util.Set;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "users")
 public class User implements UserDetails {
     @Id
-    private String Id;
+    private String id;
     @NotNull
     @NotEmpty
     private String username;
@@ -73,14 +75,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return this.enabled;
-    }
-
-    public User(String username, String password, String email, String firstName, String lastName, Set<Role> userRoles) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userRoles = userRoles;
     }
 }

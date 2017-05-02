@@ -38,7 +38,7 @@ const usersReducer = (state = {data: []}, action) => {
 
     case DELETE_USER:
       return {
-        data: state.data.remove(action.user)
+        data: state.data.splice(action.id)
       };
     default:
       return state;

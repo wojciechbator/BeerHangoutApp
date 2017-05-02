@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
+        log.info("Getting all users from mongo!");
         return userRepository.findAll();
     }
 

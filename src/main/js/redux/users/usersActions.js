@@ -1,5 +1,5 @@
 import axios from "axios";
-import {push} from "react-router-redux";
+import {push} from 'react-router-redux';
 
 export const ADD_USER = 'ADD_USER';
 export const GET_USERS = 'GET_USERS';
@@ -42,19 +42,17 @@ export const refreshUsers = () => {
   };
 };
 
-export const userDeleted = (user) => {
+export const userDeleted = () => {
   return {
-    type: DELETE_USER,
-    user
+    type: DELETE_USER
   }
 };
 
-export const deleteUser = (user) => {
+export const deleteUser = (id) => {
   return dispatch => {
-    axios.delete('/api/users').then(
+    axios.delete(`/api/users/${id}`).then(
       success => {
-        dispatch(userDeleted(user));
-        dispatch(usersRefreshed(success.data));
+        dispatch(userDeleted());
       },
       failure => {
         console.log("Failed to remove user, error: " + failure);

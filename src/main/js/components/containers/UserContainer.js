@@ -27,8 +27,9 @@ class UserContainer extends Component {
     });
   }
 
-  handleDeleteUser(user) {
-    this.props.dispatch(deleteUser(user));
+  handleDeleteUser(id) {
+    console.log(id);
+    this.props.dispatch(deleteUser(id));
     this.props.dispatch(refreshUsers());
   }
 
@@ -45,8 +46,8 @@ class UserContainer extends Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {this.props.users.map((person, i) => <User key={i} data={person}
-                                                         handleDeleteUser={this.handleDeleteUser}/>)}
+              {this.props.users.map((person, i) => <User key={i} user={person}
+                                                         handleDeleteUser={() => this.handleDeleteUser(person.id)}/>)}
             </Table.Body>
           </Table>
         </Container>
