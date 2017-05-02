@@ -51,12 +51,8 @@ export const userDeleted = () => {
 export const deleteUser = (id) => {
   return dispatch => {
     axios.delete(`/api/users/${id}`).then(
-      success => {
-        dispatch(userDeleted());
-      },
-      failure => {
-        console.log("Failed to remove user, error: " + failure);
-      }
+      success => dispatch(userDeleted()),
+      failure => console.log("Failed to remove user, error: " + failure)
     );
   }
 };

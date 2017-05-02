@@ -49,7 +49,7 @@ public class RegisterController {
          }
 
         logger.info("Validation success");
-        model.addAttribute("registeredUser");
+        model.addAttribute("registeredUser", user);
         response.setStatus(HttpServletResponse.SC_OK);
     }
 

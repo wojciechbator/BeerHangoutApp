@@ -3,7 +3,7 @@ import {CommentsList} from "./CommentsList";
 import {commentStyles, placeStyle, universalStyles} from "../styles/styles";
 import {Button, Comment, Form, Header} from "semantic-ui-react";
 import {connect} from "react-redux";
-import {refreshComments, saveComment} from "../../redux/comments/commentsActions";
+import {refreshComments, saveComment, deleteComment} from "../../redux/comments/commentsActions";
 
 require('../../../../../node_modules/semantic-ui/dist/components/form.min.css');
 require('../../../../../node_modules/semantic-ui/dist/components/button.min.css');
@@ -69,6 +69,10 @@ class CommentsContainer extends Component {
     });
   }
 
+  handleDeleteComment(id) {
+    this.props.dispatch(deleteComment(id));
+  }
+
   render() {
     return (
       <div style={commentStyles.comment.commentsContainer}>
@@ -76,7 +80,7 @@ class CommentsContainer extends Component {
         <Comment.Group style={commentStyles.comment.commentsBox} id="messageList">
           { this.props.comments.length === 0
             ? <p color="white">Bądź pierwszym, który skomentuje!</p>
-            : <CommentsList comments={this.props.comments}/>}
+            : <CommentsList comments={this.props.comments} deleteComment={() => this.handleDeleteComment}/>}
         </Comment.Group>
         <Form reply onSubmit={this.submitComment}>
           <Header as="h3" style={universalStyles.header}>Skomentuj</Header>

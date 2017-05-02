@@ -29,16 +29,18 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getAllUsers() {
+        log.info("Getting all users from mongo");
         return userService.findAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public User createUser(@Valid @RequestBody User user) throws Exception {
         Role userRole = new Role();
-        userRole.setName("USER");
+        userRole.setName("ROLE_USER");
         userRole.setRoleId("1");
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(userRole);
+        log.info("Creating user: " + user.toString());
         return userService.createUser(user, userRoles);
     }
 
@@ -46,8 +48,10 @@ public class UserController {
     public ResponseEntity<User> getUserByName(@PathVariable("username") String username) {
         User user = userService.findByUsername(username);
         if (user == null) {
+            log.info("Such user does not exist");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
+            log.info("Getting user: " + username);
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
     }
@@ -56,14 +60,17 @@ public class UserController {
     public ResponseEntity<User> updateUser(@Valid @RequestBody User user) {
         User userData = userService.findByUsername(user.getUsername());
         if (userData == null) {
+            log.info("Such user does not exist");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         userService.updateUser(user.getUsername(), userData);
+        log.info("Updating user: " + user.getUsername());
         return new ResponseEntity<>(userData, HttpStatus.OK);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void deleteUser(@Valid @PathVariable("id") String id) {
+        log.info("Removing user with id: " + id);
         userService.removeUser(id);
     }
 
