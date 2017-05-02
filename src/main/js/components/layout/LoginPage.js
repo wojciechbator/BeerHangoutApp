@@ -4,7 +4,7 @@ import {Icon} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 
 import LoginForm from "../presentation/LoginForm";
-import {loginRequest} from '../../redux/authentication/authActions';
+import {loginRequest, resetAuth} from '../../redux/authentication/authActions';
 import {LoginError} from '../presentation/ErrorMessages';
 import {formsStyle} from '../styles/styles';
 
@@ -24,6 +24,10 @@ class LoginPage extends Component {
       authFailed: false,
       signedIn: false
     };
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(resetAuth(this.state));
   }
 
   handleSubmit = (values) => {
