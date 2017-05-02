@@ -2,6 +2,7 @@ package com.beerHangout.controllers;
 
 import com.beerHangout.utils.State;
 import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +11,7 @@ import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api", produces = APPLICATION_JSON_VALUE)
 public class AccountController {
