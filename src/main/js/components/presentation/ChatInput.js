@@ -38,4 +38,8 @@ export default class ChatInput extends Component {
   }
 }
 
+ChatInput.PropTypes = {
+  onSend: React.PropTypes.func
+};
+
 ChatInput.defaultProps = {};

@@ -5,6 +5,14 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const AUTH_FAILED = 'AUTH_FAILED';
 export const LOGGED_OUT = 'LOGGED_OUT';
 export const TRANSITION_TO_LOGIN = "TRANSITION_TO_LOGIN";
+export const AUTH_RESET = 'AUTH_RESET';
+
+export const authReset = (authState) => {
+  return {
+    type: AUTH_RESET,
+    authState
+  }
+};
 
 export const authenticated = (authData) => {
   return {
@@ -61,4 +69,9 @@ export const transitionToLogin = () => {
 
 };
 
+export const resetAuth = (data) => {
+  return dispatch => {
+    dispatch(authReset(data));
+  }
+};
 

@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "../styles/styles";
+import {commentStyles} from "../styles/styles";
 import SingleComment from "../presentation/SingleComment";
 
 export const CommentsList = (props) => (
-  <ul style={styles.comment.commentsList}>
+  <ul style={commentStyles.comment.commentsList}>
     {props.comments.map((comment, i) => {
       return (
         <li key={i}>

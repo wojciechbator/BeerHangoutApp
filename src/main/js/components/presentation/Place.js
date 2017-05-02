@@ -1,13 +1,9 @@
-import React, {Component} from "react";
+import React from "react";
 
-class Place extends Component {
-  render() {
-    return (
-      <div>
-        Place stub
-      </div>
-    );
-  }
-}
+const Place = (props) => (
+  <div>
+    Place stub
+  </div>
+);
 
 export default Place;

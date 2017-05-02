@@ -1,16 +1,17 @@
 import LoginImg from "../../../../../public/images/back.png";
 import RegisterImg from "../../../../../public/images/back2.png";
 
-export default {
-  universal: {
-    margin_left_minus_15: {
-      marginLeft: -15
-    },
-    header: {
-      marginTop: 12,
-      color: '#FFFFFF',
-    }
+export const universalStyles = {
+  margin_left_minus_15: {
+    marginLeft: -15
   },
+  header: {
+    marginTop: 12,
+    color: '#FFFFFF',
+  }
+};
+
+export const commentStyles = {
   comment: {
     commentsContainer: {
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -41,46 +42,49 @@ export default {
       fontWeight: 200,
       color: '#bbbbbb'
     }
+  }
+};
+export const userStyle = {
+  usersSidebarDiv: {
+    width: "20%",
+    height: "100%",
+    position: "absolute",
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    padding: 12
   },
-  users: {
-    usersSidebarDiv: {
-      width: "20%",
-      height: "100%",
-      position: "absolute",
-      backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      padding: 12
-    },
-    refreshButton: {
-      position: "absolute",
-      bottom: "2%",
-      width: "92%"
-    },
-    hr_style: {
-      marginBottom: "10%"
-    }
+  refreshButton: {
+    position: "absolute",
+    bottom: "2%",
+    width: "92%"
   },
-  place: {
-    container: {
-      padding: 16,
-      background: '#f9f9f9',
-      marginTop: 12,
-      marginLeft: 16,
-      border: '1px solid #ddd'
-    },
-    header: {
-      marginTop: 0,
-      marginBottom: 0
-    },
-    title: {
-      textDecoration: 'none',
-      color: 'red'
-    }
+  hr_style: {
+    marginBottom: "10%"
+  }
+};
+export const placeStyle = {
+  container: {
+    padding: 16,
+    background: '#f9f9f9',
+    marginTop: 12,
+    marginLeft: 16,
+    border: '1px solid #ddd'
+  },
+  header: {
+    marginTop: 0,
+    marginBottom: 0
+  },
+  title: {
+    textDecoration: 'none',
+    color: 'red'
   },
   inputs: {
     textArea: {
       width: "93%"
     }
-  },
+  }
+};
+
+export const formsStyle = {
   loginStyle: {
     backgroundImage: `url(${LoginImg})`,
     backgroundSize: 'cover',
@@ -110,4 +114,7 @@ export default {
     margin: 12,
     padding: 6
   }
-}
+};
+export const chatStyle = {
+  chatWidget: {}
+};

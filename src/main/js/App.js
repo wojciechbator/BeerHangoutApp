@@ -25,12 +25,14 @@ class App extends Component {
 }
 
 App.propTypes = {
+  activeItem: React.PropTypes.string,
   signedIn: React.PropTypes.bool
 };
 
 const mapStateToProps = (store) => {
   return {
-    signedIn: store.auth.signedIn
+    signedIn: store.auth.signedIn,
+    // activeItem: store.
   }
 };
 

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {CommentsList} from "./CommentsList";
-import styles from "../styles/styles";
+import {commentStyles, universalStyles, placeStyle} from "../styles/styles";
 import {Button, Comment, Form, Header} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {refreshComments, saveComment} from "../../redux/comments/commentsActions";
@@ -65,17 +65,17 @@ class CommentsContainer extends Component {
 
   render() {
     return (
-      <div style={styles.comment.commentsContainer}>
-        <Header as="h3" style={styles.universal.header}>Komentarze: </Header>
-        <Comment.Group style={styles.comment.commentsBox}>
+      <div style={commentStyles.comment.commentsContainer}>
+        <Header as="h3" style={universalStyles.header}>Komentarze: </Header>
+        <Comment.Group style={commentStyles.comment.commentsBox}>
           { this.props.comments.length === 0
-            ? <p>Bądź pierwszym, który skomentuje!</p>
+            ? <p color="white">Bądź pierwszym, który skomentuje!</p>
             : <CommentsList comments={this.props.comments}/>}
         </Comment.Group>
         <Form reply onSubmit={this.submitComment}>
-          <Header as="h3" style={styles.universal.header}>Skomentuj</Header>
+          <Header as="h3" style={universalStyles.header}>Skomentuj</Header>
           <Form.Input fluid onChange={this.updateUsername} type="text"/>
-          <Form.TextArea autoHeight style={styles.inputs.textArea} onChange={this.updateBody} type="text"/>
+          <Form.TextArea autoHeight style={placeStyle.inputs.textArea} onChange={this.updateBody} type="text"/>
           <Button type="submit" content='Odpowiedz' color="green"/>
         </Form>
       </div>
