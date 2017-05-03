@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {commentStyles} from "../styles/styles";
 import SingleComment from "../presentation/SingleComment";
-import {deleteComment} from "../../redux/comments/commentsActions";
+import {deleteComment, refreshComments} from "../../redux/comments/commentsActions";
 
 
 
@@ -11,6 +11,7 @@ class CommentsList extends Component {
 
   removeComment(id) {
     this.props.dispatch(deleteComment(id));
+    this.props.dispatch(refreshComments());
   };
 
   render() {

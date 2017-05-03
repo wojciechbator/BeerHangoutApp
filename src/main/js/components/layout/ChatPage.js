@@ -3,7 +3,8 @@
  */
 
 import React, {Component} from "react";
-import io from "socket.io-client";
+import Stomp from "stomp-client";
+import SockJS from "sockjs-client";
 import Navbar from "../presentation/Navbar";
 import {Container} from "semantic-ui-react";
 
@@ -12,12 +13,14 @@ import socketsConfig from "../utils/socketsConfig";
 
 export default class ChatPage extends Component {
   socket = {};
+  stompClient = null;
 
   constructor(props) {
     super(props);
     this.state = {comments: []};
     this.handleSend = this.handleSend.bind(this);
-    this.socket = io().connect(socketsConfig.api);
+    this.socket = new SockJS('/chat');
+    this.stompClient = new Stomp(socketsConfig);
     this.socket.on('server:message', message => {
       this.addMessage(message);
     });
