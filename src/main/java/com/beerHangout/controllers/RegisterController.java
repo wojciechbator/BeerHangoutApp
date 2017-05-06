@@ -1,6 +1,8 @@
 package com.beerHangout.controllers;
 
+import com.beerHangout.models.Role;
 import com.beerHangout.models.User;
+import com.beerHangout.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.HashSet;
 
 /**
  * Created by wojciech on 11.04.17.
@@ -24,6 +27,8 @@ public class RegisterController {
     @Autowired
     @Qualifier("registerUserValidator")
     private Validator validator;
+    @Autowired
+    private UserService userService;
 
     private static  final Logger logger = Logger.getLogger(RegisterController.class);
 
@@ -47,9 +52,16 @@ public class RegisterController {
             logger.warn("Validation of user register not success");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
          }
-
         logger.info("Validation success");
         model.addAttribute("registeredUser", user);
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(new Role("ROLE_USER"));
+        try {
+            user.setUserRoles(new HashSet<>());
+            userService.createUser(user, roles);
+        } catch (Exception e) {
+            logger.info("Exception while creating user", e);
+        }
         response.setStatus(HttpServletResponse.SC_OK);
     }
 

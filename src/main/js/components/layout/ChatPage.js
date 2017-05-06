@@ -3,13 +3,13 @@
  */
 
 import React, {Component} from "react";
-import Stomp from "stomp-client";
+import Stomp from "webstomp-client";
 import SockJS from "sockjs-client";
 import Navbar from "../presentation/Navbar";
 import {Container} from "semantic-ui-react";
 
+import registerSocket from '../utils/ChatWebsocketConfig';
 import CommentsContainer from "../containers/CommentsContainer";
-import socketsConfig from "../utils/socketsConfig";
 
 export default class ChatPage extends Component {
   socket = {};
@@ -17,13 +17,21 @@ export default class ChatPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {comments: []};
+    this.state = {comments: [], pageSize: ''};
     this.handleSend = this.handleSend.bind(this);
-    this.socket = new SockJS('/chat');
-    this.stompClient = new Stomp(socketsConfig);
-    this.socket.on('server:message', message => {
-      this.addMessage(message);
-    });
+  }
+
+  componentDidMount() {
+    this.loadFromServer(this.state.pageSize);
+    registerSocket([
+      {route: '/topic/newMessage', callback: this.refreshAndGoToLastMessage},
+      {route: '/topic/updateMessage', callback: this.refreshCurrentPage},
+      {route: '/topic/deleteMessage', callback: this.refreshCurrentPage}
+    ]);
+  }
+
+  refreshAndGoToLastMessage(message) {
+    follow
   }
 
   handleSend(message) {

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Button, Form, Header, Icon, Segment} from "semantic-ui-react";
 import {Link} from "react-router";
 import {Field, reduxForm} from "redux-form";
-import {registerUser} from "../../redux/users/usersActions";
+import {registerUser, refreshUsers} from "../../redux/users/usersActions";
 import validate from "../utils/validateRegister";
 import {formsStyle} from "../styles/styles";
 
@@ -16,6 +16,7 @@ class RegisterForm extends Component {
 
   onSubmit(data) {
     this.props.dispatch(registerUser(data));
+    this.props.dispatch(refreshUsers());
   }
 
   drawInput = ({ input, label, placeholder, type, meta: { asyncValidating, touched, error } }) => {
