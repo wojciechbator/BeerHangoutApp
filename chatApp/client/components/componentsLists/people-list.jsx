@@ -12,7 +12,7 @@ const PeopleList = (props) => {
     return (
         <div className="peopleList">
             <div className="peopleTitle">
-                Users online
+                Dostępni użytkownicy
             </div>
             {personNodes}
         </div>
