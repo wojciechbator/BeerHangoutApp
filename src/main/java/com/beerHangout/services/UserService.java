@@ -21,8 +21,6 @@ public interface UserService {
 
     User findByEmail(String email);
 
-    User createUser(User user, Set<Role> userRoles) throws Exception;
-
     List<User> findAll();
 
     void removeUser(String id);

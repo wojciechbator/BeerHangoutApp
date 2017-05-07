@@ -55,14 +55,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user, Set<Role> userRoles) throws Exception {
-        log.info("Creating user " + user.getUsername());
-        user.setUserRoles(userRoles);
-        user.setActive(true);
-        return userRepository.save(user);
-    }
-
-    @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -98,6 +90,7 @@ public class UserServiceImpl implements UserService {
                     String.format("Podany email: %s jest już używany!", user.getEmail()));
         }
         User registeredUser = new User();
+        registeredUser.setActive(true);
         registeredUser.setFirstName(user.getFirstName());
         registeredUser.setLastName(user.getLastName());
         registeredUser.setEmail(user.getEmail());
