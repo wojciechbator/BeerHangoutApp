@@ -4,6 +4,7 @@ import com.beerHangout.models.Role;
 import com.beerHangout.models.User;
 import com.beerHangout.services.UserService;
 import com.beerHangout.utils.SessionIdentifierGenerator;
+import com.beerHangout.validation.exceptions.EmailExistsException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,9 +36,6 @@ public class RegisterController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SessionIdentifierGenerator sessionIdentifierGenerator;
-
     private static  final Logger logger = Logger.getLogger(RegisterController.class);
 
     @InitBinder
@@ -55,7 +53,7 @@ public class RegisterController {
     public void handleRegister(
             @RequestBody @Validated @Valid User user,
             BindingResult bindingResult,
-            Model model, HttpServletResponse response) throws Exception {
+            Model model, HttpServletResponse response) throws Exception, EmailExistsException {
         if(bindingResult.hasErrors()){
             logger.warn("Validation of user register not success");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -63,16 +61,9 @@ public class RegisterController {
         //Service Validation here impl
         logger.info("Validation success");
 
-        Role userRole = new Role();
-        userRole.setName("USER");
-        userRole.setRoleId(sessionIdentifierGenerator.nextSessionId());
-        Set<Role> userRoles = new HashSet<>();
-        userRoles.add(userRole);
-        logger.info("Creating user: " + user.getUsername() + ", with userRoles: " + userRoles.toString());
-
-        userService.createUser(user, userRoles);
+        userService.registerNewUserAccount(user);
+        logger.info("Creating user: " + user.getUsername() + ", with userRoles: " + user.getUserRoles().toString());
         response.setStatus(HttpServletResponse.SC_OK);
     }
-
 
 }

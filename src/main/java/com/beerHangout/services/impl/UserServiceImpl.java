@@ -6,12 +6,15 @@ import com.beerHangout.models.Role;
 import com.beerHangout.repositories.PasswordResetTokenRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
+import com.beerHangout.utils.SessionIdentifierGenerator;
 import com.beerHangout.validation.exceptions.EmailExistsException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +24,8 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
+    SessionIdentifierGenerator sessionIdentifierGenerator;
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -97,9 +102,25 @@ public class UserServiceImpl implements UserService {
         registeredUser.setLastName(user.getLastName());
         registeredUser.setEmail(user.getEmail());
         registeredUser.setPassword(user.getPassword());
-        registeredUser.setUserRoles(user.getUserRoles());
         registeredUser.setUsername(user.getUsername());
+
+        Set<Role> userRoles = new HashSet<>();
+        userRoles.add(createUserRole());
+        registeredUser.setUserRoles(userRoles);
+
         return userRepository.save(registeredUser);
+    }
+
+    /**
+     * Always as standard Role (USER). If wanna create ADMIN role, just do it from console in admin panel(TO DO)
+     * @return userRole as standard USER role
+     * */
+    private Role createUserRole() {
+        Role userRole = new Role();
+        userRole.setName("USER");
+        userRole.setRoleId(sessionIdentifierGenerator.nextSessionId());
+
+        return userRole;
     }
 
 }
