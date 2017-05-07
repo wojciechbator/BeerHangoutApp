@@ -34,17 +34,6 @@ public class UserController {
         return userService.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public User createUser(@Valid @RequestBody User user) throws Exception {
-        Role userRole = new Role();
-        userRole.setName("USER");
-        userRole.setRoleId("1");
-        Set<Role> userRoles = new HashSet<>();
-        userRoles.add(userRole);
-        log.info("Creating user: " + user.getUsername() + ", with userRoles: " + userRoles.toString());
-        return userService.createUser(user, userRoles);
-    }
-
     @RequestMapping(value = "{username}", method = RequestMethod.GET)
     public ResponseEntity<User> getUserByName(@PathVariable("username") String username) {
         User user = userService.findByUsername(username);
