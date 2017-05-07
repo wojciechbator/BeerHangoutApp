@@ -11,11 +11,13 @@ const SidebarRow = (props) => (
     <Grid.Column width={3}>
       {props.data.username}
     </Grid.Column>
-    <Grid.Column width={3}>
+    <Grid.Column width={5}>
       {props.data.lastName}
     </Grid.Column>
-    <Grid.Column width={1}>
-      {props.data.is_active ? "aktywny" : "nieaktywny"}
+
+
+  <Grid.Column width={1}  >
+        {props.data.is_active ? "☑" : "☐"}
     </Grid.Column>
   </Grid.Row>
 );
