@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user, Set<Role> userRoles) throws Exception {
         log.info("Creating user " + user.getUsername());
         user.setUserRoles(userRoles);
+        user.setActive(true);
         return userRepository.save(user);
     }
 
