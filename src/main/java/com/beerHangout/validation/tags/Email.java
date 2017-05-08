@@ -1,7 +1,6 @@
 package com.beerHangout.validation.tags;
 
 import com.beerHangout.validation.ValidatorOfMail;
-import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

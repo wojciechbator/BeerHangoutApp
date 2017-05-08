@@ -2,26 +2,38 @@
  * Created by wojciech on 30.04.17.
  */
 
-import React, {Component} from 'react';
-import io from 'socket.io-client';
-import Navbar from '../presentation/Navbar';
+import React, {Component} from "react";
+import Stomp from "webstomp-client";
+import SockJS from "sockjs-client";
+import Navbar from "../presentation/Navbar";
+import {Container} from "semantic-ui-react";
 
-import Messages from '../containers/Messages';
-import ChatInput from '../presentation/ChatInput';
-import socketsConfig from '../utils/socketsConfig';
+import registerSocket from '../utils/ChatWebsocketConfig';
+import CommentsContainer from "../containers/CommentsContainer";
 
 export default class ChatPage extends Component {
   socket = {};
+  stompClient = null;
 
   constructor(props) {
     super(props);
-    this.state = {messages: []};
+    this.state = {comments: [], pageSize: ''};
     this.handleSend = this.handleSend.bind(this);
-    this.socket = io().connect(socketsConfig.api);
-    this.socket.on('server:message', message => {
-      this.addMessage(message);
-    });
   }
+
+  componentDidMount() {
+    this.loadFromServer(this.state.pageSize);
+    registerSocket([
+      {route: '/topic/newMessage', callback: this.refreshAndGoToLastMessage},
+      {route: '/topic/updateMessage', callback: this.refreshCurrentPage},
+      {route: '/topic/deleteMessage', callback: this.refreshCurrentPage}
+    ]);
+  }
+
+  refreshAndGoToLastMessage(message) {
+    follow
+  }
+
 
   handleSend(message) {
     const messageObject = {
@@ -41,13 +53,13 @@ export default class ChatPage extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginTop: 50}}>
         <Navbar activeItem='Chat'/>
-        <div className="container">
-          <h3>Czat!</h3>
-          <Messages messages={this.state.messages}/>
-          <ChatInput onSend={this.handleSend}/>
-        </div>
+        <Container>
+          <div className="container">
+            <CommentsContainer comments={this.state.comments}/>
+          </div>
+        </Container>
       </div>
     );
   }

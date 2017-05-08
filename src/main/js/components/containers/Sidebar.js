@@ -1,10 +1,10 @@
 /* eslint jsx-a11y/href-no-hash:"off" */
 
 import React, {Component} from "react";
-import {Grid, Button, Header} from "semantic-ui-react";
+import {Button, Grid, Header} from "semantic-ui-react";
 import {connect} from "react-redux";
 
-import SidebarRow from '../presentation/SidebarRow';
+import SidebarRow from "../presentation/SidebarRow";
 import {universalStyles, userStyle} from "../styles/styles";
 import {refreshUsers} from "../../redux/users/usersActions";
 

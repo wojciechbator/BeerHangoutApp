@@ -1,7 +1,6 @@
 package com.beerHangout.validation;
 
 import com.beerHangout.validation.tags.Phone;
-import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

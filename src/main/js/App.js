@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import {connect} from 'react-redux';
+import {connect} from "react-redux";
 
-import {transitionToLogin} from './redux/authentication/authActions'
+import {transitionToLogin} from "./redux/authentication/authActions";
 
 class App extends Component {
   constructor(props) {

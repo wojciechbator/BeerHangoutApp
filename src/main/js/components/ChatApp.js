@@ -1,8 +1,8 @@
 /**
  * Created by wojciech on 30.04.17.
  */
-import React, {Component} from 'react';
-import ChatPage from './layout/ChatPage';
+import React, {Component} from "react";
+import ChatPage from "./layout/ChatPage";
 
 export default class ChatApp extends Component {
   constructor(props) {

@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const COMMENTS_REFRESHED = 'COMMENTS_REFRESHED';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const addComment = (comment) => {
   return {
@@ -33,4 +34,19 @@ export const refreshComments = () => {
       failure => console.log('Failure when trying to refresh comments, reason: ' + failure)
     );
   };
+};
+
+export const commentDeleted = () => {
+  return {
+    type: DELETE_COMMENT
+  }
+};
+
+export const deleteComment = (id) => {
+  return dispatch => {
+    axios.delete(`/api/comments/${id}`).then(
+      success => dispatch(commentDeleted()),
+      failure => console.log('Could not remove comment. Error: ' + failure)
+    )
+  }
 };

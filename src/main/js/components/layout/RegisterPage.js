@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Grid } from 'semantic-ui-react';
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {Grid} from "semantic-ui-react";
 
 import RegisterForm from "../presentation/RegisterForm";
-import { registerUser } from "../../redux/users/usersActions";
-import {formsStyle} from '../styles/styles';
+import {registerUser} from "../../redux/users/usersActions";
+import {formsStyle} from "../styles/styles";
 
 class RegisterPage extends Component {
   constructor(props) {

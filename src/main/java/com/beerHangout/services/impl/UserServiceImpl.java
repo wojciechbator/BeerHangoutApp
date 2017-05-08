@@ -1,8 +1,8 @@
 package com.beerHangout.services.impl;
 
 import com.beerHangout.models.PasswordResetToken;
-import com.beerHangout.models.User;
 import com.beerHangout.models.Role;
+import com.beerHangout.models.User;
 import com.beerHangout.repositories.PasswordResetTokenRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
+        log.info("Getting all users from mongo!");
         return userRepository.findAll();
     }
 

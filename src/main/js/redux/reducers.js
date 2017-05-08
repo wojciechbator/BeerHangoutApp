@@ -1,9 +1,9 @@
 import {combineReducers} from "redux";
 import {routerReducer} from "react-router-redux";
 import {reducer as formReducer} from "redux-form";
-import {AUTHENTICATED, AUTH_FAILED, LOGGED_OUT, AUTH_RESET} from "./authentication/authActions";
+import {AUTH_FAILED, AUTH_RESET, AUTHENTICATED, LOGGED_OUT} from "./authentication/authActions";
 import {ADD_COMMENT, COMMENTS_REFRESHED} from "./comments/commentsActions";
-import {ADD_USER, GET_USERS, DELETE_USER} from "./users/usersActions";
+import {ADD_USER, DELETE_USER, GET_USERS} from "./users/usersActions";
 
 const commentsReducer = (state = {status: 'stale', data: []}, action) => {
   switch (action.type) {
@@ -38,20 +38,21 @@ const usersReducer = (state = {data: []}, action) => {
 
     case DELETE_USER:
       return {
-        data: state.data.remove(action.user)
+        data: state.data.splice(action.id)
       };
     default:
       return state;
   }
 };
 
-const authReducer = (state = {signedIn: false, roles: [], authFailed: false}, action) => {
+const authReducer = (state = {signedIn: false, roles: [], authFailed: false, username: ''}, action) => {
   switch (action.type) {
     case AUTHENTICATED:
       return Object.assign({}, state, {
         signedIn: true,
         roles: action.roles,
-        authFailed: false
+        authFailed: false,
+        username: action.username
       });
 
     case AUTH_FAILED:
@@ -65,7 +66,8 @@ const authReducer = (state = {signedIn: false, roles: [], authFailed: false}, ac
       return Object.assign({}, state, {
         signedIn: false,
         roles: ['ROLE_ANONYMOUS'],
-        authFailed: false
+        authFailed: false,
+        username: ''
       });
 
     case AUTH_RESET:

@@ -26,8 +26,9 @@ public class MongoDBAuthenticationProvider extends AbstractUserDetailsAuthentica
 
         try {
             User user = users.findByUsername(username);
-            loadedUser = new User(user.getUsername(), user.getPassword(), user.getPassword(),
-                    user.getFirstName(), user.getLastName(), user.getUserRoles());
+            //TODO: fix the enabled and active fields logic
+            loadedUser = new User(user.getId(), user.getUsername(), user.getPassword(), user.getPhone(),
+                    user.getEmail(), user.getFirstName(), user.getLastName(), user.getUserRoles(), true, false);
         } catch (Exception repositoryProblem) {
             throw new InternalAuthenticationServiceException(repositoryProblem.getMessage(), repositoryProblem);
         }
