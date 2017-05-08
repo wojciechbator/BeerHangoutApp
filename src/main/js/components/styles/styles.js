@@ -15,12 +15,13 @@ export const commentStyles = {
   comment: {
     commentsContainer: {
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      height: '100%',
       padding: 15,
 
     },
     commentsBox: {
       overflowY: 'scroll',
-      height: '500px',
+      height: '50%',
     },
     singleComment: {
       fontSize: 15,

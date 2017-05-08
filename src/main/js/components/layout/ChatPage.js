@@ -34,6 +34,7 @@ export default class ChatPage extends Component {
     follow
   }
 
+
   handleSend(message) {
     const messageObject = {
       username: this.props.username,
