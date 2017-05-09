@@ -72,13 +72,17 @@ class CommentsContainer extends Component {
             ? <p color="white">Bądź pierwszym, który skomentuje!</p>
             : <CommentsList comments={this.props.comments}/>}
         </Comment.Group>
-        <Form reply onSubmit={this.submitComment}>
-          <Header as="h3" style={universalStyles.header}>Skomentuj</Header>
-          <Form.Input fluid onChange={this.updateUsername} type="text"/>
-          <Form.TextArea autoHeight style={placeStyle.inputs.textArea} onChange={this.updateBody} type="text"/>
-          <Button type="submit" content='Odpowiedz' color="green"/>
-        </Form>
-      </div>
+          {this.props.signedIn ?
+              <Form reply onSubmit={this.submitComment}>
+                <Header as="h3" style={universalStyles.header}>Skomentuj</Header>
+                <Form.Input fluid onChange={this.updateUsername} type="text"/>
+                <Form.TextArea autoHeight style={placeStyle.inputs.textArea} onChange={this.updateBody} type="text"/>
+                <Button type="submit" content='Odpowiedz' color="green"/>
+              </Form>
+              : <Header as="h3" style={universalStyles.header}>Zaloguj się aby dodawać komentarze! </Header>
+          }
+
+              </div>
     );
   };
 }
@@ -86,13 +90,15 @@ class CommentsContainer extends Component {
 CommentsContainer.propTypes = {
   status: React.PropTypes.string,
   comment: React.PropTypes.object,
-  comments: React.PropTypes.array
+  comments: React.PropTypes.array,
+    signedIn: React.PropTypes.bool
 };
 
 const mapStateToProps = (store) => {
   return {
     status: store.comments.status,
-    comments: store.comments.data
+    comments: store.comments.data,
+      signedIn: store.auth.signedIn
   };
 };
 
