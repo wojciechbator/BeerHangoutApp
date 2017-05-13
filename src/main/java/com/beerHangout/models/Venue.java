@@ -4,10 +4,7 @@ import fi.foyt.foursquare.api.entities.*;
 import fi.foyt.foursquare.api.entities.venue.Hours;
 import fi.foyt.foursquare.api.entities.venue.Menu;
 import fi.foyt.foursquare.api.entities.venue.Price;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,6 +17,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 @Document(collection = "venues")
 public class Venue implements Serializable {

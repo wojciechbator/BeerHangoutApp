@@ -13,6 +13,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * Created by Adam Krysiak on 09.05.17.
  */
-
+@Service
 public class ForsquareService {
     private static final String FORSQUARE_SEARCH_API = "api.foursquare.com/v2/venues/search";
     private static final String KEY = "RWASTDDQUJ0RHIANAJKWLCCME1NN5TP4YJG5WGXR5B0RH4MI";
