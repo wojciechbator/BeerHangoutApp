@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,13 +28,15 @@ import java.util.List;
 @Service
 public class ForsquareService {
     private static final String FORSQUARE_SEARCH_API = "api.foursquare.com/v2/venues/search";
-    private static final String KEY = "RWASTDDQUJ0RHIANAJKWLCCME1NN5TP4YJG5WGXR5B0RH4MI";
-    private static final String KEY2 = "WPCAN5HFSMDD30WO3UN4JJVINU4SYDBIYCWYGOVEFQSTXZ4J";
+    private static final String KEY = "WPCAN5HFSMDD30WO3UN4JJVINU4SYDBIYCWYGOVEFQSTXZ4J";
+    private static final String CLIENT_ID = "0EM1UVHV52I5BGMLGLQTCG0ISP53W4XNITP5RKTRM1Q4N2MC";
+    private static final String CLIENT_SECRET = "RYNVU0MWM1B0D2LFV5VTMKYFOM2L4LLNOOOSTH1UIQA1HZ1E";
+
     private final Gson gson = GsonUtils.getGson();
 
     public List<Venue> venuesSearch(String locations) throws IOException, FoursquareApiException, URISyntaxException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-        URI uri = buildURI(locations);
+        URI uri = buildURIWithClientInfo(locations);
         CloseableHttpResponse response = httpClient.execute(new HttpPost(uri));
         String json = getJson(response);
         httpClient.close();
@@ -47,10 +51,23 @@ public class ForsquareService {
 
     private URI buildURI(String locations) throws URISyntaxException {
         return new URIBuilder().setScheme("https").setHost(FORSQUARE_SEARCH_API)
-                .addParameter("oauth_token", KEY2)
+                .addParameter("oauth_token", KEY)
                 .addParameter("ll", locations)
-                .addParameter("v", "20170509")
+                .addParameter("v", getFormattedTodaysDate())
                 .build();
+    }
+
+    private URI buildURIWithClientInfo(String locations) throws URISyntaxException {
+        return new URIBuilder().setScheme("https").setHost(FORSQUARE_SEARCH_API)
+                .addParameter("client_id", CLIENT_ID)
+                .addParameter("client_secret", CLIENT_SECRET)
+                .addParameter("ll", locations)
+                .addParameter("v", getFormattedTodaysDate())
+                .build();
+    }
+
+    private static String getFormattedTodaysDate() {
+        return new SimpleDateFormat("yyyyMMdd").format(new Date());
     }
 
     public static void main(String[] args) {

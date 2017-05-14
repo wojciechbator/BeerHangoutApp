@@ -35,7 +35,7 @@ public class PremisesController {
     }
 
 
-    @RequestMapping(value = {"location", "premisesType"}, method = RequestMethod.GET)
+    @RequestMapping(value = "{location}", method = RequestMethod.GET)
     public Map<String, List<Venue>> getVenuesByLocation(@PathVariable("location") String location) throws URISyntaxException, IOException, FoursquareApiException {
         Map<String, List<Venue>> venuesMap = new HashMap<>();
         Venue statusVenue = new Venue();
