@@ -27,6 +27,7 @@ import java.util.List;
 public class ForsquareService {
     private static final String FORSQUARE_SEARCH_API = "api.foursquare.com/v2/venues/search";
     private static final String KEY = "RWASTDDQUJ0RHIANAJKWLCCME1NN5TP4YJG5WGXR5B0RH4MI";
+    private static final String KEY2 = "WPCAN5HFSMDD30WO3UN4JJVINU4SYDBIYCWYGOVEFQSTXZ4J";
     private final Gson gson = GsonUtils.getGson();
 
     public List<Venue> venuesSearch(String locations) throws IOException, FoursquareApiException, URISyntaxException {
@@ -46,7 +47,7 @@ public class ForsquareService {
 
     private URI buildURI(String locations) throws URISyntaxException {
         return new URIBuilder().setScheme("https").setHost(FORSQUARE_SEARCH_API)
-                .addParameter("oauth_token", KEY)
+                .addParameter("oauth_token", KEY2)
                 .addParameter("ll", locations)
                 .addParameter("v", "20170509")
                 .build();
