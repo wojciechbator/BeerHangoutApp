@@ -34,6 +34,8 @@ public class VenuesSearchDeserializer implements JsonDeserializer<VenuesSearchRe
     }
 
     private Venue convertElementToVenue(JsonElement e) {
-        return gson.fromJson(e, Venue.class);
+        Venue venue = gson.fromJson(e, Venue.class);
+        venue.setCity(venue.getLocation().getCity());
+        return venue;
     }
 }

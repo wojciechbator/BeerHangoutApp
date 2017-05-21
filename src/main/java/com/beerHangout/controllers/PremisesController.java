@@ -6,12 +6,9 @@ import com.beerHangout.services.ForsquareService;
 import fi.foyt.foursquare.api.FoursquareApiException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.util.*;
 
@@ -24,34 +21,26 @@ import java.util.*;
 public class PremisesController {
     private static final Logger LOGGER = Logger.getLogger(PremisesController.class);
 
-    private final VenueRepository venueRepository;
+
+    private final ForsquareService forsquareService;
 
     @Autowired
-    public ForsquareService forsquareService;
-
-    @Autowired
-    public PremisesController(VenueRepository venueRepository) {
-        this.venueRepository = venueRepository;
+    public PremisesController(ForsquareService forsquareService) {
+        this.forsquareService = forsquareService;
     }
 
 
     @RequestMapping(value = "{location}", method = RequestMethod.GET)
-    public Map<String, List<Venue>> getVenuesByLocation(@PathVariable("location") String location) throws URISyntaxException, IOException, FoursquareApiException {
-        Map<String, List<Venue>> venuesMap = new HashMap<>();
-        Venue statusVenue = new Venue();
-        List<Venue> venues = forsquareService.venuesSearch(location);
-        LOGGER.info("Getting venues using foursquareService " );
-        if (venues.isEmpty()) {
-            statusVenue.setName("error");
-            venuesMap.put("status", Arrays.asList(statusVenue));
-        } else {
-            venues = venueRepository.save(venues);
-            statusVenue.setName("ok");
-            venuesMap.put("status",  Arrays.asList(statusVenue));
-            venuesMap.put("data", venues);
-        }
-        return venuesMap;
+    public List<Venue> getVenuesByLocation(@PathVariable("location") String location) throws URISyntaxException, IOException, FoursquareApiException {
+        List<Venue> venues = forsquareService.getVenuesByLocation(location);
+        LOGGER.info("Getting venues by location" );
+        return venues;
     }
 
-
+    @RequestMapping(value = "{city}", method = RequestMethod.GET)
+    public List<Venue> getVenuesByCity(@PathVariable("city") String city) throws URISyntaxException, IOException, FoursquareApiException {
+        List<Venue> venues = forsquareService.getVenuesByCity(city);
+        LOGGER.info("Getting venues by city" );
+        return venues;
+    }
 }
