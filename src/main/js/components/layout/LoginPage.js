@@ -1,12 +1,11 @@
 import React, {Component} from "react";
-import {Form, Grid, Header, Segment} from "semantic-ui-react";
-import {Icon} from 'semantic-ui-react';
-import {connect} from 'react-redux';
+import {Form, Grid, Header, Icon, Segment} from "semantic-ui-react";
+import {connect} from "react-redux";
 
 import LoginForm from "../presentation/LoginForm";
-import {loginRequest, resetAuth} from '../../redux/authentication/authActions';
-import {LoginError} from '../presentation/ErrorMessages';
-import {formsStyle} from '../styles/styles';
+import {loginRequest, resetAuth} from "../../redux/authentication/authActions";
+import {LoginError} from "../presentation/ErrorMessages";
+import {formsStyle} from "../styles/styles";
 
 const drawInput = ({input, label, placeholder, type, meta: {asyncValidating, touched, error}}) => {
   return (
@@ -22,7 +21,8 @@ class LoginPage extends Component {
     super(props);
     this.state = {
       authFailed: false,
-      signedIn: false
+      signedIn: false,
+      username: ''
     };
   }
 
@@ -31,6 +31,7 @@ class LoginPage extends Component {
   }
 
   handleSubmit = (values) => {
+    this.setState({username: values.username});
     if (values.username.length === 0) {
       return;
     }
@@ -60,13 +61,15 @@ class LoginPage extends Component {
 
 LoginPage.propTypes = {
   authFailed: React.PropTypes.bool,
-  signedIn: React.PropTypes.bool
+  signedIn: React.PropTypes.bool,
+  username: React.PropTypes.string
 };
 
 const mapStateToProps = (store) => {
   return {
     authFailed: store.auth.authFailed,
-    signedIn: store.auth.signedIn
+    signedIn: store.auth.signedIn,
+    username: store.auth.username
   }
 
 };

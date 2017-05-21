@@ -3,8 +3,11 @@ package com.beerHangout.controllers;
 import com.beerHangout.models.Role;
 import com.beerHangout.models.User;
 import com.beerHangout.services.UserService;
+<<<<<<< HEAD
+=======
 import com.beerHangout.utils.SessionIdentifierGenerator;
 import com.beerHangout.validation.exceptions.EmailExistsException;
+>>>>>>> 2ac95c8da6761543c1d54513c1aedebb8498e7fc
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +27,6 @@ import java.util.Set;
 /**
  * Created by wojciech on 11.04.17.
  */
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/register")
 public class RegisterController {
@@ -32,6 +34,8 @@ public class RegisterController {
     @Autowired
     @Qualifier("registerUserValidator")
     private Validator validator;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserService userService;

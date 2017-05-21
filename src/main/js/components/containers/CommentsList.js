@@ -1,15 +1,44 @@
-import React from "react";
+import React, {Component} from "react";
+import {connect} from 'react-redux';
+
 import {commentStyles} from "../styles/styles";
 import SingleComment from "../presentation/SingleComment";
+import {deleteComment, refreshComments} from "../../redux/comments/commentsActions";
 
-export const CommentsList = (props) => (
-  <ul style={commentStyles.comment.commentsList}>
-    {props.comments.map((comment, i) => {
-      return (
-        <li key={i}>
-          <SingleComment currentComment={comment}/>
-        </li>
-      );
-    })}
-  </ul>
-);
+
+
+class CommentsList extends Component {
+
+  removeComment(id) {
+    this.props.dispatch(deleteComment(id));
+    this.props.dispatch(refreshComments());
+  };
+
+  render() {
+    return (
+      <ul style={commentStyles.comment.commentsList}>
+        {this.props.comments.map((comment, i) => {
+          return (
+            <li key={i}>
+              <SingleComment author={comment.author}
+                             message={comment.content}
+                             timestamp={comment.timestamp}
+                             fromMe={comment.fromMe}
+                             deleteComment={() => this.removeComment(comment.id)}/>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+}
+
+CommentsList.PropTypes = {
+  comments: React.PropTypes.array
+};
+
+CommentsList.defaultProps = {
+  comments: []
+};
+
+export default connect()(CommentsList);

@@ -42,23 +42,17 @@ export const refreshUsers = () => {
   };
 };
 
-export const userDeleted = (user) => {
+export const userDeleted = () => {
   return {
-    type: DELETE_USER,
-    user
+    type: DELETE_USER
   }
 };
 
-export const deleteUser = (user) => {
+export const deleteUser = (id) => {
   return dispatch => {
-    axios.delete('/api/users').then(
-      success => {
-        dispatch(userDeleted(user));
-        dispatch(usersRefreshed(success.data));
-      },
-      failure => {
-        console.log("Failed to remove user, error: " + failure);
-      }
+    axios.delete(`/api/users/${id}`).then(
+      success => dispatch(userDeleted()),
+      failure => console.log("Failed to remove user, error: " + failure)
     );
   }
 };
