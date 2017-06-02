@@ -21,6 +21,8 @@ public interface UserService {
 
     User findByEmail(String email);
 
+    void createUser(User user, Set<Role> userRoles);
+
     List<User> findAll();
 
     void removeUser(String id);
