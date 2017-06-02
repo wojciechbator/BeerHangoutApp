@@ -34,14 +34,15 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public User createUser(@Valid @RequestBody User user) throws Exception {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) throws Exception {
         Role userRole = new Role();
         userRole.setName("ROLE_USER");
         userRole.setRoleId("1");
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(userRole);
         log.info("Creating user: " + user.toString());
-        return userService.createUser(user, userRoles);
+        userService.createUser(user, userRoles);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "{username}", method = RequestMethod.GET)
