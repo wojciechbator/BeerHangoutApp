@@ -1,8 +1,8 @@
 package com.beerHangout.services.impl;
 
 import com.beerHangout.models.PasswordResetToken;
-import com.beerHangout.models.User;
 import com.beerHangout.models.Role;
+import com.beerHangout.models.User;
 import com.beerHangout.repositories.PasswordResetTokenRepository;
 import com.beerHangout.repositories.UserRepository;
 import com.beerHangout.services.UserService;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -55,7 +54,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void createUser(User user, Set<Role> userRoles) {
+        user.setUserRoles(userRoles);
+        userRepository.save(user);
+    }
+
+    @Override
     public List<User> findAll() {
+        log.info("Getting all users from mongo!");
         return userRepository.findAll();
     }
 

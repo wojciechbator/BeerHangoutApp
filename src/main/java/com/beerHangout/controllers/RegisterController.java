@@ -1,9 +1,7 @@
 package com.beerHangout.controllers;
 
-import com.beerHangout.models.Role;
 import com.beerHangout.models.User;
 import com.beerHangout.services.UserService;
-import com.beerHangout.utils.SessionIdentifierGenerator;
 import com.beerHangout.validation.exceptions.EmailExistsException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +15,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by wojciech on 11.04.17.
  */
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/register")
 public class RegisterController {
@@ -36,7 +30,7 @@ public class RegisterController {
     @Autowired
     private UserService userService;
 
-    private static  final Logger logger = Logger.getLogger(RegisterController.class);
+    private static final Logger logger = Logger.getLogger(RegisterController.class);
 
     @InitBinder
     public void initBinder (WebDataBinder binder) {

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import {CommentsList} from "./CommentsList";
-import {commentStyles, universalStyles, placeStyle} from "../styles/styles";
+import CommentsList from "./CommentsList";
+import {commentStyles, placeStyle, universalStyles} from "../styles/styles";
 import {Button, Comment, Form, Header} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {refreshComments, saveComment} from "../../redux/comments/commentsActions";
@@ -14,6 +14,7 @@ class CommentsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // author: this.props.comment
       comments: this.props.comments
     };
     this.submitComment = this.submitComment.bind(this);
@@ -29,6 +30,11 @@ class CommentsContainer extends Component {
         comments: this.props.comments
       })
     }
+  }
+
+  componentDidUpdate() {
+    const messagesListDiv = document.getElementById('messageList');
+    messagesListDiv.scrollTop = messagesListDiv.scrollHeight;
   }
 
   submitComment(event) {
@@ -67,7 +73,7 @@ class CommentsContainer extends Component {
     return (
       <div style={commentStyles.comment.commentsContainer}>
         <Header as="h3" style={universalStyles.header}>Komentarze: </Header>
-        <Comment.Group style={commentStyles.comment.commentsBox}>
+        <Comment.Group style={commentStyles.comment.commentsBox} id="messageList">
           { this.props.comments.length === 0
             ? <p color="white">Bądź pierwszym, który skomentuje!</p>
             : <CommentsList comments={this.props.comments}/>}
@@ -93,6 +99,9 @@ CommentsContainer.propTypes = {
   comments: React.PropTypes.array,
     signedIn: React.PropTypes.bool
 };
+
+
+CommentsContainer.defaultProps = {};
 
 const mapStateToProps = (store) => {
   return {

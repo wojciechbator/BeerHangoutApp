@@ -1,8 +1,8 @@
 /**
  * Created by wojciech on 30.04.17.
  */
-import React from 'react';
-import {Message} from 'semantic-ui-react';
+import React from "react";
+import {Message} from "semantic-ui-react";
 
 require('../../../../../node_modules/semantic-ui/dist/components/message.min.css');
 
