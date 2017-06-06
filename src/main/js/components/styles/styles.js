@@ -47,11 +47,15 @@ export const commentStyles = {
 };
 export const userStyle = {
   usersSidebarDiv: {
-    width: "20%",
+      padding: 8,
+      width: "20%",
     height: "100%",
     position: "absolute",
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    padding: 12
+      color:"ffffff",
+      overflowWrap: 'break-word'
+
+
   },
   refreshButton: {
     position: "absolute",
@@ -60,6 +64,12 @@ export const userStyle = {
   },
   hr_style: {
     marginBottom: "10%"
+  },
+  userList: {
+      color: '#ffffff',
+      listStyleType: 'none',
+      paddingBottom: 8,
+
   }
 };
 export const placeStyle = {
