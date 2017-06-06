@@ -10,6 +10,11 @@ import {refreshUsers} from "../../redux/users/usersActions";
 
 
 class Sidebar extends Component {
+    componentDidUpdate() {
+        const usersListDiv = document.getElementById('usersList');
+        usersListDiv.scrollTop = usersListDiv.scrollHeight;
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -35,9 +40,13 @@ class Sidebar extends Component {
             <div style={userStyle.usersSidebarDiv}>
                 <Header as="h3" style={universalStyles.header}>Użytkownicy: </Header>
                 <hr style={userStyle.hr_style}/>
-                <Grid columns='equal'>
-                    {this.props.users.map((person, i) => <SidebarRow key={i} data={person}/>)}
-                </Grid>
+
+                <Grid style={userStyle.userBox} columns='equal' >
+
+                    {this.props.users.map((person, i) => <SidebarRow  key={i} data={person}/>)}
+
+
+            </Grid>
                 <Button onClick={this.handleGetUsers} color="green" content="Odśwież"
                         style={userStyle.refreshButton}/>
             </div>

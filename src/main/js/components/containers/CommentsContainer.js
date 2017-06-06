@@ -32,10 +32,12 @@ class CommentsContainer extends Component {
     }
   }
 
+/* to psuje focus scroola, ktory zawsze zjezdza na dol po usunieciu komentarza, moim zdaniem zbedne
   componentDidUpdate() {
     const messagesListDiv = document.getElementById('messageList');
     messagesListDiv.scrollTop = messagesListDiv.scrollHeight;
   }
+*/
 
   submitComment(event) {
     event.preventDefault();
@@ -73,7 +75,7 @@ class CommentsContainer extends Component {
     return (
       <div style={commentStyles.comment.commentsContainer}>
         <Header as="h3" style={universalStyles.header}>Komentarze: </Header>
-        <Comment.Group style={commentStyles.comment.commentsBox} id="messageList">
+        <Comment.Group style={commentStyles.comment.commentsBox} >
           { this.props.comments.length === 0
             ? <p color="white">Bądź pierwszym, który skomentuje!</p>
             : <CommentsList comments={this.props.comments}/>}

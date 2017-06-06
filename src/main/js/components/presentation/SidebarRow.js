@@ -6,12 +6,13 @@ import {userStyle} from "../styles/styles";
  * Created by wojciech on 11.04.17.
  */
 
+
 const SidebarRow = (props) => (
   <Grid.Row verticalAlign="middle" style={userStyle.userList}>
-    <Grid.Column width={4}>
+    <Grid.Column width={5}>
       {props.data.username}
     </Grid.Column>
-    <Grid.Column width={4}>
+    <Grid.Column width={5}>
       {props.data.lastName}
     </Grid.Column>
 

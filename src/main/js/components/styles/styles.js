@@ -15,13 +15,14 @@ export const commentStyles = {
   comment: {
     commentsContainer: {
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      height: '100%',
+        height:'650',
       padding: 15,
 
     },
     commentsBox: {
       overflowY: 'scroll',
       height: '50%',
+        maxHeight: '500'
     },
     singleComment: {
       fontSize: 15,
@@ -47,20 +48,22 @@ export const commentStyles = {
 };
 export const userStyle = {
   usersSidebarDiv: {
-      padding: 8,
-      width: "20%",
-    height: "100%",
-    position: "absolute",
+    minWidth:"300",
+    padding: 8,
+    width: "20%",
+    height: "650",
+   position: "absolute",
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      color:"ffffff",
-      overflowWrap: 'break-word'
+    color:"ffffff",
+    overflowWrap: 'break-word'
 
 
   },
   refreshButton: {
-    position: "absolute",
-    bottom: "2%",
-    width: "92%"
+
+    width: "92%",
+      marginLeft:10
+
   },
   hr_style: {
     marginBottom: "10%"
@@ -70,6 +73,13 @@ export const userStyle = {
       listStyleType: 'none',
       paddingBottom: 8,
 
+  },
+  userBox: {
+      overflowY: 'scroll',
+      height: '80%',
+      maxHeight: '500',
+      marginRight:10,
+      marginBottom:10
   }
 };
 export const placeStyle = {
