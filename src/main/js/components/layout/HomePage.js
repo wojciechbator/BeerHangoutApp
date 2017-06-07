@@ -18,7 +18,7 @@ const HomePage = (props) => (
           <Sidebar />
         </ Grid.Column>
         <Grid.Column width={4}>
-          <CommentsContainer />
+          <CommentsContainer/>
         </Grid.Column>
       </Grid.Row>
     </Grid>

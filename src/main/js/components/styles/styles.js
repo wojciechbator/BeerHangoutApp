@@ -70,7 +70,6 @@ export const userStyle = {
   },
   userList: {
       color: '#ffffff',
-      listStyleType: 'none',
       paddingBottom: 8,
 
   },

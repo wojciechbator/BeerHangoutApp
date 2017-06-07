@@ -8,12 +8,9 @@ import {userStyle} from "../styles/styles";
 
 
 const SidebarRow = (props) => (
-  <Grid.Row verticalAlign="middle" style={userStyle.userList}>
-    <Grid.Column width={5}>
-      {props.data.username}
-    </Grid.Column>
-    <Grid.Column width={5}>
-      {props.data.lastName}
+  <Grid.Row style={userStyle.userList}>
+    <Grid.Column width={9}>
+      {props.data.firstName} {props.data.lastName}
     </Grid.Column>
 
 
