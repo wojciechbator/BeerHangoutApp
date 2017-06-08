@@ -55,9 +55,7 @@ public class ForsquareService {
     }
 
     public List<Venue> getVenuesByLocation(String location) throws URISyntaxException, IOException, FoursquareApiException {
-        List<Venue> venuesFromForsquare = getVenuesFromForsquare(LOCATION_PARAM, location);
-        venueRepository.insert(venuesFromForsquare);
-        return venuesFromForsquare;
+        return getVenuesFromForsquare(LOCATION_PARAM, location);
     }
 
 
