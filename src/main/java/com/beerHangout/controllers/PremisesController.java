@@ -30,14 +30,14 @@ public class PremisesController {
     }
 
 
-    @RequestMapping(value = "{location}", method = RequestMethod.GET)
+    @RequestMapping(value = "/location/{location}", method = RequestMethod.GET)
     public List<Venue> getVenuesByLocation(@PathVariable("location") String location) throws URISyntaxException, IOException, FoursquareApiException {
         List<Venue> venues = forsquareService.getVenuesByLocation(location);
         LOGGER.info("Getting venues by location" );
         return venues;
     }
 
-    @RequestMapping(value = "{city}", method = RequestMethod.GET)
+    @RequestMapping(value = "/city/{city}", method = RequestMethod.GET)
     public List<Venue> getVenuesByCity(@PathVariable("city") String city) throws URISyntaxException, IOException, FoursquareApiException {
         List<Venue> venues = forsquareService.getVenuesByCity(city);
         LOGGER.info("Getting venues by city" );

@@ -48,7 +48,7 @@ public class ForsquareService {
         List<Venue> venuesFromDB = getVenuesFromDB(city);
         if(venuesFromDB.isEmpty()){
             List<Venue> venuesFromForsquare = getVenuesFromForsquare(CITY_PARAM, city);
-            venueRepository.save(venuesFromForsquare);
+            venueRepository.insert(venuesFromForsquare);
             return venuesFromForsquare;
         }
         return venuesFromDB;
@@ -56,7 +56,7 @@ public class ForsquareService {
 
     public List<Venue> getVenuesByLocation(String location) throws URISyntaxException, IOException, FoursquareApiException {
         List<Venue> venuesFromForsquare = getVenuesFromForsquare(LOCATION_PARAM, location);
-        venueRepository.save(venuesFromForsquare);
+        venueRepository.insert(venuesFromForsquare);
         return venuesFromForsquare;
     }
 
