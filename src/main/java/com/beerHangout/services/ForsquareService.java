@@ -4,7 +4,7 @@ import com.beerHangout.models.Venue;
 import com.beerHangout.models.VenuesSearchResponse;
 import com.beerHangout.repositories.VenueRepository;
 import com.beerHangout.utils.GsonUtils;
-import com.google.gson.*;
+import com.google.gson.Gson;
 import fi.foyt.foursquare.api.FoursquareApiException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -46,20 +46,21 @@ public class ForsquareService {
 
     public List<Venue> getVenuesByCity(String city) throws URISyntaxException, IOException, FoursquareApiException {
         List<Venue> venuesFromDB = getVenuesFromDB(city);
-        if(venuesFromDB.isEmpty()){
+        if (venuesFromDB.isEmpty()) {
             List<Venue> venuesFromForsquare = getVenuesFromForsquare(CITY_PARAM, city);
-            venueRepository.insert(venuesFromForsquare);
+            insertIgnoreToDB(venuesFromForsquare);
             return venuesFromForsquare;
         }
         return venuesFromDB;
     }
 
     public List<Venue> getVenuesByLocation(String location) throws URISyntaxException, IOException, FoursquareApiException {
-        return getVenuesFromForsquare(LOCATION_PARAM, location);
+        List<Venue> venuesFromForsquare = getVenuesFromForsquare(LOCATION_PARAM, location);
+        insertIgnoreToDB(venuesFromForsquare);
+        return venuesFromForsquare;
     }
 
-
-    private List<Venue> getVenuesFromDB(String city){
+    private List<Venue> getVenuesFromDB(String city) {
         return venueRepository.findByCity(city);
     }
 
@@ -71,6 +72,10 @@ public class ForsquareService {
         httpClient.close();
         VenuesSearchResponse venuesSearchResponse = gson.fromJson(json, VenuesSearchResponse.class);
         return venuesSearchResponse.getVenues();
+    }
+
+    private void insertIgnoreToDB(List<Venue> venues) {
+        venues.stream().filter(e -> !venueRepository.exists(e.getId())).forEach(venueRepository::insert);
     }
 
     private String getJson(CloseableHttpResponse response) throws IOException {
