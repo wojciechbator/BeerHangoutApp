@@ -48,7 +48,7 @@ public class ForsquareService {
         List<Venue> venuesFromDB = getVenuesFromDB(city);
         if (venuesFromDB.isEmpty()) {
             List<Venue> venuesFromForsquare = getVenuesFromForsquare(CITY_PARAM, city);
-            insertIgnoreToDB(venuesFromForsquare);
+            venueRepository.save(venuesFromForsquare);
             return venuesFromForsquare;
         }
         return venuesFromDB;
@@ -56,7 +56,7 @@ public class ForsquareService {
 
     public List<Venue> getVenuesByLocation(String location) throws URISyntaxException, IOException, FoursquareApiException {
         List<Venue> venuesFromForsquare = getVenuesFromForsquare(LOCATION_PARAM, location);
-        insertIgnoreToDB(venuesFromForsquare);
+        venueRepository.save(venuesFromForsquare);
         return venuesFromForsquare;
     }
 
@@ -72,10 +72,6 @@ public class ForsquareService {
         httpClient.close();
         VenuesSearchResponse venuesSearchResponse = gson.fromJson(json, VenuesSearchResponse.class);
         return venuesSearchResponse.getVenues();
-    }
-
-    private void insertIgnoreToDB(List<Venue> venues) {
-        venues.stream().filter(e -> !venueRepository.exists(e.getId())).forEach(venueRepository::insert);
     }
 
     private String getJson(CloseableHttpResponse response) throws IOException {

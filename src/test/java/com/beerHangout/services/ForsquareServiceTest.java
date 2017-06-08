@@ -53,6 +53,6 @@ public class ForsquareServiceTest {
         //when
         forsquareService.getVenuesByCity(WROCLAW);
         //than
-        verify(venueRepository, times(1)).insert(anyListOf(Venue.class));
+        verify(venueRepository, times(1)).save(anyListOf(Venue.class));
     }
 }
