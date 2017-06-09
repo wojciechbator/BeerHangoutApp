@@ -14,9 +14,9 @@ export const venuesRefreshed = (venues) => {
 };
 
 
-export const refreshVenuesByLocation = () => {
+export const refreshVenuesByLocation = (location) => {
     return dispatch => {
-        axios.get(`/api/premises/city/Wrocław`).then(
+        axios.get(`/api/premises/location/${location}`).then(
             success => dispatch(venuesRefreshed(success.data)),
             failure => console.log('Failure when trying to refresh comments, reason: ' + failure)
         );

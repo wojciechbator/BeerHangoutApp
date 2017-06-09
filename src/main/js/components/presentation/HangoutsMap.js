@@ -8,23 +8,26 @@ class HangoutsMap extends Component {
   state = {
     hasLocation: false,
     latlng: Map.latlng,
+
   };
 
+    handleLocationFound = (e) => {
+        this.setState({
+            hasLocation: true,
+            latlng: e.latlng,
+        });
+        this.props.dispatch(refreshVenuesByLocation(this.state.latlng.lat+","+this.state.latlng.lng));
+
+    };
   componentDidMount() {
+
     this.refs.map.leafletElement.locate();
-      this.props.dispatch(refreshVenuesByLocation(Map.latlng));
       this.setState({
           venues: this.props.venues
       })
 
   }
 
-  handleLocationFound = (e) => {
-    this.setState({
-      hasLocation: true,
-      latlng: e.latlng,
-    });
-  };
 
   render() {
 
@@ -32,7 +35,7 @@ class HangoutsMap extends Component {
       <Marker position={this.state.latlng}>
 
         <Popup>
-          <span>Tutaj jesteś</span>
+          <span>{this.state.latlng.lat.toString()}</span>
 
         </Popup>
       </Marker>
@@ -52,16 +55,30 @@ class HangoutsMap extends Component {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         {marker}
+          <Marker position={{lat: 32.421,lng:32.244}}>
+              <Popup>
+                  <span>aaa</span>
+              </Popup>
+
+          </Marker>
+        <ul>
+
           {this.props.venues.map((venue, i) => {
         return(
             <li key={i}>
-                <SingleVenue location={venue.location} name={venue.name} />
 
-            </li>
+            <Marker position={{lat: venue.lat,lng:venue.lng}}>
+                <Popup>
+                    <span>aaa</span>
+                </Popup>
+
+            </Marker>
+           </li>
 
         );
-
           })}
+        </ul>
+
       </Map>
     )
   }

@@ -4,7 +4,8 @@ import { Marker, Popup} from "react-leaflet";
 
 const SingleVenue = (props) => {
     return (
-            <Marker position={props.location}>
+            <Marker position={{lat: 32.421,
+                            lng:32.244}}>
                 <Popup>
                     <span>props.name</span>
                 </Popup>
@@ -15,12 +16,14 @@ const SingleVenue = (props) => {
 };
 
 SingleVenue.PropTypes = {
-    location: React.PropTypes.location,
+    lng: React.PropTypes.string,
+    lat: React.PropTypes.string,
     name: React.PropTypes.string,
 };
 
 SingleVenue.defaultProps = {
-    location:'',
+    lng:'',
+    lat:'',
     name:'',
 
 };

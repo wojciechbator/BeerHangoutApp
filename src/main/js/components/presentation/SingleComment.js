@@ -2,6 +2,7 @@ import React from "react";
 import {Button} from 'semantic-ui-react';
 
 import {commentStyles} from "../styles/styles";
+import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 
 const SingleComment = (props) => {
     const fromMe = props.fromMe ? 'from-me' : '';
@@ -15,8 +16,10 @@ const SingleComment = (props) => {
         <span style={commentStyles.comment.pipeStyle}>|</span>
         <span style={commentStyles.comment.nameAndDate}>{time.toLocaleString()}</span>
         <hr />
-        <Button negative onClick={props.deleteComment}>Usuń</Button>
+        <Button negative onClick={props.deleteComment}>
+        </Button>
       </div>
+
     );
 };
 
