@@ -1,14 +1,21 @@
 import React, {Component} from "react";
 import {Map, Marker, Popup, TileLayer} from "react-leaflet";
+import {refreshVenuesByLocation} from "../../redux/venues/venuesActions"
+import {connect} from "react-redux";
 
-export default class HangoutsMap extends Component {
+class HangoutsMap extends Component {
   state = {
     hasLocation: false,
-    latlng: Map.latLng
+    latlng: Map.latlng,
   };
 
   componentDidMount() {
     this.refs.map.leafletElement.locate();
+      this.props.dispatch(refreshVenuesByLocation(Map.latlng));
+      this.setState({
+          venues: this.props.venues
+      })
+
   }
 
   handleLocationFound = (e) => {
@@ -19,8 +26,10 @@ export default class HangoutsMap extends Component {
   };
 
   render() {
+
     const marker = this.state.hasLocation ? (
       <Marker position={this.state.latlng}>
+
         <Popup>
           <span>Tutaj jesteś</span>
         </Popup>
@@ -28,6 +37,7 @@ export default class HangoutsMap extends Component {
     ) : null;
 
     return (
+
       <Map
         center={this.state.latlng}
         zoom={13}
@@ -41,7 +51,30 @@ export default class HangoutsMap extends Component {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         {marker}
+          {this.props.venues.map((venue, i) => {
+        return(
+            <li key={i}>
+            <Marker latlng={venue.location} />
+            </li>
+
+        );
+
+          })}
       </Map>
     )
   }
-}
+
+};
+const mapStateToProps = (store) => {
+    return {
+        venues: store.venues.id,
+    };
+};
+HangoutsMap.PropTypes = {
+    venues: React.PropTypes.array
+};
+
+HangoutsMap.defaultProps = {
+    venues: []
+};
+export default connect(mapStateToProps)(HangoutsMap);

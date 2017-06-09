@@ -4,6 +4,7 @@ import {reducer as formReducer} from "redux-form";
 import {AUTH_FAILED, AUTH_RESET, AUTHENTICATED, LOGGED_OUT} from "./authentication/authActions";
 import {ADD_COMMENT, COMMENTS_REFRESHED} from "./comments/commentsActions";
 import {ADD_USER, DELETE_USER, GET_USERS} from "./users/usersActions";
+import{REFRESH_VENUES} from "./venues/venuesActions";
 
 const commentsReducer = (state = {status: 'stale', data: []}, action) => {
   switch (action.type) {
@@ -44,7 +45,18 @@ const usersReducer = (state = {data: []}, action) => {
       return state;
   }
 };
+const venuesReducer = (state= { id:[]},action) => {
+  switch (action.type) {
+      case REFRESH_VENUES:
+          return {
+              id: action.id,
 
+          };
+      default:
+          return state;
+  }
+
+  };
 const authReducer = (state = {signedIn: false, roles: [], authFailed: false, username: ''}, action) => {
   switch (action.type) {
     case AUTHENTICATED:
@@ -90,7 +102,8 @@ const reducers = combineReducers({
   users: usersReducer,
   errors: errorsReducer,
   routing: routerReducer,
-  form: formReducer
+  form: formReducer,
+    venues: venuesReducer
 });
 
 export default reducers;

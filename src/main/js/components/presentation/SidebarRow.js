@@ -15,7 +15,7 @@ const SidebarRow = (props) => (
 
 
   <Grid.Column width={1}  >
-        {props.data.is_active ? "☑" : "☐"}
+        {props.data.active ? "☑" : "☐"}
     </Grid.Column>
   </Grid.Row>
 );
