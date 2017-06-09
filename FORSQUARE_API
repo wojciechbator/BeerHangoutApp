@@ -1,0 +1,3 @@
+http://localhost:8080/api/premises/location/51,17
+http://localhost:8080/api/premises/city/wroclaw <- działa, pobiera zawsze z forsqareAPI
+http://localhost:8080/api/premises/city/Wrocław <- to jest lepsze bo w tej formie zapisuje sie w bazie, za pierszym razem czyta z forsquareAPI a później już z bazki

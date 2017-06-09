@@ -4,7 +4,7 @@ import com.beerHangout.models.Venue;
 import com.beerHangout.models.VenuesSearchResponse;
 import com.beerHangout.repositories.VenueRepository;
 import com.beerHangout.utils.GsonUtils;
-import com.google.gson.*;
+import com.google.gson.Gson;
 import fi.foyt.foursquare.api.FoursquareApiException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -46,7 +46,7 @@ public class ForsquareService {
 
     public List<Venue> getVenuesByCity(String city) throws URISyntaxException, IOException, FoursquareApiException {
         List<Venue> venuesFromDB = getVenuesFromDB(city);
-        if(venuesFromDB.isEmpty()){
+        if (venuesFromDB.isEmpty()) {
             List<Venue> venuesFromForsquare = getVenuesFromForsquare(CITY_PARAM, city);
             venueRepository.save(venuesFromForsquare);
             return venuesFromForsquare;
@@ -60,8 +60,7 @@ public class ForsquareService {
         return venuesFromForsquare;
     }
 
-
-    private List<Venue> getVenuesFromDB(String city){
+    private List<Venue> getVenuesFromDB(String city) {
         return venueRepository.findByCity(city);
     }
 

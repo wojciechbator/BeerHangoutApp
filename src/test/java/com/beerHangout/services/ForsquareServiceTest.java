@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ForsquareServiceTest {
 
-    public static final String WROCLAW = "wroclaw";
+    private static final String WROCLAW = "wroclaw";
     private List<Venue> exampleVanues = Arrays.asList(
             Venue.builder().name(WROCLAW).city(WROCLAW).build(),
             Venue.builder().name(WROCLAW).city(WROCLAW).build()
