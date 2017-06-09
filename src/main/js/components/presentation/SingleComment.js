@@ -16,10 +16,8 @@ const SingleComment = (props) => {
         <span style={commentStyles.comment.pipeStyle}>|</span>
         <span style={commentStyles.comment.nameAndDate}>{time.toLocaleString()}</span>
         <hr />
-        <Button negative onClick={props.deleteComment}>
-        </Button>
+        <Button negative onClick={props.deleteComment}>Usuń</Button>
       </div>
-
     );
 };
 

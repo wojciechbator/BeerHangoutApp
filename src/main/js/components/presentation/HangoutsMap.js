@@ -3,6 +3,7 @@ import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 import {refreshVenuesByLocation} from "../../redux/venues/venuesActions"
 import {connect} from "react-redux";
 import SingleVenue from "./SingleVenue";
+import {Button} from 'semantic-ui-react';
 
 class HangoutsMap extends Component {
   state = {
@@ -15,11 +16,13 @@ class HangoutsMap extends Component {
         this.setState({
             hasLocation: true,
             latlng: e.latlng,
+            venues: this.props.venues,
         });
         this.props.dispatch(refreshVenuesByLocation(this.state.latlng.lat+","+this.state.latlng.lng));
 
     };
   componentDidMount() {
+
 
     this.refs.map.leafletElement.locate();
       this.setState({
@@ -30,16 +33,18 @@ class HangoutsMap extends Component {
 
 
   render() {
+      console.log(this.props.venues);
 
     const marker = this.state.hasLocation ? (
       <Marker position={this.state.latlng}>
 
         <Popup>
-          <span>{this.state.latlng.lat.toString()}</span>
+          <span>{this.state.venues.lat}</span>
 
         </Popup>
       </Marker>
     ) : null;
+
     return (
 
       <Map
@@ -54,46 +59,43 @@ class HangoutsMap extends Component {
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {marker}
-          <Marker position={{lat: 32.421,lng:32.244}}>
-              <Popup>
-                  <span>aaa</span>
-              </Popup>
+          {marker}
+          <ul >
 
-          </Marker>
-        <ul>
+              {this.props.venues.map((venue, i) => {
 
-          {this.props.venues.map((venue, i) => {
-        return(
-            <li key={i}>
+                  return (
+                      <li key={i}>
+                        <Marker position={{lat:venue.location.lat, lng:venue.location.lng}}/>
+                      </li>
+                  );
+              })}
+          </ul>
 
-            <Marker position={{lat: venue.lat,lng:venue.lng}}>
-                <Popup>
-                    <span>aaa</span>
-                </Popup>
-
-            </Marker>
-           </li>
-
-        );
-          })}
-        </ul>
 
       </Map>
+
     )
+
   }
 
 };
-const mapStateToProps = (store) => {
-    return {
-        venues: store.venues.id,
-    };
-};
+
 HangoutsMap.PropTypes = {
-    venues: React.PropTypes.array
+    venues: React.PropTypes.array,
+    comments: React.PropTypes.array
+
+
 };
 
 HangoutsMap.defaultProps = {
-    venues: []
+    venues: [],
+    comments: [],
 };
+
+const mapStateToProps = (store) => {
+    return {
+        venues: store.venues.data,
+    };
+    }
 export default connect(mapStateToProps)(HangoutsMap);
