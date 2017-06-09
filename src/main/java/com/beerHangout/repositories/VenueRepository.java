@@ -13,7 +13,5 @@ public interface VenueRepository extends MongoRepository<Venue, String> {
 
     Venue findOne(String id);
 
-    List<Venue> save(List<Venue> venues);
-
     void delete(Venue venue);
 }
