@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 import {refreshVenuesByLocation} from "../../redux/venues/venuesActions"
 import {connect} from "react-redux";
+import SingleVenue from "./SingleVenue";
 
 class HangoutsMap extends Component {
   state = {
@@ -32,10 +33,10 @@ class HangoutsMap extends Component {
 
         <Popup>
           <span>Tutaj jesteś</span>
+
         </Popup>
       </Marker>
     ) : null;
-
     return (
 
       <Map
@@ -54,7 +55,8 @@ class HangoutsMap extends Component {
           {this.props.venues.map((venue, i) => {
         return(
             <li key={i}>
-            <Marker latlng={venue.location} />
+                <SingleVenue location={venue.location} name={venue.name} />
+
             </li>
 
         );

@@ -24,7 +24,17 @@ const commentsReducer = (state = {status: 'stale', data: []}, action) => {
       return state;
   }
 };
+const venuesReducer = (state= { data: []},action) => {
+    switch (action.type) {
+        case REFRESH_VENUES:
+            return {
+                data: action.venues
+            };
+        default:
+            return state;
+    }
 
+};
 const usersReducer = (state = {data: []}, action) => {
   switch (action.type) {
     case ADD_USER:
@@ -45,18 +55,7 @@ const usersReducer = (state = {data: []}, action) => {
       return state;
   }
 };
-const venuesReducer = (state= { id:[]},action) => {
-  switch (action.type) {
-      case REFRESH_VENUES:
-          return {
-              id: action.id,
 
-          };
-      default:
-          return state;
-  }
-
-  };
 const authReducer = (state = {signedIn: false, roles: [], authFailed: false, username: ''}, action) => {
   switch (action.type) {
     case AUTHENTICATED:
