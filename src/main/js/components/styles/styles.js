@@ -48,9 +48,9 @@ export const commentStyles = {
 };
 export const userStyle = {
   usersSidebarDiv: {
-    minWidth: 300,
+    minWidth: '350',
     padding: 8,
-    width: '20%',
+    width: '30%',
     height: 650,
     position: 'absolute',
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -71,14 +71,18 @@ export const userStyle = {
   userList: {
     color: '#ffffff',
     paddingBottom: 8,
-
+    border:0,
+      pointPadding:0,
+      borderWidth:0,
+      marginRight:0
   },
   userBox: {
     overflowY: 'scroll',
     height: '80%',
+      width: '100%',
     maxHeight: 500,
-    marginRight: 10,
-    marginBottom: 10
+      marginBottom: 10,
+    justifyItems: 0,
   }
 };
 export const placeStyle = {
@@ -103,7 +107,14 @@ export const placeStyle = {
     }
   }
 };
+export const textStyle ={
+bold:{
+  fontWeight:20,
+    fontColor:"#F12345"
 
+}
+
+}
 export const formsStyle = {
   loginStyle: {
     backgroundImage: `url(${LoginImg})`,

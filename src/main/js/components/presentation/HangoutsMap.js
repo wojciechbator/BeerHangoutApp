@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { doGetCurrentPosition } from "../../redux/map/map";
-import { refreshVenuesByLocation } from "../../redux/venues/venuesActions";
+import { refreshVenuesByLocation,refreshVenuesByCity } from "../../redux/venues/venuesActions";
 import { connect } from "react-redux";
 
 class HangoutsMap extends Component {
@@ -21,8 +21,13 @@ class HangoutsMap extends Component {
       latlng: e.latlng,
       venues: this.props.venues,
     });
-    this.props.dispatch(refreshVenuesByLocation(this.state.latlng.lat + "," + this.state.latlng.lng));
-    this.props.dispatch(doGetCurrentPosition(this.state.latlng));
+      this.props.dispatch(doGetCurrentPosition(this.state.latlng));
+    //  this.props.dispatch(refreshVenuesByLocation(this.state.latlng.lat + "," + this.state.latlng.lng));
+      this.props.dispatch(refreshVenuesByLocation(this.state.latlng.lat+","+this.state.latlng.lng));
+      console.log("POZYCJA" + this.state.latlng+ this.state.latlng.lat+","+this.state.latlng.lng);
+
+
+
   };
   componentDidMount() {
     this.refs.map.leafletElement.locate();
@@ -33,7 +38,6 @@ class HangoutsMap extends Component {
 
 
   render() {
-    console.log("POZYCJA" + Map.latlng)
 
     const marker = this.state.hasLocation ? (
       <Marker position={this.state.latlng}  color="black" >
@@ -41,7 +45,6 @@ class HangoutsMap extends Component {
         <Popup>
           <div>
             <div>Tutaj jesteś</div>
-            <div>{this.state.latlng.lat} {this.state.latlng.lng}</div>
           </div>
 
         </Popup>

@@ -35,18 +35,19 @@ class Sidebar extends Component {
                 <hr style={userStyle.hr_style} />
 
                 <Grid style={userStyle.userBox} columns='equal' >
-
                     {this.props.venues.map((venue, i) => <Venue key={i}
                         name={venue.name}
                         city={venue.city}
                         visits={venue.stats.checkinsCount}
-                        address={venue.location.address} />)}
+                        address={venue.location.address}
+                    distance={venue.location.distance} />)}
 
-
+                    >
                 </Grid>
                 <Button onClick={this.handleGetUsers} color="green" content="Odśwież"
-                    style={userStyle.refreshButton} />
+                        style={userStyle.refreshButton} />
             </div>
+
         );
     }
 
