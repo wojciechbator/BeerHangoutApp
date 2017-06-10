@@ -5,7 +5,6 @@ import { Button, Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import Venue from "../presentation/Venue";
-import { refreshVenuesByLocation } from "../../redux/venues/venuesActions";
 import { universalStyles, userStyle } from "../styles/styles";
 
 
