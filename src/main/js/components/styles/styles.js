@@ -151,3 +151,27 @@ export const aStyle = {
   color: 'inherit',
   textDecoration: 'inherit'
 }
+
+export const menuButton = {
+  position: 'relative',
+  verticalAlign: 'middle',
+  lineHeight: 1,
+  textDecoration: 'none',
+  webkitTapHighlightColor: 'transparent',
+  webkitBoxFlex: '0',
+  webkitFlex: '0 0 auto',
+  msFlex: '0 0 auto',
+  flex: '0 0 auto',
+  webkitUserSelect: 'none',
+  mozUserSelect: 'none',
+  msUserSelect: 'none',
+  userSelect: 'none',
+  background: 'none',
+  padding: '0.92857143em 1.14285714em',
+  textTransform: 'none',
+  color: 'rgba(0, 0, 0, 0.87)',
+  fontWeight: 'normal',
+  webkitTransition: 'background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease',
+  transition: 'background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease',
+  fontcolor: 'rgba(0, 0, 0, 0.87)',
+};

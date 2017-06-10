@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router";
 
+import {menuButton} from '../styles/styles';
 import {logoutRequest} from "../../redux/authentication/authActions";
 
 require('../../../../../node_modules/semantic-ui/dist/components/menu.min.css');
