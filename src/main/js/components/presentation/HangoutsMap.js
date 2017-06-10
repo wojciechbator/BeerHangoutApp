@@ -40,10 +40,10 @@ class HangoutsMap extends Component {
   render() {
 
     const marker = this.state.hasLocation ? (
-      <Marker position={this.state.latlng}  color="black" >
+      <Marker  opacity={0.35}   position={this.state.latlng} >
 
-        <Popup>
-          <div>
+        <Popup  >
+          <div >
             <div>Tutaj jesteś</div>
           </div>
 
