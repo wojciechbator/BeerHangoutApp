@@ -31,20 +31,24 @@ class Navbar extends Component {
     return (
       <Menu inverted fixed="top">
         <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick}/>
-        {/*<Menu.Item name='Chat' active={activeItem === 'Chat'}*/}
-                   {/*onClick={event.target.port=8081}/>*/}
-        <a href="http://localhost:8081" style={menuButton}>Chat</a>
-        {this.props.signedIn ? <Menu.Menu position='right'>
+        <Menu.Item as={Link} to='/' name='Konto' active={activeItem === 'Konto'}
+                   onClick={this.handleItemClick}/>
+        <Menu.Item as={Link} to='/' name='Ulubione' active={activeItem === 'Ulubione'}
+                   onClick={this.handleItemClick}/>
+        {this.props.signedIn ?
+            <Menu.Menu position='right'>
           <Menu.Item as={Link} to='/admin' name='Admin' active={activeItem === 'Admin'}
                      onClick={this.handleItemClick}/>
-          <Menu.Item as={Link} to='/login' name='Logout' active={activeItem === 'Logout'}
+              <Menu.Item as={Link} to='/admin' name='Ustawienia' active={activeItem === 'Ustawienia'}
+                         onClick={this.handleItemClick}/>
+          <Menu.Item as={Link} to='/login' name='Wyloguj' active={activeItem === 'Logout'}
                      onClick={this.handleLogoutRequest}/>
         </Menu.Menu>
           :
           <Menu.Menu position='right'>
-            <Menu.Item as={Link} to='/login' name='Login' active={activeItem === 'Login'}
+            <Menu.Item as={Link} to='/login' name='Zaloguj' active={activeItem === 'Zaloguj'}
                        onClick={this.handleItemClick}/>
-            <Menu.Item as={Link} to='/register' name='Register' active={activeItem === 'Register'}
+            <Menu.Item as={Link} to='/register' name='Rejestracja' active={activeItem === 'Rejestracja'}
                        onClick={this.handleItemClick}/>
           </Menu.Menu>}
 

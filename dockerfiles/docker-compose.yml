@@ -12,6 +12,18 @@ services:
     networks:
       beerNet:
         ipv4_address: 10.0.1.2
+  
+  # chat:
+  #   container_name: chat
+  #   build:
+  #     context: ./chat/
+  #   volumes:
+  #     - ../chatApp/:/opt/chatApp/
+  #   ports:
+  #     - "8081:8081"
+  #   networks:
+  #     beerNet:
+  #       ipv4_address: 10.0.1.3
 
 networks:
   beerNet:

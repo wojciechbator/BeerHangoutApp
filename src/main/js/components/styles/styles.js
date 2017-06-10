@@ -15,13 +15,14 @@ export const commentStyles = {
   comment: {
     commentsContainer: {
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      height: '100%',
+      height: 650,
       padding: 15,
 
     },
     commentsBox: {
       overflowY: 'scroll',
       height: '50%',
+      maxHeight: 500
     },
     singleComment: {
       fontSize: 15,
@@ -47,19 +48,41 @@ export const commentStyles = {
 };
 export const userStyle = {
   usersSidebarDiv: {
-    width: "20%",
-    height: "100%",
-    position: "absolute",
+    minWidth: '350',
+    padding: 8,
+    width: '30%',
+    height: 650,
+    position: 'absolute',
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    padding: 12
+    color: "ffffff",
+    overflowWrap: 'break-word'
+
+
   },
   refreshButton: {
-    position: "absolute",
-    bottom: "2%",
-    width: "92%"
+
+    width: "92%",
+    marginLeft: 10
+
   },
   hr_style: {
     marginBottom: "10%"
+  },
+  userList: {
+    color: '#ffffff',
+    paddingBottom: 8,
+    border:0,
+      pointPadding:0,
+      borderWidth:0,
+      marginRight:0
+  },
+  userBox: {
+    overflowY: 'scroll',
+    height: '80%',
+      width: '100%',
+    maxHeight: 500,
+      marginBottom: 10,
+    justifyItems: 0,
   }
 };
 export const placeStyle = {
@@ -84,7 +107,14 @@ export const placeStyle = {
     }
   }
 };
+export const textStyle ={
+bold:{
+  fontWeight:20,
+    fontColor:"#F12345"
 
+}
+
+}
 export const formsStyle = {
   loginStyle: {
     backgroundImage: `url(${LoginImg})`,
@@ -116,6 +146,12 @@ export const formsStyle = {
     padding: 6
   }
 };
+
+export const aStyle = {
+  color: 'inherit',
+  textDecoration: 'inherit'
+}
+
 export const menuButton = {
   position: 'relative',
   verticalAlign: 'middle',
