@@ -77,7 +77,7 @@ class CommentsContainer extends Component {
         <Header as="h3" style={universalStyles.header}>Komentarze: </Header>
         <Comment.Group style={commentStyles.comment.commentsBox} >
           { this.props.comments.length === 0
-            ? <p color="white">Bądź pierwszym, który skomentuje!</p>
+            ? <p style={{color:'white'}}>Bądź pierwszym, który skomentuje!</p>
             : <CommentsList comments={this.props.comments}/>}
         </Comment.Group>
           {this.props.signedIn ?

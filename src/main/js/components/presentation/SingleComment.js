@@ -2,7 +2,6 @@ import React from "react";
 import {Button} from 'semantic-ui-react';
 
 import {commentStyles} from "../styles/styles";
-import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 
 const SingleComment = (props) => {
     const fromMe = props.fromMe ? 'from-me' : '';

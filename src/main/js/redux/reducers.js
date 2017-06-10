@@ -1,12 +1,38 @@
-import {combineReducers} from "redux";
-import {routerReducer} from "react-router-redux";
-import {reducer as formReducer} from "redux-form";
-import {AUTH_FAILED, AUTH_RESET, AUTHENTICATED, LOGGED_OUT} from "./authentication/authActions";
-import {ADD_COMMENT, COMMENTS_REFRESHED} from "./comments/commentsActions";
-import {ADD_USER, DELETE_USER, GET_USERS} from "./users/usersActions";
-import{REFRESH_VENUES} from "./venues/venuesActions";
+import {
+  combineReducers
+} from "redux";
+import {
+  routerReducer
+} from "react-router-redux";
+import {
+  reducer as formReducer
+} from "redux-form";
+import {
+  AUTH_FAILED,
+  AUTH_RESET,
+  AUTHENTICATED,
+  LOGGED_OUT
+} from "./authentication/authActions";
+import {
+  ADD_COMMENT,
+  COMMENTS_REFRESHED
+} from "./comments/commentsActions";
+import {
+  ADD_USER,
+  DELETE_USER,
+  GET_USERS
+} from "./users/usersActions";
+import {
+  REFRESH_VENUES
+} from "./venues/venuesActions";
+import {
+  CURRENT_POSITION
+} from "./map/map";
 
-const commentsReducer = (state = {status: 'stale', data: []}, action) => {
+const commentsReducer = (state = {
+  status: 'stale',
+  data: []
+}, action) => {
   switch (action.type) {
     case ADD_COMMENT:
       return {
@@ -24,18 +50,22 @@ const commentsReducer = (state = {status: 'stale', data: []}, action) => {
       return state;
   }
 };
-const venuesReducer = (state= { data: []},action) => {
-    switch (action.type) {
-        case REFRESH_VENUES:
-            return {
-                data: action.venues
-            };
-        default:
-            return state;
-    }
+const venuesReducer = (state = {
+  data: []
+}, action) => {
+  switch (action.type) {
+    case REFRESH_VENUES:
+      return {
+        data: action.venues
+      };
+    default:
+      return state;
+  }
 
 };
-const usersReducer = (state = {data: []}, action) => {
+const usersReducer = (state = {
+  data: []
+}, action) => {
   switch (action.type) {
     case ADD_USER:
       return {
@@ -56,7 +86,12 @@ const usersReducer = (state = {data: []}, action) => {
   }
 };
 
-const authReducer = (state = {signedIn: false, roles: [], authFailed: false, username: ''}, action) => {
+const authReducer = (state = {
+  signedIn: false,
+  roles: [],
+  authFailed: false,
+  username: ''
+}, action) => {
   switch (action.type) {
     case AUTHENTICATED:
       return Object.assign({}, state, {
@@ -95,14 +130,27 @@ const errorsReducer = (state = {}) => {
   return state;
 };
 
+const mapReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CURRENT_POSITION:
+      return Object.assign({}, state, {
+        ourLocation: action.position
+      });
+    default:
+      return state;
+  }
+
+};
+
 const reducers = combineReducers({
+  map: mapReducer,
   auth: authReducer,
   comments: commentsReducer,
   users: usersReducer,
   errors: errorsReducer,
   routing: routerReducer,
   form: formReducer,
-    venues: venuesReducer
+  venues: venuesReducer
 });
 
 export default reducers;

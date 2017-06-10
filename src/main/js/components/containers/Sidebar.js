@@ -1,12 +1,12 @@
 /* eslint jsx-a11y/href-no-hash:"off" */
 
-import React, {Component} from "react";
-import {Button, Grid, Header} from "semantic-ui-react";
-import {connect} from "react-redux";
+import React, { Component } from "react";
+import { Button, Grid, Header } from "semantic-ui-react";
+import { connect } from "react-redux";
 
-import SidebarRow from "../presentation/SidebarRow";
-import {universalStyles, userStyle} from "../styles/styles";
-import {refreshUsers} from "../../redux/users/usersActions";
+import Venue from "../presentation/Venue";
+import { refreshVenuesByLocation } from "../../redux/venues/venuesActions";
+import { universalStyles, userStyle } from "../styles/styles";
 
 
 class Sidebar extends Component {
@@ -19,36 +19,34 @@ class Sidebar extends Component {
         super(props);
         this.state = {
             date: new Date(),
-            users: [],
+            venues: [],
         };
-        this.handleGetUsers = this.handleGetUsers.bind(this);
     }
 
     componentDidMount() {
-        this.props.dispatch(refreshUsers());
         this.setState({
-            users: this.props.users
-        })
-    }
-
-    handleGetUsers() {
-        this.props.dispatch(refreshUsers());
+            venues: this.props.venues
+        });
     }
 
     render() {
         return (
-            <div style={userStyle.usersSidebarDiv}>
-                <Header as="h3" style={universalStyles.header}>Użytkownicy: </Header>
-                <hr style={userStyle.hr_style}/>
+            <div style={userStyle.usersSidebarDiv} id="usersList">
+                <Header as="h3" style={universalStyles.header}>Miejsca: </Header>
+                <hr style={userStyle.hr_style} />
 
                 <Grid style={userStyle.userBox} columns='equal' >
 
-                    {this.props.users.map((person, i) => <SidebarRow  key={i} data={person}/>)}
+                    {this.props.venues.map((venue, i) => <Venue key={i}
+                        name={venue.name}
+                        city={venue.city}
+                        visits={venue.stats.checkinsCount}
+                        address={venue.location.address} />)}
 
 
-            </Grid>
+                </Grid>
                 <Button onClick={this.handleGetUsers} color="green" content="Odśwież"
-                        style={userStyle.refreshButton}/>
+                    style={userStyle.refreshButton} />
             </div>
         );
     }
@@ -57,7 +55,7 @@ class Sidebar extends Component {
 
 const mapStateToProps = (store) => {
     return {
-        users: store.users.data,
+        venues: store.venues.data,
     };
 };
 
