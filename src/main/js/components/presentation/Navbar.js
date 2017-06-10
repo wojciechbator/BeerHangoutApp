@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router";
 
+import {menuButton} from '../styles/styles';
 import {logoutRequest} from "../../redux/authentication/authActions";
 
 require('../../../../../node_modules/semantic-ui/dist/components/menu.min.css');
@@ -30,8 +31,9 @@ class Navbar extends Component {
     return (
       <Menu inverted fixed="top">
         <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick}/>
-        <Menu.Item as={Link} to='/chat' name='Chat' active={activeItem === 'Chat'}
-                   onClick={this.handleItemClick}/>
+        {/*<Menu.Item name='Chat' active={activeItem === 'Chat'}*/}
+                   {/*onClick={event.target.port=8081}/>*/}
+        <a href="http://localhost:8081" style={menuButton}>Chat</a>
         {this.props.signedIn ? <Menu.Menu position='right'>
           <Menu.Item as={Link} to='/admin' name='Admin' active={activeItem === 'Admin'}
                      onClick={this.handleItemClick}/>
